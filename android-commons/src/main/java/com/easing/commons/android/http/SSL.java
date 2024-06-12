@@ -1,5 +1,8 @@
 package com.easing.commons.android.http;
 
+import java.net.Socket;
+import java.security.Principal;
+import java.security.PrivateKey;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 

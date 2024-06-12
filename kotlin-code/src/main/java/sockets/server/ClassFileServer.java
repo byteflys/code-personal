@@ -129,7 +129,7 @@ public class ClassFileServer extends ClassServer {
         if (args.length >= 2) {
             docroot = args[1];
         }
-        String type = "PlainSocket";
+        String type = "TLS";
         if (args.length >= 3) {
             type = args[2];
         }
@@ -160,7 +160,7 @@ public class ClassFileServer extends ClassServer {
 
                 ctx = SSLContext.getInstance("TLS");
                 kmf = KeyManagerFactory.getInstance("SunX509");
-                String keystoreFile = "/Users/easing/Code/kotlin-code/src/main/kotlin/sockets/server/server.jks";
+                String keystoreFile = "/Users/easing/Code/code-personal/kotlin-code/src/main/java/sockets/server/server.jks";
                 ks = KeyStore.getInstance("JKS");
                 ks.load(new FileInputStream(keystoreFile), passphrase);
                 kmf.init(ks, passphrase);

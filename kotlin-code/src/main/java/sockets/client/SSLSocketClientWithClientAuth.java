@@ -96,7 +96,7 @@ public class SSLSocketClientWithClientAuth {
                 kmf = KeyManagerFactory.getInstance("SunX509");
                 ks = KeyStore.getInstance("JKS");
 
-                ks.load(new FileInputStream("testkeys"), passphrase);
+                ks.load(new FileInputStream("/Users/easing/Code/code-personal/kotlin-code/src/main/java/sockets/client/client.jks"), passphrase);
 
                 kmf.init(ks, passphrase);
                 ctx.init(kmf.getKeyManagers(), null, null);
