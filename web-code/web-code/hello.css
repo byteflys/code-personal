@@ -1,0 +1,26 @@
+@font-face {
+    font-family: HuangYouTi;
+    src: url("HuangYou1.ttf")
+}
+
+@font-face {
+    font-family: KaiTi;
+    src: url("KaiTi.ttf")
+}
+
+@font-face {
+    font-family: NormalKaiTi;
+    src: url("NormalKaiTi.ttf")
+}
+
+.a {
+    font-family: HuangYouTi;
+}
+
+.b {
+    font-family: KaiTi;
+}
+
+.c {
+    font-family: NormalKaiTi;
+}
