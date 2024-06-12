@@ -40,6 +40,7 @@ package sockets.server;/*
 import java.io.*;
 import java.net.*;
 import javax.net.*;
+import javax.net.ssl.SSLSocket;
 
 /*
  * ClassServer.java -- a simple file server that can serve
