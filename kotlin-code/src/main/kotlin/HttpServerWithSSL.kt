@@ -2,15 +2,16 @@ import com.sun.net.httpserver.HttpsConfigurator
 import com.sun.net.httpserver.HttpsServer
 import java.io.*
 import java.net.InetSocketAddress
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
 import java.security.KeyStore
 import java.util.*
 import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManagerFactory
+import java.security.cert.X509Certificate
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLSession
+import javax.net.ssl.X509TrustManager
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 const val serverKeyStore = "resources/private.keystore"
 const val clientKeyStore = "resources/public.truststore"
@@ -51,27 +52,35 @@ fun launchHttpServer() {
 }
 
 fun launchHttpClient() {
-    // load trust manager from trust store
-    val trustManagerFactory = TrustManagerFactory.getInstance("SunX509")
-    val trustStore = KeyStore.getInstance("JKS")
-    trustStore.load(FileInputStream(clientKeyStore), passphrase.toCharArray())
-    trustManagerFactory.init(trustStore)
-    val trustManagers = trustManagerFactory.trustManagers
-    // init ssl context
-    val context = SSLContext.getInstance("TLS")
-    context.init(null, trustManagers, null)
-    // create http client
-    val uri = URI.create("https://localhost:18001/home")
-    val client = HttpClient.newBuilder()
-        .version(HttpClient.Version.HTTP_1_1)
-        .sslContext(context)
+    val url = "https://localhost:18001/home"
+    // create okhttp client
+    val builder = OkHttpClient.Builder()
+    setOkHttpSSL(builder)
+    val client = builder.build()
+    // create request
+    val request = Request.Builder()
+        .url(url)
+        .get()
         .build()
-    // send request
-    val request = HttpRequest.newBuilder()
-        .GET()
-        .uri(uri)
-        .build()
-    // get response
-    val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-    println(response.body())
+    // execute call
+    val call = client.newCall(request)
+    val response = call.execute()
+    // print response
+    val responseBody = response.body.string()
+    println(responseBody)
+}
+
+fun setOkHttpSSL(builder: OkHttpClient.Builder) {
+    val trustManager = object : X509TrustManager {
+        override fun checkClientTrusted(chain: Array<out X509Certificate>, authType: String) {}
+        override fun checkServerTrusted(chain: Array<out X509Certificate>, authType: String) {}
+        override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
+    }
+    val trustManagers = arrayOf(trustManager)
+    val hostnameVerifier = HostnameVerifier { hostname: String, session: SSLSession -> true }
+    val sslContext = SSLContext.getInstance("SSL")
+    sslContext.init(null, trustManagers, null)
+    val socketFactory = sslContext.socketFactory
+    builder.sslSocketFactory(socketFactory, trustManager)
+    builder.hostnameVerifier(hostnameVerifier)
 }
