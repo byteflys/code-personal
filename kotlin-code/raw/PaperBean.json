@@ -1,0 +1,19 @@
+[
+  {
+    "paperJsonBean": {
+      "contentPageId": "71005",
+      "contentType": "geo_layout",
+      "geoContent": "{\"boundingRect\":{\"bottom\":0.0,\"empty\":true,\"left\":0.0,\"right\":0.0,\"top\":0.0},\"isEnableFillColor\":true,\"properties\":{\"fillAttr\":{\"color\":-1,\"enableColor\":true},\"layoutType\":\"LayoutResVector\",\"pageMargins\":{\"layoutRect\":{\"bottom\":0.0,\"empty\":true,\"left\":0.0,\"right\":0.0,\"top\":0.0},\"paddingBottom\":0.0,\"paddingLeft\":0.0,\"paddingRight\":0.0,\"paddingTop\":0.0,\"spacing\":0.0},\"radius\":2.0,\"resourceAttr\":{\"resName\":\"template_basketball_tactical_paper_horizontal\"},\"selectionPointType\":\"SCALE\",\"strokeAttr\":{\"color\":0,\"colorTransformMode\":0,\"enableColor\":true,\"roundCorner\":true,\"width\":0.60000014},\"subType\":\"Layout\",\"underContent\":false},\"type\":\"Feature\"}",
+      "relativePath": "",
+      "resourceId": "d5a25767f63643219b96e752ad2d5536",
+      "uniqueId": "71005"
+    },
+    "paperRectF": {
+      "bottom": 1080.404,
+      "empty": false,
+      "left": 0.0,
+      "right": 1528.0,
+      "top": 0.0
+    }
+  }
+]
