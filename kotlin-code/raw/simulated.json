@@ -1,0 +1,1002 @@
+{
+  "coverCategoryList": [
+    {
+      "createdAt": 0,
+      "name": "Cover-V",
+      "uniqueId": "22362c8e360b494b89f6dc9e1ccdc47c",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "Cover-H",
+      "uniqueId": "222a5c3a7c934a0281701b26c3984662",
+      "updatedAt": 0
+    }
+  ],
+  "paperCategoryList": [
+    {
+      "createdAt": 0,
+      "name": "Paper-V",
+      "uniqueId": "dec74a083ffe410ebb05a6506b10d1a5",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "Paper-H",
+      "uniqueId": "a40ec22e269f4ea28e4a01fcd243c79c",
+      "updatedAt": 0
+    }
+  ],
+  "coverList": [
+    {
+      "createdAt": 0,
+      "name": "PNG",
+      "orientation": 1,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "09dad445951f469e8b3f1adb00906da5",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "SVG",
+      "orientation": 1,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "0db3280b32274764805fa93cfd39b965",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "PNG",
+      "orientation": 0,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "0075d12390a848cebc8aefde8b16b8d9",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "SVG",
+      "orientation": 0,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "c79ca05994b94541adbec4377a1ae565",
+      "updatedAt": 0
+    }
+  ],
+  "paperList": [
+    {
+      "createdAt": 0,
+      "name": "PNG",
+      "orientation": 1,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "aba0a76e6782471f88a352d6eba0886d",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "SVG",
+      "orientation": 1,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "536d488b3c4442d388167cb3717f3703",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "PNG",
+      "orientation": 0,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "584c90ba72cf426fa0a496b76f2b5201",
+      "updatedAt": 0
+    },
+    {
+      "createdAt": 0,
+      "name": "SVG",
+      "orientation": 0,
+      "pageSize": "A4",
+      "status": 0,
+      "uniqueId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "updatedAt": 0
+    }
+  ],
+  "coverCategoryRelationList": [
+    {
+      "categoryId": "22362c8e360b494b89f6dc9e1ccdc47c",
+      "itemId": "09dad445951f469e8b3f1adb00906da5",
+      "targetId": "cover",
+      "uniqueId": "cad8fc3242fb41f6bf2bea620056464f"
+    },
+    {
+      "categoryId": "22362c8e360b494b89f6dc9e1ccdc47c",
+      "itemId": "0db3280b32274764805fa93cfd39b965",
+      "targetId": "cover",
+      "uniqueId": "3ec674bd3c68438eb73d13aa78c9c6c8"
+    },
+    {
+      "categoryId": "222a5c3a7c934a0281701b26c3984662",
+      "itemId": "0075d12390a848cebc8aefde8b16b8d9",
+      "targetId": "cover",
+      "uniqueId": "61cd507e28a4495f8d7a9f8b4d376e4a"
+    },
+    {
+      "categoryId": "222a5c3a7c934a0281701b26c3984662",
+      "itemId": "c79ca05994b94541adbec4377a1ae565",
+      "targetId": "cover",
+      "uniqueId": "2c35126cdf3d4482bc6a35f8738f68f8"
+    }
+  ],
+  "paperCategoryRelationList": [
+    {
+      "categoryId": "dec74a083ffe410ebb05a6506b10d1a5",
+      "itemId": "aba0a76e6782471f88a352d6eba0886d",
+      "targetId": "template",
+      "uniqueId": "61f3b709296a47f3b9a94f6d1921e17c"
+    },
+    {
+      "categoryId": "dec74a083ffe410ebb05a6506b10d1a5",
+      "itemId": "536d488b3c4442d388167cb3717f3703",
+      "targetId": "template",
+      "uniqueId": "5169af10b5994e86acd45b9eac9591bb"
+    },
+    {
+      "categoryId": "a40ec22e269f4ea28e4a01fcd243c79c",
+      "itemId": "584c90ba72cf426fa0a496b76f2b5201",
+      "targetId": "template",
+      "uniqueId": "6c35edcaa2eb440ba6fc912695410678"
+    },
+    {
+      "categoryId": "a40ec22e269f4ea28e4a01fcd243c79c",
+      "itemId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "targetId": "template",
+      "uniqueId": "bf004a5375054c078571c99ff44a15be"
+    }
+  ],
+  "resourceList": [
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png",
+      "type": "picture",
+      "uniqueId": "b2b5a4b6d3584c47923dce4604f52eae",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png",
+      "type": "picture",
+      "uniqueId": "270fb9fca91747c5b6c29474a4cf839c",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png",
+      "type": "picture",
+      "uniqueId": "d566be5956c54cdf9e6bfc50bb03a8b3",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png",
+      "type": "picture",
+      "uniqueId": "45df4c8a92c4490fbb45642124c508a4",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png",
+      "type": "picture",
+      "uniqueId": "78302dfcb07c4aa2b8e33d0d828b2bcc",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/72d31c41-7197-450c-9aec-545048664dff.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg",
+      "type": "picture",
+      "uniqueId": "5b38dbe304e542cf97a13d49dcc7786d",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg",
+      "type": "picture",
+      "uniqueId": "2dcb7692eece4aa29c6b312e5fbbbb36",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg",
+      "type": "picture",
+      "uniqueId": "84b82a7538f44c9fad837cefecd45c49",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg",
+      "type": "picture",
+      "uniqueId": "7693ce0747114509adc76d4684722d1c",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg",
+      "type": "picture",
+      "uniqueId": "d116208bae1e4dd28f9e7358eabed569",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/bc0f7c7b-3f66-45ba-bcd2-bee3775c8f22.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png",
+      "type": "picture",
+      "uniqueId": "a3aff7107d8d48fba8b1958ec7d213af",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png",
+      "type": "picture",
+      "uniqueId": "06a8c2c9758640fc808008f6f445cea1",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png",
+      "type": "picture",
+      "uniqueId": "ef70d1bca45e456bbbff369936646450",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png",
+      "type": "picture",
+      "uniqueId": "f6b54c1bb8af498c82a4e59330378dd7",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png",
+      "type": "picture",
+      "uniqueId": "d9c24c0c702c400a98ce717153d4c456",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/e7743065-41f9-44d0-a5b5-902ff92cbd74.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg",
+      "type": "picture",
+      "uniqueId": "aba10a6faf8449eb9d863082ba1c0cec",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg",
+      "type": "picture",
+      "uniqueId": "3d3d2f0fd9504ded85aad9c02fbf0d3b",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg",
+      "type": "picture",
+      "uniqueId": "2d72bcb90950472b9bda3c5f8054f55e",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg",
+      "type": "picture",
+      "uniqueId": "417771b4058749bf8b36985ec6885961",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "cover",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg",
+      "type": "picture",
+      "uniqueId": "154047fd3cf34d3abe36d37ad0de4753",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/b527e06d-bb48-4e3f-988a-a34140d2a014.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png",
+      "type": "picture",
+      "uniqueId": "8bbb465568f041f692675cb9a5a88a30",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png",
+      "type": "picture",
+      "uniqueId": "86ad43aef6fb416783fb9757237650bb",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png",
+      "type": "picture",
+      "uniqueId": "8ee053386f8c4f4d96b29e49cf73a6ea",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png",
+      "type": "picture",
+      "uniqueId": "b5c779fa6f4b4be689eb0489890c090e",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png",
+      "type": "picture",
+      "uniqueId": "2549f539862c47c0b97f07a080c03a68",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/05d9713d-7595-4d36-a72c-dd11b4b2c37c.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg",
+      "type": "picture",
+      "uniqueId": "2ddb4e79aea14bbc949ee4660843d96a",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg",
+      "type": "picture",
+      "uniqueId": "e40e02084fde4a8ba05a93cc2567f295",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg",
+      "type": "picture",
+      "uniqueId": "8c5d7f1947d947d99e91e0beed4a99bf",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg",
+      "type": "picture",
+      "uniqueId": "9b57e63d83744a299f6595935632dafc",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg",
+      "type": "picture",
+      "uniqueId": "819ef0a60b87487ca5337052cf35362a",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/f3de55f9-e92e-4fcb-bcbb-f43801350276.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png",
+      "type": "picture",
+      "uniqueId": "fb1de3c1b824409485e5b5d18b15d757",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png",
+      "type": "picture",
+      "uniqueId": "4f08f428157743aabdc1965a1672eb2c",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png",
+      "type": "picture",
+      "uniqueId": "98ae878b0f68460ba3e6ffabbf92b6b9",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png",
+      "type": "picture",
+      "uniqueId": "ddb7edc3a9ad4d749b17e1141b1769fe",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png",
+      "type": "picture",
+      "uniqueId": "5a1eaf865fd5407aa7cc13a17fc74ab5",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/c0b61fe5-02e0-4bce-b339-acda9b181061.png"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -1,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg",
+      "type": "picture",
+      "uniqueId": "81b523590b5f49c780b06bdc2ef4f2de",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -3355444,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg",
+      "type": "picture",
+      "uniqueId": "a9b22ded2b1e458db7e82d5ccf679dc8",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -256,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg",
+      "type": "picture",
+      "uniqueId": "3c1bed5554914ec3bdc44b3a8827992d",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -16711681,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg",
+      "type": "picture",
+      "uniqueId": "4b5163a8f85c4cfab69491af3e4cdb7f",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg"
+    },
+    {
+      "colorTransformMode": 0,
+      "createdAt": 0,
+      "fillColor": -65281,
+      "name": "",
+      "source": 2,
+      "status": 0,
+      "strokeColor": -65536,
+      "target": "template",
+      "thumbnailUri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg",
+      "type": "picture",
+      "uniqueId": "8db6956f90154aa187e43fa4289b6295",
+      "updatedAt": 0,
+      "uri": "https://static.send2boox.com/res_cover/6fc0c469-9538-403b-b41e-37cb61874f5c.svg"
+    }
+  ],
+  "resourceRelationList": [
+    {
+      "resourceUniqueId": "b2b5a4b6d3584c47923dce4604f52eae",
+      "target": "cover",
+      "targetUniqueId": "09dad445951f469e8b3f1adb00906da5",
+      "uniqueId": "771f7f8348ff42eab65510286f10355d"
+    },
+    {
+      "resourceUniqueId": "270fb9fca91747c5b6c29474a4cf839c",
+      "target": "cover",
+      "targetUniqueId": "09dad445951f469e8b3f1adb00906da5",
+      "uniqueId": "37c07f3801c04863917b7b4f7d5a71fb"
+    },
+    {
+      "resourceUniqueId": "d566be5956c54cdf9e6bfc50bb03a8b3",
+      "target": "cover",
+      "targetUniqueId": "09dad445951f469e8b3f1adb00906da5",
+      "uniqueId": "cf741228828c4b5a888387576549d749"
+    },
+    {
+      "resourceUniqueId": "45df4c8a92c4490fbb45642124c508a4",
+      "target": "cover",
+      "targetUniqueId": "09dad445951f469e8b3f1adb00906da5",
+      "uniqueId": "d283fef8f2984c7f8bd28bcb828021f0"
+    },
+    {
+      "resourceUniqueId": "78302dfcb07c4aa2b8e33d0d828b2bcc",
+      "target": "cover",
+      "targetUniqueId": "09dad445951f469e8b3f1adb00906da5",
+      "uniqueId": "7eae9bdae82c436d86c56bd8220ca72e"
+    },
+    {
+      "resourceUniqueId": "5b38dbe304e542cf97a13d49dcc7786d",
+      "target": "cover",
+      "targetUniqueId": "0db3280b32274764805fa93cfd39b965",
+      "uniqueId": "14278b8cb80e4ab28e2226be61369139"
+    },
+    {
+      "resourceUniqueId": "2dcb7692eece4aa29c6b312e5fbbbb36",
+      "target": "cover",
+      "targetUniqueId": "0db3280b32274764805fa93cfd39b965",
+      "uniqueId": "7b9adf2e3bee4f69853a31d58fabc0c1"
+    },
+    {
+      "resourceUniqueId": "84b82a7538f44c9fad837cefecd45c49",
+      "target": "cover",
+      "targetUniqueId": "0db3280b32274764805fa93cfd39b965",
+      "uniqueId": "ad4f9e16bee6404ebf74e1332a7f71b8"
+    },
+    {
+      "resourceUniqueId": "7693ce0747114509adc76d4684722d1c",
+      "target": "cover",
+      "targetUniqueId": "0db3280b32274764805fa93cfd39b965",
+      "uniqueId": "0b08e0a2e69241e09feb1aa2dedf1d3a"
+    },
+    {
+      "resourceUniqueId": "d116208bae1e4dd28f9e7358eabed569",
+      "target": "cover",
+      "targetUniqueId": "0db3280b32274764805fa93cfd39b965",
+      "uniqueId": "ce6b0e55a8dd421bbac612162319ece9"
+    },
+    {
+      "resourceUniqueId": "a3aff7107d8d48fba8b1958ec7d213af",
+      "target": "cover",
+      "targetUniqueId": "0075d12390a848cebc8aefde8b16b8d9",
+      "uniqueId": "1fa1b968912e419790e323ada72c5ef7"
+    },
+    {
+      "resourceUniqueId": "06a8c2c9758640fc808008f6f445cea1",
+      "target": "cover",
+      "targetUniqueId": "0075d12390a848cebc8aefde8b16b8d9",
+      "uniqueId": "655c35d4fc99401b95a7f6d9e49e7baf"
+    },
+    {
+      "resourceUniqueId": "ef70d1bca45e456bbbff369936646450",
+      "target": "cover",
+      "targetUniqueId": "0075d12390a848cebc8aefde8b16b8d9",
+      "uniqueId": "e5a6e74b6bef4b8982697836430d8cc8"
+    },
+    {
+      "resourceUniqueId": "f6b54c1bb8af498c82a4e59330378dd7",
+      "target": "cover",
+      "targetUniqueId": "0075d12390a848cebc8aefde8b16b8d9",
+      "uniqueId": "87f45f0983514fa4ae4bd760838b99e3"
+    },
+    {
+      "resourceUniqueId": "d9c24c0c702c400a98ce717153d4c456",
+      "target": "cover",
+      "targetUniqueId": "0075d12390a848cebc8aefde8b16b8d9",
+      "uniqueId": "8bef377fd8044801a02dac7d72bbf383"
+    },
+    {
+      "resourceUniqueId": "aba10a6faf8449eb9d863082ba1c0cec",
+      "target": "cover",
+      "targetUniqueId": "c79ca05994b94541adbec4377a1ae565",
+      "uniqueId": "b695af027724414b900c8358ed010982"
+    },
+    {
+      "resourceUniqueId": "3d3d2f0fd9504ded85aad9c02fbf0d3b",
+      "target": "cover",
+      "targetUniqueId": "c79ca05994b94541adbec4377a1ae565",
+      "uniqueId": "d2071ff562c84d339e1aaaf997378d68"
+    },
+    {
+      "resourceUniqueId": "2d72bcb90950472b9bda3c5f8054f55e",
+      "target": "cover",
+      "targetUniqueId": "c79ca05994b94541adbec4377a1ae565",
+      "uniqueId": "ceb0e4008f3b43d1919413d6071599f9"
+    },
+    {
+      "resourceUniqueId": "417771b4058749bf8b36985ec6885961",
+      "target": "cover",
+      "targetUniqueId": "c79ca05994b94541adbec4377a1ae565",
+      "uniqueId": "3c199fd2b5994e4e92cfab65b94aead7"
+    },
+    {
+      "resourceUniqueId": "154047fd3cf34d3abe36d37ad0de4753",
+      "target": "cover",
+      "targetUniqueId": "c79ca05994b94541adbec4377a1ae565",
+      "uniqueId": "0be3815573974bfe83681ea91be9cd35"
+    },
+    {
+      "resourceUniqueId": "8bbb465568f041f692675cb9a5a88a30",
+      "target": "template",
+      "targetUniqueId": "aba0a76e6782471f88a352d6eba0886d",
+      "uniqueId": "69e5c971b82646998e556c912401aa7d"
+    },
+    {
+      "resourceUniqueId": "86ad43aef6fb416783fb9757237650bb",
+      "target": "template",
+      "targetUniqueId": "aba0a76e6782471f88a352d6eba0886d",
+      "uniqueId": "9e6bfc191da94689a370d480a1407858"
+    },
+    {
+      "resourceUniqueId": "8ee053386f8c4f4d96b29e49cf73a6ea",
+      "target": "template",
+      "targetUniqueId": "aba0a76e6782471f88a352d6eba0886d",
+      "uniqueId": "db61c0dbdabd4f019864d84af1d8e201"
+    },
+    {
+      "resourceUniqueId": "b5c779fa6f4b4be689eb0489890c090e",
+      "target": "template",
+      "targetUniqueId": "aba0a76e6782471f88a352d6eba0886d",
+      "uniqueId": "ecdb1d67da674eee8fea3eda450ec39c"
+    },
+    {
+      "resourceUniqueId": "2549f539862c47c0b97f07a080c03a68",
+      "target": "template",
+      "targetUniqueId": "aba0a76e6782471f88a352d6eba0886d",
+      "uniqueId": "75984145371c44cd8ce31651e0fbfd18"
+    },
+    {
+      "resourceUniqueId": "2ddb4e79aea14bbc949ee4660843d96a",
+      "target": "template",
+      "targetUniqueId": "536d488b3c4442d388167cb3717f3703",
+      "uniqueId": "6c8596244d4b468686863a626ced1b69"
+    },
+    {
+      "resourceUniqueId": "e40e02084fde4a8ba05a93cc2567f295",
+      "target": "template",
+      "targetUniqueId": "536d488b3c4442d388167cb3717f3703",
+      "uniqueId": "5430b74ed7794c058e4029f1a401cd38"
+    },
+    {
+      "resourceUniqueId": "8c5d7f1947d947d99e91e0beed4a99bf",
+      "target": "template",
+      "targetUniqueId": "536d488b3c4442d388167cb3717f3703",
+      "uniqueId": "7b7fbd9fa57749f19c69a88718ad5ee2"
+    },
+    {
+      "resourceUniqueId": "9b57e63d83744a299f6595935632dafc",
+      "target": "template",
+      "targetUniqueId": "536d488b3c4442d388167cb3717f3703",
+      "uniqueId": "8f0a45902fda493f9c355c94f3d5813e"
+    },
+    {
+      "resourceUniqueId": "819ef0a60b87487ca5337052cf35362a",
+      "target": "template",
+      "targetUniqueId": "536d488b3c4442d388167cb3717f3703",
+      "uniqueId": "f91e426591a14689a2f031b5083a024a"
+    },
+    {
+      "resourceUniqueId": "fb1de3c1b824409485e5b5d18b15d757",
+      "target": "template",
+      "targetUniqueId": "584c90ba72cf426fa0a496b76f2b5201",
+      "uniqueId": "d2a654c686ae4ed5961771c6f6ce95b5"
+    },
+    {
+      "resourceUniqueId": "4f08f428157743aabdc1965a1672eb2c",
+      "target": "template",
+      "targetUniqueId": "584c90ba72cf426fa0a496b76f2b5201",
+      "uniqueId": "ff586fdf8e434a528f499b46b6900efa"
+    },
+    {
+      "resourceUniqueId": "98ae878b0f68460ba3e6ffabbf92b6b9",
+      "target": "template",
+      "targetUniqueId": "584c90ba72cf426fa0a496b76f2b5201",
+      "uniqueId": "500b88b21bc141e1856caa02a5ce98d1"
+    },
+    {
+      "resourceUniqueId": "ddb7edc3a9ad4d749b17e1141b1769fe",
+      "target": "template",
+      "targetUniqueId": "584c90ba72cf426fa0a496b76f2b5201",
+      "uniqueId": "144968763eac4202b0ae506da9eb0e4d"
+    },
+    {
+      "resourceUniqueId": "5a1eaf865fd5407aa7cc13a17fc74ab5",
+      "target": "template",
+      "targetUniqueId": "584c90ba72cf426fa0a496b76f2b5201",
+      "uniqueId": "be6f12bde28745b4870639598d772226"
+    },
+    {
+      "resourceUniqueId": "81b523590b5f49c780b06bdc2ef4f2de",
+      "target": "template",
+      "targetUniqueId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "uniqueId": "a05646296e9e405e84e90283a5219ebc"
+    },
+    {
+      "resourceUniqueId": "a9b22ded2b1e458db7e82d5ccf679dc8",
+      "target": "template",
+      "targetUniqueId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "uniqueId": "72f952d79a4e44948a9e9e7b81e2a120"
+    },
+    {
+      "resourceUniqueId": "3c1bed5554914ec3bdc44b3a8827992d",
+      "target": "template",
+      "targetUniqueId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "uniqueId": "47dc37673cd84b91aaf6ce0b0a5b5738"
+    },
+    {
+      "resourceUniqueId": "4b5163a8f85c4cfab69491af3e4cdb7f",
+      "target": "template",
+      "targetUniqueId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "uniqueId": "210207e25d60415c85e011a29fa90e28"
+    },
+    {
+      "resourceUniqueId": "8db6956f90154aa187e43fa4289b6295",
+      "target": "template",
+      "targetUniqueId": "37b86ba2a2ee4a96ba3a0b01621b5b80",
+      "uniqueId": "1938ed69092842f890464b8096b11ac7"
+    }
+  ]
+}
