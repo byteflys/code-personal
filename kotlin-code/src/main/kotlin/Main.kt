@@ -1,20 +1,36 @@
 import io.reactivex.rxjava3.core.Observable
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+
+var x = -1
 
 fun main() {
-    Observable.just(0)
+    val list = mutableListOf<Int>()
+    for (i in 0 until 1000000){
+        list.add(i)
+    }
+    Observable.fromIterable(list)
         .map {
-            Thread.sleep(2000L)
+            x = it
         }
-        .timeout(1000L, TimeUnit.MILLISECONDS)
-        .doOnNext {
-            println("No Timeout")
+        .flatMap {
+            printXA()
         }
-        .doOnError {
-            if (it is TimeoutException) {
-                println("No Timeout")
-            }
+        .flatMap {
+            printXB()
         }
         .blockingSubscribe()
 }
+
+fun printXA():Observable<Int>{
+    return Observable.just(x)
+        .doOnNext {
+            println("A$it")
+        }
+}
+
+fun printXB():Observable<Int>{
+    return Observable.just(x)
+        .doOnNext {
+            println("A$it")
+        }
+}
+
