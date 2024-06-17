@@ -1,36 +1,10 @@
-import io.reactivex.rxjava3.core.Observable
+import org.apache.commons.codec.digest.HmacUtils
 
-var x = -1
-
+@OptIn(ExperimentalStdlibApi::class)
 fun main() {
-    val list = mutableListOf<Int>()
-    for (i in 0 until 1000000){
-        list.add(i)
-    }
-    Observable.fromIterable(list)
-        .map {
-            x = it
-        }
-        .flatMap {
-            printXA()
-        }
-        .flatMap {
-            printXB()
-        }
-        .blockingSubscribe()
+    val mac = HmacUtils.getInitializedMac("HMacMD5", byteArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 11))
+    val encrypted = mac.doFinal()
+    println(encrypted.toHexString())
 }
 
-fun printXA():Observable<Int>{
-    return Observable.just(x)
-        .doOnNext {
-            println("A$it")
-        }
-}
-
-fun printXB():Observable<Int>{
-    return Observable.just(x)
-        .doOnNext {
-            println("A$it")
-        }
-}
 
