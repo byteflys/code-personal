@@ -12,14 +12,19 @@ dependencies {
 
     // apache commons
     api("org.apache.commons:commons-lang3:3.9")
-    api("commons-io:commons-io:2.6")
-    api("commons-codec:commons-codec:1.15")
+    api("commons-io:commons-io:2.7")
+
+    // commons codec
+    api("commons-codec:commons-codec:1.17.0")
+
+    // bouncy castle provider
+    api("org.bouncycastle:bcprov-jdk18on:1.78.1")
 
     // xml
-    api("org.dom4j:dom4j:2.1.1")
+    api("org.dom4j:dom4j:2.1.3")
 
     // gson
-    api("com.google.code.gson:gson:2.8.5")
+    api("com.google.code.gson:gson:2.8.9")
 
     // okhttp
     api("com.squareup.okhttp3:okhttp:+")
