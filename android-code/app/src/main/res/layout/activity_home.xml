@@ -8,23 +8,4 @@
     android:orientation="vertical"
     android:padding="30dp">
 
-    <ImageView
-        android:id="@+id/image1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic" />
-
-    <ImageView
-        android:id="@+id/image2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:inputType="number" />
 </LinearLayout>
