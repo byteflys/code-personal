@@ -18,7 +18,7 @@ dependencies {
     api("commons-codec:commons-codec:1.17.0")
 
     // bouncy castle provider
-    api("org.bouncycastle:bcprov-jdk18on:1.78.1")
+    api("org.bouncycastle:bcprov-jdk18on:1.71")
 
     // xml
     api("org.dom4j:dom4j:2.1.3")
