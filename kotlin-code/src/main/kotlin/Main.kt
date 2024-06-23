@@ -1,25 +1,29 @@
+import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.io.FileInputStream
 import java.security.KeyPairGenerator
-import java.security.Signature
+import java.security.Security
+import javax.crypto.Cipher
 
+@OptIn(ExperimentalStdlibApi::class)
 fun main() {
-    val keyAlgorithm = "DSA"
-    val signAlgorithm = "SHA256withDSA"
+    val provider = "BC"
+    val keyAlgorithm = "ECIES"
+    val cipherAlgorithm = "ECIES"
+    // register bouncy castle provider
+    Security.addProvider(BouncyCastleProvider())
     // create test data
     val file = "resources/data.txt"
     val origin = FileInputStream(file).readAllBytes()
     // generate key pair
-    val keyGenerator = KeyPairGenerator.getInstance(keyAlgorithm)
+    val keyGenerator = KeyPairGenerator.getInstance(keyAlgorithm, provider)
     val keyPair = keyGenerator.genKeyPair()
-    // sign
-    val sign = Signature.getInstance(signAlgorithm)
-    sign.initSign(keyPair.private)
-    sign.update(origin)
-    val signature = sign.sign()
-    // verify
-    val verify = Signature.getInstance(signAlgorithm)
-    verify.initVerify(keyPair.public)
-    verify.update(origin)
-    val result = verify.verify(signature)
-    println(result)
+    // encrypt
+    val cipher1 = Cipher.getInstance(cipherAlgorithm, provider)
+    cipher1.init(Cipher.ENCRYPT_MODE, keyPair.public)
+    val encrypted = cipher1.doFinal(origin)
+    // decrypt
+    val cipher2 = Cipher.getInstance(cipherAlgorithm, provider)
+    cipher2.init(Cipher.DECRYPT_MODE, keyPair.private)
+    val decrypted = cipher2.doFinal(encrypted)
+    println(decrypted.toHexString() == origin.toHexString())
 }
