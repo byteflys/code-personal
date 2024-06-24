@@ -1,6 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 16 16">
-    <g transform="matrix(1.99997 0 0 1.99997-10.994-2071.68)" fill="#da4453">
-        <rect y="1037.36" x="7" height="8" width="8" fill="#32c671" rx="4"/>
-        <path d="m123.86 12.966l-11.08-11.08c-1.52-1.521-3.368-2.281-5.54-2.281-2.173 0-4.02.76-5.541 2.281l-53.45 53.53-23.953-24.04c-1.521-1.521-3.368-2.281-5.54-2.281-2.173 0-4.02.76-5.541 2.281l-11.08 11.08c-1.521 1.521-2.281 3.368-2.281 5.541 0 2.172.76 4.02 2.281 5.54l29.493 29.493 11.08 11.08c1.52 1.521 3.367 2.281 5.54 2.281 2.172 0 4.02-.761 5.54-2.281l11.08-11.08 58.986-58.986c1.52-1.521 2.281-3.368 2.281-5.541.0001-2.172-.761-4.02-2.281-5.54" fill="#fff" transform="matrix(.0436 0 0 .0436 8.177 1039.72)" stroke="none" stroke-width="9.512"/>
+<svg xmlns="http://www.w3.org/2000/svg" version="2.0" viewBox="-600 -600 1200 1200">
+    <rect width="50%" height="50%" fill="#EEEE0022"/>
+    <circle cx="100" cy="100" r="50" fill="blue" stroke="black" stroke-width="2" />
+
+    <path id="lineAB" d="M 100 350 l 150 -300" stroke="red"
+          stroke-width="3" fill="none"/>
+    <path id="lineBC" d="M 250 50 l 150 300" stroke="red"
+          stroke-width="3" fill="none"/>
+    <path d="M 175 200 l 150 0" stroke="green" stroke-width="3"
+          fill="none"/>
+    <path d="M 100 350 q 150 -300 300 0" stroke="blue"
+          stroke-width="5" fill="none"/>
+    <!-- Mark relevant points -->
+    <g stroke="black" stroke-width="3" fill="black">
+        <circle id="pointA" cx="100" cy="350" r="3"/>
+        <circle id="pointB" cx="250" cy="50" r="3"/>
+        <circle id="pointC" cx="400" cy="350" r="3"/>
+    </g>
+    <!-- Label the points -->
+    <g font-size="30" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+        <text x="100" y="350" dx="-30">A</text>
+        <text x="250" y="50" dy="-10">B</text>
+        <text x="400" y="350" dx="30">C</text>
     </g>
 </svg>
