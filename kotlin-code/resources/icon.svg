@@ -1,6 +1,18 @@
-<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-    <filter id="blur_filter">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="5 5"/>
-    </filter>
-    <rect x="100" y="100" width="200" height="200" fill="red" filter="url(#blur_filter)"/>
+<svg width="100" height="100"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <circle id="C" r="10"/>
+        <filter id="BF">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1 1"/>
+        </filter>
+    </defs>
+    <style>
+        #C1 { fill:red }
+        #C2 { fill:green }
+        #C3 { fill:blue; filter:url(#BF) }
+    </style>
+    <use id="C1" x="50" y="20" xlink:href="#C"/>
+    <use id="C2" x="50" y="50" xlink:href="#C" filter="url(#BF)"/>
+    <use id="C3" x="50" y="80" xlink:href="#C"/>
 </svg>
