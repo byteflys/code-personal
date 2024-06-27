@@ -1,9 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-    <rect width="100%" height="100%" fill="#FF00FF11">
-        <animate
-            attributeName="rx"
-            values="30%;50%;30%"
-            dur="3s"
-            repeatCount="indefinite"/>
-    </rect>
+<svg xmlns='http://www.w3.org/2000/svg' width="200" height="200">
+    <script type="text/ecmascript">
+        function reshape(event) {
+            var element=event.target
+            var rx = element.getAttribute ("rx")
+            if(rx=="50%"){
+                element.setAttribute ("rx", "0%")
+            }else{
+                element.setAttribute ("rx", "50%")
+            }
+        }
+    </script>
+    <rect onclick="reshape(evt)" width="100%" height="100%" fill="#FF00FF11"/>
 </svg>
