@@ -1,23 +1,14 @@
-<?xml version="1.0" standalone="no"?>
-<svg width="200" height="200"
-     xmlns="http://www.w3.org/2000/svg">
-    <linearGradient id="Gradient1">
-        <stop offset="5%" stop-color="white"/>
-        <stop offset="95%" stop-color="blue"/>
-    </linearGradient>
-    <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="5%" stop-color="red"/>
-        <stop offset="95%" stop-color="orange"/>
-    </linearGradient>
-    <pattern id="Pattern"
-             x="0" y="0" width=".25" height=".25"
-             patternUnits="objectBoundingBox">
-        <rect x="0" y="0" width="50" height="50" fill="skyblue"/>
-        <rect x="0" y="0" width="25" height="25" fill="url(#Gradient2)"/>
-        <circle cx="25" cy="25" r="20"
-                fill="url(#Gradient1)"
-                fill-opacity="0.5"/>
-    </pattern>
-    <rect x="0" y="0" width="200" height="200"
-          fill="url(#Pattern)" stroke="black"/>
+<svg xmlns='http://www.w3.org/2000/svg' width="200" height="200">
+    <script type="text/ecmascript">
+        function reshape(event) {
+            var element=event.target
+            var rx = element.getAttribute ("rx")
+            if(rx=="50%"){
+                element.setAttribute ("rx", "0%")
+            }else{
+                element.setAttribute ("rx", "50%")
+            }
+        }
+    </script>
+    <rect onclick="reshape(evt)" width="100%" height="100%" fill="#FF00FF11"/>
 </svg>
