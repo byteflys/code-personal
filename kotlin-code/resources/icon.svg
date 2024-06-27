@@ -1,3 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400">
-    <image href="https://img-home.csdnimg.cn/images/20230308042836.png"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
+    <rect x="0" y="0" width="200" height="200" fill="#FFFF0011"/>
+    <clipPath id="clip">
+        <circle cx="100" cy="50" r="50"/>
+        <rect x="0" y="0" width="100" height="100"/>
+    </clipPath>
+    <circle cx="100" cy="100" r="100" fill="#00FFFF33" clip-path="url(#clip)"/>
 </svg>
