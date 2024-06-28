@@ -8,6 +8,7 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.android.library.skinner.SkinnerAssetManager
 import com.tencent.mmkv.MMKV
 
 class SplashActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Global.application = application
         MMKV.initialize(application)
+        SkinnerAssetManager.init(application, "file:///android_asset/skin.apk")
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
