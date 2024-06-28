@@ -10,6 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.library.skinner.SkinnerAssetManager
 import com.tencent.mmkv.MMKV
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.FileOutputStream
 
 class SplashActivity : AppCompatActivity() {
 
@@ -17,7 +20,16 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Global.application = application
         MMKV.initialize(application)
-        SkinnerAssetManager.init(application, "file:///android_asset/skin.apk")
+        copySkinPackage()
+        SkinnerAssetManager.init(application, "sdcard/skin.apk")
+    }
+
+    private fun copySkinPackage() {
+        val fis = application.assets.open("skin.apk")
+        val fos = FileOutputStream("sdcard/skin.apk")
+        val buffer = ByteArray(fis.available())
+        fis.read(buffer)
+        fos.write(buffer)
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

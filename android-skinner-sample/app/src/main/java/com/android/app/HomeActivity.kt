@@ -3,6 +3,7 @@ package com.android.app
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.app.databinding.ActivityHomeBinding
+import com.android.library.skinner.SkinnerAssetManager
 
 class HomeActivity : AppCompatActivity() {
 
@@ -16,6 +17,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
+        val drawable = SkinnerAssetManager.skinDrawable(R.drawable.icon_app)
+        binding.image.setImageDrawable(drawable)
     }
 }

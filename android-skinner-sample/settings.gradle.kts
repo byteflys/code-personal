@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 include(":app")
 include(":library-skinner")
+include(":skin-packager")
