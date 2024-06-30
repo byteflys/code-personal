@@ -2,6 +2,7 @@ package com.android.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.android.library.skinner.SkinnerInflaterFactory
 
 class HomeActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.android.app
+package com.android.library.skinner
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.android.library.skinner.SkinnerAssetManager
 
 typealias androidStyleableRes = androidx.appcompat.R.styleable
 
