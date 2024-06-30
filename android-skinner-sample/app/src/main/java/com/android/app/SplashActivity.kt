@@ -10,8 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.library.skinner.SkinnerAssetManager
 import com.tencent.mmkv.MMKV
-import java.io.BufferedInputStream
-import java.io.BufferedOutputStream
 import java.io.FileOutputStream
 
 class SplashActivity : AppCompatActivity() {

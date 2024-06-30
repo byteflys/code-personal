@@ -2,22 +2,17 @@ package com.android.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.android.app.databinding.ActivityHomeBinding
-import com.android.library.skinner.SkinnerAssetManager
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        setSkinnerInflaterFactory( this)
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initView()
+        val root = layoutInflater.inflate(R.layout.activity_home, null)
+        setContentView(root)
     }
 
-    private fun initView() {
-        val drawable = SkinnerAssetManager.skinDrawable(R.drawable.icon_app)
-        binding.image.setImageDrawable(drawable)
+    private fun setSkinnerInflaterFactory(  activity: AppCompatActivity) {
+        activity.layoutInflater.factory2 = SkinnerInflaterFactory(activity)
     }
 }
