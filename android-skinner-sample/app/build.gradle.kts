@@ -29,7 +29,7 @@ android {
 
 dependencies {
 
-    api(project(":library-skinner"))
+    api(project(":android-skinner"))
 
     // Kotlin
     api("androidx.core:core-ktx:1.13.1")

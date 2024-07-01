@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 include(":app")
-include(":library-skinner")
+include(":android-skinner")
 include(":skin-package")

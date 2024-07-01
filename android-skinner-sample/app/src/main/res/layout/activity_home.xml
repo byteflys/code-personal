@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:skin="http://schemas.android.com/skin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color_01_skinnable"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="30dp">
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_app" />
+        android:src="@drawable/icon_app_skinnable"
+        skin:provider="BasicAttributeSkinner" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="@color/text_color_01_skinnable"
+        android:textSize="18dp"
+        skin:provider="BasicAttributeSkinner" />
 </LinearLayout>
