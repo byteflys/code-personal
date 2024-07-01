@@ -7,5 +7,5 @@ interface SkinnerProvider {
 
     fun isProviderSupported(view: View, attrs: AttributeSet): Boolean
 
-    fun hookView(view: View, attrs: AttributeSet): Boolean
+    fun hookView(view: View, attrs: AttributeSet)
 }

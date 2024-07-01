@@ -28,7 +28,11 @@ object SkinnerAssetManager {
         this.resources = resources
     }
 
-    fun skinResId(resId: Int): Int {
+    fun resourceType(resId: Int): String {
+        return originResources.getResourceTypeName(resId)
+    }
+
+    fun skinRes(resId: Int): Int {
         return resources.getIdentifier(
             originResources.getResourceName(resId),
             originResources.getResourceTypeName(resId),
@@ -37,7 +41,7 @@ object SkinnerAssetManager {
     }
 
     fun skinColor(resId: Int): Int {
-        val skinResId = skinResId(resId)
+        val skinResId = skinRes(resId)
         if (skinResId > 0) {
             return resources.getColor(skinResId)
         }
@@ -45,7 +49,7 @@ object SkinnerAssetManager {
     }
 
     fun skinDrawable(resId: Int): Drawable {
-        val skinResId = skinResId(resId)
+        val skinResId = skinRes(resId)
         if (skinResId > 0) {
             return resources.getDrawable(skinResId)
         }

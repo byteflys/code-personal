@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="skinnable_color_activity_background" type="color">#11FF0000</item>
+    <item name="text_color_01_skinnable" type="color">#EA0000</item>
+    <item name="background_color_01_skinnable" type="color">#22FF00FF</item>
 </resources>
