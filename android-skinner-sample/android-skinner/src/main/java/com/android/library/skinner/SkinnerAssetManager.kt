@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import com.android.library.skinner.SkinnerKit.getSkinMode
 
 @Suppress("Deprecated")
 object SkinnerAssetManager {
@@ -33,8 +34,13 @@ object SkinnerAssetManager {
     }
 
     fun skinRes(resId: Int): Int {
+        val mode = getSkinMode()
+        var name = originResources.getResourceName(resId)
+        if (mode.isNotEmpty()) {
+            name = name + "_" + mode
+        }
         return resources.getIdentifier(
-            originResources.getResourceName(resId),
+            name,
             originResources.getResourceTypeName(resId),
             originResources.getResourcePackageName(resId)
         )

@@ -19,4 +19,9 @@ object SkinnerValues {
     const val ATTRIBUTE_BACKGROUND = "background"
     const val ATTRIBUTE_TEXT_COLOR = "textColor"
     const val ATTRIBUTE_SRC = "src"
+
+    const val KEY_SKIN_MODE = "skin_mode"
+
+    const val SKIN_MODE_NONE = ""
+    const val SKIN_MODE_NIGHT = "night"
 }
