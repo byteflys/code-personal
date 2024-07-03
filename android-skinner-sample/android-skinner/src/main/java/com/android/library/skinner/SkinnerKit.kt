@@ -1,5 +1,6 @@
 package com.android.library.skinner
 
+import android.app.Application
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,7 @@ import com.android.library.skinner.SkinnerValues.KEY_SKIN_MODE
 import com.android.library.skinner.SkinnerValues.KEY_SKIN_NAME
 import com.android.library.skinner.SkinnerValues.PREFIX_SKINNABLE
 import com.android.library.skinner.SkinnerValues.RESOURCE_ID_INVALID
-import com.android.library.skinner.SkinnerValues.SKIN_MODE_NIGHT
-import com.android.library.skinner.SkinnerValues.SKIN_MODE_NONE
+import com.android.library.skinner.SkinnerValues.SKIN_NAME_NONE
 import com.android.library.skinner.provider.BasicAttributeSkinner
 import com.tencent.mmkv.MMKV
 import java.io.FileOutputStream
@@ -39,7 +39,7 @@ object SkinnerKit {
     }
 
     fun getSkinName(): String {
-        return MMKV.defaultMMKV().getString(KEY_SKIN_NAME, "")!!
+        return MMKV.defaultMMKV().getString(KEY_SKIN_NAME, SKIN_NAME_NONE)!!
     }
 
     fun setSkinName(name: String) {
@@ -57,6 +57,11 @@ object SkinnerKit {
     fun getSkinPackagePath(name: String): String {
         val root = SkinnerResources.context.filesDir.absolutePath
         return Path(root, "skin/skin_$name.apk").absolutePathString()
+    }
+
+    fun init(application: Application) {
+        SkinnerResources.context = application
+        MMKV.initialize(application)
     }
 
     fun installSkinnerFactory(activity: AppCompatActivity) {
@@ -86,17 +91,16 @@ object SkinnerKit {
     fun loadSkin(name: String) {
         val path = getSkinPackagePath(name)
         SkinnerResources.setHookedAssetManager(path)
+        setSkinName(name)
     }
 
-    fun setNightMode() = setSkinMode(SKIN_MODE_NIGHT)
-
-    fun setDayMode() = setSkinMode(SKIN_MODE_NONE)
-
     fun uninstallSkinnerFactory(activity: AppCompatActivity) {
-
+        val field = LayoutInflater::class.java.getDeclaredField("mFactory2")
+        field.isAccessible = true
+        field.set(activity.layoutInflater, activity.delegate)
     }
 
     fun unloadSkin() {
-
+        setSkinName(SKIN_NAME_NONE)
     }
 }

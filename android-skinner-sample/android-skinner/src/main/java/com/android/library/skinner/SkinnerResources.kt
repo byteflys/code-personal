@@ -5,7 +5,6 @@ import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import com.android.library.skinner.SkinnerKit.getSkinMode
-import com.tencent.mmkv.MMKV
 
 object SkinnerResources {
 
@@ -13,11 +12,6 @@ object SkinnerResources {
     lateinit var assetManager: AssetManager
     lateinit var resources: Resources
     lateinit var originResources: Resources
-
-    fun init(application: Application) = apply {
-        context = application
-        MMKV.initialize(application)
-    }
 
     fun setHookedAssetManager(resourcePath: String) {
         val assetManager = AssetManager::class.java.newInstance()

@@ -23,6 +23,7 @@ object SkinnerValues {
     const val KEY_SKIN_NAME = "skin_name"
     const val KEY_SKIN_MODE = "skin_mode"
 
+    const val SKIN_NAME_NONE = ""
     const val SKIN_MODE_NONE = ""
     const val SKIN_MODE_NIGHT = "night"
 }

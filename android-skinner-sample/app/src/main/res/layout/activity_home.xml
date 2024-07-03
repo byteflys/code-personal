@@ -17,6 +17,7 @@
         skin:provider="BasicAttributeSkinner" />
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:gravity="center"
@@ -24,27 +25,6 @@
         android:textColor="@color/text_color_01_skinnable"
         android:textSize="18dp"
         skin:provider="BasicAttributeSkinner" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/installPlugin"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="InstallPlugin"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/uninstallPlugin"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="UninstallPlugin"
-            android:textAllCaps="false" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
