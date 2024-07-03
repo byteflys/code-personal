@@ -13,7 +13,7 @@ class SkinnerInflaterFactory(private val activity: AppCompatActivity) : LayoutIn
 
     private val providers = mutableListOf<SkinnerProvider>()
 
-    fun registerSkinnerProvider(provider: SkinnerProvider) = apply {
+    fun registerViewProvider(provider: SkinnerProvider) = apply {
         providers.add(provider)
     }
 

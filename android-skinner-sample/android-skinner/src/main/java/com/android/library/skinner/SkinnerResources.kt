@@ -19,12 +19,7 @@ object SkinnerResources {
         MMKV.initialize(application)
     }
 
-    fun loadSkin(name: String) {
-        val path = SkinnerKit.getSkinPackagePath(name)
-        setHookedAssetManager(path)
-    }
-
-    private fun setHookedAssetManager(resourcePath: String) {
+    fun setHookedAssetManager(resourcePath: String) {
         val assetManager = AssetManager::class.java.newInstance()
         val method = AssetManager::class.java.getDeclaredMethod("addAssetPath", String::class.java)
         method.invoke(assetManager, resourcePath)
