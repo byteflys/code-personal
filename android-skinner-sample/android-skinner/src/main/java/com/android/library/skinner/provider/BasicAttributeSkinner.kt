@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.android.library.skinner.SkinnerAssetManager.resourceType
-import com.android.library.skinner.SkinnerAssetManager.skinColor
-import com.android.library.skinner.SkinnerAssetManager.skinDrawable
+import com.android.library.skinner.SkinnerResources.resourceType
+import com.android.library.skinner.SkinnerResources.skinColor
+import com.android.library.skinner.SkinnerResources.skinDrawable
 import com.android.library.skinner.SkinnerKit.getAttributeResourceId
 import com.android.library.skinner.SkinnerKit.hasSkinnableAttribute
 import com.android.library.skinner.SkinnerValues.ATTRIBUTE_BACKGROUND

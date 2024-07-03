@@ -33,7 +33,7 @@ class SkinnerInflaterFactory(private val activity: AppCompatActivity) : LayoutIn
         val typedArray = activity.obtainStyledAttributes(attrs, androidStyleableRes.AppCompatImageView)
         if (typedArray.hasValue(androidStyleableRes.AppCompatImageView_android_src)) {
             val srcDrawableId = typedArray.getResourceId(androidStyleableRes.AppCompatImageView_android_src, 0)
-            val skinDrawable = SkinnerAssetManager.skinDrawable(srcDrawableId)
+            val skinDrawable = SkinnerResources.skinDrawable(srcDrawableId)
             view.setImageDrawable(skinDrawable)
         }
     }

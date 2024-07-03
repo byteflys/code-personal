@@ -5,21 +5,26 @@ import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import com.android.library.skinner.SkinnerKit.getSkinMode
+import com.tencent.mmkv.MMKV
 
-@Suppress("Deprecated")
-object SkinnerAssetManager {
+object SkinnerResources {
 
     lateinit var context: Application
     lateinit var assetManager: AssetManager
     lateinit var resources: Resources
     lateinit var originResources: Resources
 
-    fun init(application: Application, resourcePath: String) = apply {
+    fun init(application: Application) = apply {
         context = application
-        createHookedAssetManager(resourcePath)
+        MMKV.initialize(application)
     }
 
-    private fun createHookedAssetManager(resourcePath: String) {
+    fun loadSkin(name: String) {
+        val path = SkinnerKit.getSkinPackagePath(name)
+        setHookedAssetManager(path)
+    }
+
+    private fun setHookedAssetManager(resourcePath: String) {
         val assetManager = AssetManager::class.java.newInstance()
         val method = AssetManager::class.java.getDeclaredMethod("addAssetPath", String::class.java)
         method.invoke(assetManager, resourcePath)

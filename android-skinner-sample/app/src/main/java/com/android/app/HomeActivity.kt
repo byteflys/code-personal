@@ -1,15 +1,20 @@
 package com.android.app
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.android.library.skinner.SkinnerInflaterFactory
+import android.view.LayoutInflater
+import android.view.View
+import com.android.app.databinding.ActivityHomeBinding
+import com.android.library.skinner.SkinnerCompatActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : SkinnerCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        layoutInflater.factory2 = SkinnerInflaterFactory(this)
-        super.onCreate(savedInstanceState)
-        val root = layoutInflater.inflate(R.layout.activity_home, null)
-        setContentView(root)
+    private lateinit var binding: ActivityHomeBinding
+
+    override fun createContentView(layoutInflater: LayoutInflater): View {
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun initContentView() {
+
     }
 }
