@@ -15,6 +15,35 @@ class HomeActivity : SkinnerCompatActivity() {
     }
 
     override fun initContentView() {
+        binding.installPlugin.setOnClickListener { installPlugin() }
+        binding.uninstallPlugin.setOnClickListener { uninstallPlugin() }
+        binding.loadSkin.setOnClickListener { loadSkin() }
+        binding.unloadSkin.setOnClickListener { unloadSkin() }
+        binding.nightMode.setOnClickListener { nightMode() }
+        binding.dayMode.setOnClickListener { dayMode() }
+    }
+
+    private fun installPlugin() {
+
+    }
+
+    private fun uninstallPlugin() {
+
+    }
+
+    private fun loadSkin() {
+
+    }
+
+    private fun unloadSkin() {
+
+    }
+
+    private fun nightMode() {
+
+    }
+
+    private fun dayMode() {
 
     }
 }

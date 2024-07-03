@@ -60,7 +60,7 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/resetSkin"
+            android:id="@+id/unload_skin"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:text="ResetSkin"
