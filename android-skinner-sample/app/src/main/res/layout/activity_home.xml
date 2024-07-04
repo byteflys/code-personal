@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:skin="http://schemas.android.com/skin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,12 +19,12 @@
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="Hello"
         android:textColor="@color/text_color_01_skinnable"
-        android:textSize="18dp"
+        android:textSize="16dp"
         skin:provider="BasicAttributeSkinner" />
 
     <LinearLayout
@@ -40,7 +41,7 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/unload_skin"
+            android:id="@+id/unloadSkin"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:text="ResetSkin"
@@ -54,17 +55,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/dayMode"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="DayMode"
-            android:textAllCaps="false" />
-
-        <Button
             android:id="@+id/nightMode"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:text="NightMode"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/dayMode"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="DayMode"
             android:textAllCaps="false" />
     </LinearLayout>
 </LinearLayout>

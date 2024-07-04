@@ -22,7 +22,7 @@ abstract class SkinnerCompatActivity : AppCompatActivity() {
 
     open abstract protected fun initContentView()
 
-    fun reloadContentView() {
+    protected fun reloadContentView() {
         val contentView = createContentView(layoutInflater)
         setContentView(contentView)
         initContentView()

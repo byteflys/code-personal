@@ -2,12 +2,11 @@ package com.android.library.skinner
 
 object SkinnerValues {
 
+    const val NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android"
+    const val NAMESPACE_APP = "http://schemas.android.com/apk/res-auto"
     const val NAMESPACE_SKIN = "http://schemas.android.com/android/skin"
-    const val NAMESPACE_ANDROID = "http://schemas.android.com/android/android"
-    const val NAMESPACE_APP = "http://schemas.android.com/android/app"
-    const val NAMESPACE_TOOL = "http://schemas.android.com/android/tool"
 
-    const val PREFIX_SKINNABLE = "skinnable"
+    const val SUFFIX_SKINNABLE = "_skinnable"
 
     const val RESOURCE_ID_INVALID = 0
 
@@ -23,7 +22,7 @@ object SkinnerValues {
     const val KEY_SKIN_NAME = "skin_name"
     const val KEY_SKIN_MODE = "skin_mode"
 
-    const val SKIN_NAME_NONE = ""
-    const val SKIN_MODE_NONE = ""
+    const val SKIN_NAME_DEFAULT = "default"
+    const val SKIN_MODE_DEFAULT = "default"
     const val SKIN_MODE_NIGHT = "night"
 }

@@ -5,6 +5,7 @@ import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import com.android.library.skinner.SkinnerKit.getSkinMode
+import com.android.library.skinner.SkinnerValues.SKIN_MODE_DEFAULT
 
 object SkinnerResources {
 
@@ -30,7 +31,7 @@ object SkinnerResources {
     fun skinRes(resId: Int): Int {
         val mode = getSkinMode()
         var name = originResources.getResourceName(resId)
-        if (mode.isNotEmpty()) {
+        if (mode != SKIN_MODE_DEFAULT) {
             name = name + "_" + mode
         }
         return resources.getIdentifier(
@@ -40,6 +41,7 @@ object SkinnerResources {
         )
     }
 
+    // TODO : origin resource support mode
     fun skinColor(resId: Int): Int {
         val skinResId = skinRes(resId)
         if (skinResId > 0) {

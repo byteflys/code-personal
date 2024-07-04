@@ -7,11 +7,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.library.skinner.SkinnerValues.KEY_SKIN_MODE
 import com.android.library.skinner.SkinnerValues.KEY_SKIN_NAME
-import com.android.library.skinner.SkinnerValues.PREFIX_SKINNABLE
+import com.android.library.skinner.SkinnerValues.SUFFIX_SKINNABLE
 import com.android.library.skinner.SkinnerValues.RESOURCE_ID_INVALID
-import com.android.library.skinner.SkinnerValues.SKIN_NAME_NONE
-import com.android.library.skinner.provider.BasicAttributeSkinner
+import com.android.library.skinner.SkinnerValues.SKIN_MODE_DEFAULT
+import com.android.library.skinner.SkinnerValues.SKIN_NAME_DEFAULT
 import com.tencent.mmkv.MMKV
+import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import kotlin.io.path.Path
@@ -26,7 +27,7 @@ object SkinnerKit {
             return false
         }
         val resourceName = SkinnerResources.originResources.getResourceName(resourceId)
-        return resourceName.startsWith(PREFIX_SKINNABLE, true)
+        return resourceName.endsWith(SUFFIX_SKINNABLE, true)
     }
 
     fun hasSkinnableAttribute(view: View, attrs: AttributeSet, namespace: String, attribute: String): Boolean {
@@ -39,7 +40,7 @@ object SkinnerKit {
     }
 
     fun getSkinName(): String {
-        return MMKV.defaultMMKV().getString(KEY_SKIN_NAME, SKIN_NAME_NONE)!!
+        return MMKV.defaultMMKV().getString(KEY_SKIN_NAME, SKIN_NAME_DEFAULT)!!
     }
 
     fun setSkinName(name: String) {
@@ -47,7 +48,7 @@ object SkinnerKit {
     }
 
     fun getSkinMode(): String {
-        return MMKV.defaultMMKV().getString(KEY_SKIN_MODE, "")!!
+        return MMKV.defaultMMKV().getString(KEY_SKIN_MODE, SKIN_MODE_DEFAULT)!!
     }
 
     fun setSkinMode(mode: String) {
@@ -66,10 +67,12 @@ object SkinnerKit {
 
     fun installSkinnerFactory(activity: AppCompatActivity) {
         val factory = SkinnerInflaterFactory(activity)
-        factory.registerViewProvider(BasicAttributeSkinner)
-        val field = LayoutInflater::class.java.getDeclaredField("mFactory2")
-        field.isAccessible = true
-        field.set(activity.layoutInflater, factory)
+        val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
+        field2.isAccessible = true
+        field2.set(activity.layoutInflater, factory)
+        val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
+        field1.isAccessible = true
+        field1.set(activity.layoutInflater, factory)
     }
 
     fun registerViewProvider(activity: AppCompatActivity, provider: SkinnerProvider) {
@@ -80,6 +83,10 @@ object SkinnerKit {
 
     fun installSkin(inputStream: InputStream, name: String) {
         val path = getSkinPackagePath(name)
+        File(path).apply {
+            parentFile.mkdirs()
+            createNewFile()
+        }
         val fos = FileOutputStream(path)
         val buffer = ByteArray(inputStream.available())
         inputStream.read(buffer)
@@ -98,9 +105,6 @@ object SkinnerKit {
         val field = LayoutInflater::class.java.getDeclaredField("mFactory2")
         field.isAccessible = true
         field.set(activity.layoutInflater, activity.delegate)
-    }
-
-    fun unloadSkin() {
-        setSkinName(SKIN_NAME_NONE)
+        setSkinName(SKIN_NAME_DEFAULT)
     }
 }
