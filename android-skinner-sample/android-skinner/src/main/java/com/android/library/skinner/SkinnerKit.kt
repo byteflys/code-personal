@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.android.library.skinner.SkinnerResources.isResourceAvailable
 import com.android.library.skinner.SkinnerValues.KEY_SKIN_MODE
 import com.android.library.skinner.SkinnerValues.KEY_SKIN_NAME
 import com.android.library.skinner.SkinnerValues.SUFFIX_SKINNABLE
@@ -20,8 +21,6 @@ import kotlin.io.path.Path
 import kotlin.io.path.absolutePathString
 
 object SkinnerKit {
-
-    fun isResourceAvailable(resourceId: Int) = resourceId != RESOURCE_ID_INVALID
 
     fun isResourceSkinnable(resourceId: Int): Boolean {
         if (!isResourceAvailable(resourceId)) {
@@ -76,12 +75,12 @@ object SkinnerKit {
     ) {
         if (!isSkinnerFactoryInstalled(activity)) {
             val factory = SkinnerInflaterFactory(activity)
-            val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
-            field2.isAccessible = true
-            field2.set(activity.layoutInflater, factory)
             val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
             field1.isAccessible = true
             field1.set(activity.layoutInflater, factory)
+            val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
+            field2.isAccessible = true
+            field2.set(activity.layoutInflater, factory)
         }
         providers.forEach { registerViewProvider(activity, it) }
     }
@@ -113,9 +112,12 @@ object SkinnerKit {
     }
 
     fun uninstallSkinnerFactory(activity: AppCompatActivity) {
-        val field = LayoutInflater::class.java.getDeclaredField("mFactory2")
-        field.isAccessible = true
-        field.set(activity.layoutInflater, activity.delegate)
+        val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
+        field1.isAccessible = true
+        field1.set(activity.layoutInflater, activity.delegate)
+        val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
+        field2.isAccessible = true
+        field2.set(activity.layoutInflater, activity.delegate)
         setSkinName(SKIN_NAME_DEFAULT)
     }
 }

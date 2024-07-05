@@ -24,6 +24,8 @@ object SkinnerResources {
         this.resources = resources
     }
 
+    fun isResourceAvailable(resourceId: Int) = resourceId != SkinnerValues.RESOURCE_ID_INVALID
+
     fun resourceType(resId: Int): String {
         return originResources.getResourceTypeName(resId)
     }
