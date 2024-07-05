@@ -2,6 +2,8 @@ package com.android.code
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.code.databinding.ActivityHomeBinding
 
@@ -17,9 +19,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val adapter = SimpleAdapter()
-        binding.listView.layoutManager = LinearLayoutManager(this)
-        binding.listView.adapter = adapter
-        adapter.notifyDataSetChanged()
+        val x :Fragment
+        val viewModel = ViewModelProvider(this)[ContextViewModel::class.java]
     }
 }
