@@ -28,17 +28,16 @@ class HomeActivity : SkinnerCompatActivity() {
 
     override fun beforeCreate() {
         SkinnerKit.init(application)
+        SkinnerKit.installSkinnerFactory(this)
         SkinnerKit.installSkin(assets.open("skin.apk"), "skinner")
     }
 
     private fun loadSkinner() {
-        SkinnerKit.installSkinnerFactory(this)
         SkinnerKit.loadSkin("skinner")
         reloadContentView()
     }
 
     private fun loadDefault() {
-        SkinnerKit.installSkinnerFactory(this)
         SkinnerKit.loadSkin(SkinnerValues.SKIN_NAME_DEFAULT)
         reloadContentView()
     }
