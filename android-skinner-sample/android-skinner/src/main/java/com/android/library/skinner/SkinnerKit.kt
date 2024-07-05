@@ -60,6 +60,15 @@ object SkinnerKit {
         return Path(root, "skin/skin_$name.apk").absolutePathString()
     }
 
+    fun getSkinnableResourceName(resId: Int): String {
+        val mode = getSkinMode()
+        var name = SkinnerResources.originResources.getResourceName(resId)
+        if (mode != SKIN_MODE_DEFAULT) {
+            name = name + "_" + mode
+        }
+        return name
+    }
+
     fun init(application: Application) {
         SkinnerResources.context = application
         MMKV.initialize(application)

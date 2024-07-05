@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.res.AssetManager
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import com.android.library.skinner.SkinnerKit.getSkinMode
-import com.android.library.skinner.SkinnerValues.SKIN_MODE_DEFAULT
 
 object SkinnerResources {
 
@@ -30,32 +28,34 @@ object SkinnerResources {
         return originResources.getResourceTypeName(resId)
     }
 
-    fun skinRes(resId: Int): Int {
-        val mode = getSkinMode()
-        var name = originResources.getResourceName(resId)
-        if (mode != SKIN_MODE_DEFAULT) {
-            name = name + "_" + mode
-        }
+    fun skinRes(resources: Resources, resId: Int): Int {
         return resources.getIdentifier(
-            name,
+            SkinnerKit.getSkinnableResourceName(resId),
             originResources.getResourceTypeName(resId),
             originResources.getResourcePackageName(resId)
         )
     }
 
-    // TODO : origin resource support mode
     fun skinColor(resId: Int): Int {
-        val skinResId = skinRes(resId)
+        val skinResId = skinRes(resources, resId)
         if (skinResId > 0) {
             return resources.getColor(skinResId)
+        }
+        val originResIdWithMode = skinRes(originResources, resId)
+        if (originResIdWithMode > 0) {
+            return originResources.getColor(originResIdWithMode)
         }
         return originResources.getColor(resId)
     }
 
     fun skinDrawable(resId: Int): Drawable {
-        val skinResId = skinRes(resId)
+        val skinResId = skinRes(resources, resId)
         if (skinResId > 0) {
             return resources.getDrawable(skinResId)
+        }
+        val originResIdWithMode = skinRes(originResources, resId)
+        if (originResIdWithMode > 0) {
+            return originResources.getDrawable(originResIdWithMode)
         }
         return originResources.getDrawable(resId)
     }
