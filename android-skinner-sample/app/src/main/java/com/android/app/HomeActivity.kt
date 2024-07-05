@@ -2,7 +2,6 @@ package com.android.app
 
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
 import com.android.app.databinding.ActivityHomeBinding
 import com.android.library.skinner.SkinnerCompatActivity
 import com.android.library.skinner.SkinnerKit
@@ -12,21 +11,19 @@ class HomeActivity : SkinnerCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
-    private lateinit var root: View
-
     override fun createContentView(layoutInflater: LayoutInflater): View {
-        root = layoutInflater.inflate(R.layout.activity_home, null)
-        return root
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun initContentView() {
         val skinName = SkinnerKit.getSkinName()
         val skinMode = SkinnerKit.getSkinMode()
-        root.findViewById<TextView>(R.id.text).text = "$skinName/$skinMode"
-        root.findViewById<View>(R.id.loadSkinner).setOnClickListener { loadSkinner() }
-        root.findViewById<View>(R.id.loadDefault).setOnClickListener { loadDefault() }
-        root.findViewById<View>(R.id.nightMode).setOnClickListener { nightMode() }
-        root.findViewById<View>(R.id.dayMode).setOnClickListener { dayMode() }
+        binding.text.text = "$skinName/$skinMode"
+        binding.loadSkinner.setOnClickListener { loadSkinner() }
+        binding.loadDefault.setOnClickListener { loadDefault() }
+        binding.nightMode.setOnClickListener { nightMode() }
+        binding.dayMode.setOnClickListener { dayMode() }
     }
 
     override fun beforeCreate() {
