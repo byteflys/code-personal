@@ -15,13 +15,14 @@ class SkinnerInflaterFactory(private val activity: AppCompatActivity) : LayoutIn
     }
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
-        val view = activity.delegate.createView(parent, name, context, attrs)
-        view ?: return null
+        val delegateView = activity.delegate.createView(parent, name, context, attrs)
+        val inflateView = delegateView ?: activity.layoutInflater.onCreateView(context, parent, name, attrs)
+        inflateView ?: return null
         providers.forEach {
-            if (it.isProviderSupported(view, attrs))
-                it.hookView(view, attrs)
+            if (it.isProviderSupported(inflateView, attrs))
+                it.hookView(inflateView, attrs)
         }
-        return view
+        return inflateView
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet) = null
