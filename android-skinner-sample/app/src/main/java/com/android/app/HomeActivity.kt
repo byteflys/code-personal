@@ -27,7 +27,6 @@ class HomeActivity : SkinnerCompatActivity() {
     }
 
     // TODO
-    //  set default asset manager
     //  if skin is same, not reload
     //  if apk not exist, use origin resource
     override fun beforeCreate() {

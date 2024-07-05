@@ -56,6 +56,9 @@ object SkinnerKit {
     }
 
     fun getSkinPackagePath(name: String): String {
+        if (name == SKIN_NAME_DEFAULT) {
+            return SkinnerResources.context.packageResourcePath
+        }
         val root = SkinnerResources.context.filesDir.absolutePath
         return Path(root, "skin/skin_$name.apk").absolutePathString()
     }
@@ -71,6 +74,9 @@ object SkinnerKit {
 
     fun init(application: Application) {
         SkinnerResources.context = application
+        SkinnerResources.assetManager = application.assets
+        SkinnerResources.resources = application.resources
+        SkinnerResources.originResources = application.resources
         MMKV.initialize(application)
     }
 
