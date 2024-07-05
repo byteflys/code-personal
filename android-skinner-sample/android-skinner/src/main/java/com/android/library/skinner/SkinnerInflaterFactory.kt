@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SkinnerInflaterFactory(private val activity: AppCompatActivity) : LayoutInflater.Factory2 {
 
-    private val providers = mutableListOf<SkinnerProvider>()
+    internal val providers = mutableListOf<SkinnerProvider>()
 
     fun registerViewProvider(provider: SkinnerProvider) = apply {
-        providers.add(provider)
+        if (!providers.contains(provider))
+            providers.add(provider)
     }
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {

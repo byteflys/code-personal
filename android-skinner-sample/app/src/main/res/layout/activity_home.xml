@@ -34,17 +34,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/loadSkin"
+            android:id="@+id/loadSkinner"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:text="LoadSkin"
+            android:text="LoadSkinner"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/unloadSkin"
+            android:id="@+id/loadDefault"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:text="ResetSkin"
+            android:text="LoadDefault"
             android:textAllCaps="false" />
     </LinearLayout>
 

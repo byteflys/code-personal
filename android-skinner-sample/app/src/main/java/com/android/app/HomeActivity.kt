@@ -7,7 +7,6 @@ import com.android.app.databinding.ActivityHomeBinding
 import com.android.library.skinner.SkinnerCompatActivity
 import com.android.library.skinner.SkinnerKit
 import com.android.library.skinner.SkinnerValues
-import com.android.library.skinner.provider.BasicAttributeSkinner
 
 class HomeActivity : SkinnerCompatActivity() {
 
@@ -24,8 +23,8 @@ class HomeActivity : SkinnerCompatActivity() {
         val skinName = SkinnerKit.getSkinName()
         val skinMode = SkinnerKit.getSkinMode()
         root.findViewById<TextView>(R.id.text).text = "$skinName/$skinMode"
-        root.findViewById<View>(R.id.loadSkin).setOnClickListener { loadSkin() }
-        root.findViewById<View>(R.id.unloadSkin).setOnClickListener { unloadSkin() }
+        root.findViewById<View>(R.id.loadSkinner).setOnClickListener { loadSkinner() }
+        root.findViewById<View>(R.id.loadDefault).setOnClickListener { loadDefault() }
         root.findViewById<View>(R.id.nightMode).setOnClickListener { nightMode() }
         root.findViewById<View>(R.id.dayMode).setOnClickListener { dayMode() }
     }
@@ -35,15 +34,15 @@ class HomeActivity : SkinnerCompatActivity() {
         SkinnerKit.installSkin(assets.open("skin.apk"), "skinner")
     }
 
-    private fun loadSkin() {
+    private fun loadSkinner() {
         SkinnerKit.installSkinnerFactory(this)
-        SkinnerKit.registerViewProvider(this, BasicAttributeSkinner)
         SkinnerKit.loadSkin("skinner")
         reloadContentView()
     }
 
-    private fun unloadSkin() {
-        SkinnerKit.uninstallSkinnerFactory(this)
+    private fun loadDefault() {
+        SkinnerKit.installSkinnerFactory(this)
+        SkinnerKit.loadSkin(SkinnerValues.SKIN_NAME_DEFAULT)
         reloadContentView()
     }
 
