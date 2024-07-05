@@ -73,11 +73,11 @@ object SkinnerKit {
     }
 
     fun init(application: Application) {
+        MMKV.initialize(application)
         SkinnerResources.context = application
         SkinnerResources.assetManager = application.assets
         SkinnerResources.resources = application.resources
         SkinnerResources.originResources = application.resources
-        MMKV.initialize(application)
     }
 
     fun isSkinnerFactoryInstalled(activity: AppCompatActivity): Boolean {
@@ -134,5 +134,6 @@ object SkinnerKit {
         field2.isAccessible = true
         field2.set(activity.layoutInflater, activity.delegate)
         setSkinName(SKIN_NAME_DEFAULT)
+        setSkinMode(SKIN_MODE_DEFAULT)
     }
 }

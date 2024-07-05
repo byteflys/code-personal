@@ -11,6 +11,13 @@ class HomeActivity : SkinnerCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
+    override fun beforeCreate() {
+        initSkinner()
+        installSkinner()
+        val lastSkin = SkinnerKit.getSkinName()
+        SkinnerKit.loadSkin(lastSkin)
+    }
+
     override fun createContentView(layoutInflater: LayoutInflater): View {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         return binding.root
@@ -20,37 +27,42 @@ class HomeActivity : SkinnerCompatActivity() {
         val skinName = SkinnerKit.getSkinName()
         val skinMode = SkinnerKit.getSkinMode()
         binding.text.text = "$skinName/$skinMode"
-        binding.loadSkinner.setOnClickListener { loadSkinner() }
-        binding.loadDefault.setOnClickListener { loadDefault() }
-        binding.nightMode.setOnClickListener { nightMode() }
-        binding.defaultMode.setOnClickListener { defaultMode() }
+        binding.loadSkinner.setOnClickListener { loadSkinnerSkin() }
+        binding.loadDefault.setOnClickListener { loadDefaultSkin() }
+        binding.nightMode.setOnClickListener { setDarkMode() }
+        binding.defaultMode.setOnClickListener { setDefaultMode() }
     }
 
-    // TODO
-    //  if skin is same, not reload
-    //  if apk not exist, use origin resource
-    override fun beforeCreate() {
+    private fun initSkinner() {
         SkinnerKit.init(application)
-        SkinnerKit.installSkinnerFactory(this)
         SkinnerKit.installSkin(assets.open("skin.apk"), "skinner")
     }
 
-    private fun loadSkinner() {
-        SkinnerKit.loadSkin("skinner")
+    private fun installSkinner() {
+        SkinnerKit.installSkinnerFactory(this)
+    }
+
+    private fun uninstallSkinner() {
+        SkinnerKit.uninstallSkinnerFactory(this)
         reloadContentView()
     }
 
-    private fun loadDefault() {
+    private fun loadSkinnerSkin() {
+        SkinnerKit.loadSkin("skinner22")
+        reloadContentView()
+    }
+
+    private fun loadDefaultSkin() {
         SkinnerKit.loadSkin(SkinnerValues.SKIN_NAME_DEFAULT)
         reloadContentView()
     }
 
-    private fun nightMode() {
+    private fun setDarkMode() {
         SkinnerKit.setSkinMode(SkinnerValues.SKIN_MODE_DARK)
         reloadContentView()
     }
 
-    private fun defaultMode() {
+    private fun setDefaultMode() {
         SkinnerKit.setSkinMode(SkinnerValues.SKIN_MODE_DEFAULT)
         reloadContentView()
     }
