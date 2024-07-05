@@ -12,7 +12,6 @@ class HomeActivity : SkinnerCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     override fun beforeCreate() {
-        initSkinner()
         installSkinner()
         val lastSkin = SkinnerKit.getSkinName()
         SkinnerKit.loadSkin(lastSkin)
@@ -33,18 +32,10 @@ class HomeActivity : SkinnerCompatActivity() {
         binding.defaultMode.setOnClickListener { setDefaultMode() }
     }
 
-    private fun initSkinner() {
+    private fun installSkinner() {
         SkinnerKit.init(application)
         SkinnerKit.installSkin(assets.open("skin.apk"), "skinner")
-    }
-
-    private fun installSkinner() {
         SkinnerKit.installSkinnerFactory(this)
-    }
-
-    private fun uninstallSkinner() {
-        SkinnerKit.uninstallSkinnerFactory(this)
-        reloadContentView()
     }
 
     private fun loadSkinnerSkin() {
