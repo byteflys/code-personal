@@ -12,6 +12,10 @@ android {
         minSdk = 30
     }
 
+    sourceSets {
+        getByName("main").res.srcDirs("src/main/res-dark")
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

@@ -9,4 +9,8 @@ android {
         applicationId = "com.android.app"
         minSdk = 30
     }
+
+    sourceSets {
+        getByName("main").res.srcDirs("src/main/res-dark")
+    }
 }
