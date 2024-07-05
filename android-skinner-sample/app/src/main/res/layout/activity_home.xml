@@ -58,14 +58,14 @@
             android:id="@+id/nightMode"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:text="NightMode"
+            android:text="DarkMode"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/dayMode"
+            android:id="@+id/defaultMode"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:text="DayMode"
+            android:text="DefaultMode"
             android:textAllCaps="false" />
     </LinearLayout>
 </LinearLayout>

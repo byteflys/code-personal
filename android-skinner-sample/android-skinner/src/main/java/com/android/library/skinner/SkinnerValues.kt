@@ -24,5 +24,6 @@ object SkinnerValues {
 
     const val SKIN_NAME_DEFAULT = "default"
     const val SKIN_MODE_DEFAULT = "default"
-    const val SKIN_MODE_NIGHT = "night"
+    const val SKIN_MODE_DARK = "dark"
+    const val SKIN_MODE_LIGHT = "light"
 }

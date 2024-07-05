@@ -23,7 +23,7 @@ class HomeActivity : SkinnerCompatActivity() {
         binding.loadSkinner.setOnClickListener { loadSkinner() }
         binding.loadDefault.setOnClickListener { loadDefault() }
         binding.nightMode.setOnClickListener { nightMode() }
-        binding.dayMode.setOnClickListener { dayMode() }
+        binding.defaultMode.setOnClickListener { defaultMode() }
     }
 
     // TODO
@@ -46,11 +46,11 @@ class HomeActivity : SkinnerCompatActivity() {
     }
 
     private fun nightMode() {
-        SkinnerKit.setSkinMode(SkinnerValues.SKIN_MODE_NIGHT)
+        SkinnerKit.setSkinMode(SkinnerValues.SKIN_MODE_DARK)
         reloadContentView()
     }
 
-    private fun dayMode() {
+    private fun defaultMode() {
         SkinnerKit.setSkinMode(SkinnerValues.SKIN_MODE_DEFAULT)
         reloadContentView()
     }

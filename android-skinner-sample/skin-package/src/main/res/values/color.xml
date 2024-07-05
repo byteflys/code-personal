@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="text_color_01_skinnable" type="color">#EA0000</item>
-    <item name="background_color_01_skinnable" type="color">#22FF00FF</item>
+    <color name="text_color_01_skinnable">#EA0000</color>
+    <color name="background_color_01_skinnable">#22FF0000</color>
 </resources>
