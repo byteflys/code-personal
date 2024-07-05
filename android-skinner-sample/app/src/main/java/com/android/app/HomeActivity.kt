@@ -26,6 +26,10 @@ class HomeActivity : SkinnerCompatActivity() {
         binding.dayMode.setOnClickListener { dayMode() }
     }
 
+    // TODO
+    //  set default asset manager
+    //  if skin is same, not reload
+    //  if apk not exist, use origin resource
     override fun beforeCreate() {
         SkinnerKit.init(application)
         SkinnerKit.installSkinnerFactory(this)
