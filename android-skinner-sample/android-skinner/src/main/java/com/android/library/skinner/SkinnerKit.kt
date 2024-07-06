@@ -98,6 +98,8 @@ object SkinnerKit {
             field2.set(activity.layoutInflater, factory)
         }
         providers.forEach { registerViewProvider(activity, it) }
+        val lastSkin = getSkinName()
+        loadSkin(lastSkin)
     }
 
     fun registerViewProvider(activity: AppCompatActivity, provider: SkinnerProvider) {

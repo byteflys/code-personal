@@ -13,8 +13,6 @@ class HomeActivity : SkinnerCompatActivity() {
 
     override fun beforeCreate() {
         installSkinner()
-        val lastSkin = SkinnerKit.getSkinName()
-        SkinnerKit.loadSkin(lastSkin)
     }
 
     override fun createContentView(layoutInflater: LayoutInflater): View {
