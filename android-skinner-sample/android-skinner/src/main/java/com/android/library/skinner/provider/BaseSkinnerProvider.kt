@@ -8,6 +8,11 @@ import com.android.library.skinner.SkinnerValues.NAMESPACE_SKIN
 
 abstract class BaseSkinnerProvider : SkinnerProvider {
 
+    override fun isProviderSupported(view: View, attrs: AttributeSet): Boolean {
+        val providers = getAllProviders(view, attrs)
+        return providers.contains(BasicAttributeSkinner::class.simpleName)
+    }
+
     fun getProviderNames(view: View, attrs: AttributeSet): String? {
         return attrs.getAttributeValue(NAMESPACE_SKIN, ATTRIBUTE_PROVIDER)
     }

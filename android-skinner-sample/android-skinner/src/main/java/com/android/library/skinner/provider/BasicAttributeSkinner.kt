@@ -24,10 +24,7 @@ object BasicAttributeSkinner : BaseSkinnerProvider() {
         if (providers.isEmpty()) {
             return true
         }
-        if (providers.contains(BasicAttributeSkinner::class.simpleName)) {
-            return true
-        }
-        return false
+        return super.isProviderSupported(view, attrs)
     }
 
     override fun hookView(view: View, attrs: AttributeSet) {

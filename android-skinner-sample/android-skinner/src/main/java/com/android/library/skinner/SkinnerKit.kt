@@ -12,7 +12,6 @@ import com.android.library.skinner.SkinnerValues.SUFFIX_SKINNABLE
 import com.android.library.skinner.SkinnerValues.RESOURCE_ID_INVALID
 import com.android.library.skinner.SkinnerValues.SKIN_MODE_DEFAULT
 import com.android.library.skinner.SkinnerValues.SKIN_NAME_DEFAULT
-import com.android.library.skinner.provider.BasicAttributeSkinner
 import com.tencent.mmkv.MMKV
 import java.io.File
 import java.io.FileOutputStream
@@ -80,32 +79,27 @@ object SkinnerKit {
         SkinnerResources.originResources = application.resources
     }
 
-    fun isSkinnerFactoryInstalled(activity: AppCompatActivity): Boolean {
-        return activity.layoutInflater.factory2 is SkinnerInflaterFactory
-    }
-
-    fun installSkinnerFactory(
-        activity: AppCompatActivity,
-        vararg providers: SkinnerProvider = arrayOf(BasicAttributeSkinner)
-    ) {
-        if (!isSkinnerFactoryInstalled(activity)) {
-            val factory = SkinnerInflaterFactory(activity)
-            val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
-            field1.isAccessible = true
-            field1.set(activity.layoutInflater, factory)
-            val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
-            field2.isAccessible = true
-            field2.set(activity.layoutInflater, factory)
-        }
-        providers.forEach { registerViewProvider(activity, it) }
+    fun installSkinnerFactory(activity: AppCompatActivity) {
+        val factory = SkinnerInflaterFactory(activity)
+        val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
+        field1.isAccessible = true
+        field1.set(activity.layoutInflater, factory)
+        val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
+        field2.isAccessible = true
+        field2.set(activity.layoutInflater, factory)
         val lastSkin = getSkinName()
         loadSkin(lastSkin)
     }
 
-    fun registerViewProvider(activity: AppCompatActivity, provider: SkinnerProvider) {
-        (activity.layoutInflater.factory2 as? SkinnerInflaterFactory)?.let {
-            it.registerViewProvider(provider)
-        }
+    fun uninstallSkinnerFactory(activity: AppCompatActivity) {
+        val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
+        field1.isAccessible = true
+        field1.set(activity.layoutInflater, activity.delegate)
+        val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
+        field2.isAccessible = true
+        field2.set(activity.layoutInflater, activity.delegate)
+        setSkinName(SKIN_NAME_DEFAULT)
+        setSkinMode(SKIN_MODE_DEFAULT)
     }
 
     fun installSkin(inputStream: InputStream, name: String) {
@@ -126,16 +120,5 @@ object SkinnerKit {
         val path = getSkinPackagePath(name)
         SkinnerResources.setHookedAssetManager(path)
         setSkinName(name)
-    }
-
-    fun uninstallSkinnerFactory(activity: AppCompatActivity) {
-        val field1 = LayoutInflater::class.java.getDeclaredField("mFactory")
-        field1.isAccessible = true
-        field1.set(activity.layoutInflater, activity.delegate)
-        val field2 = LayoutInflater::class.java.getDeclaredField("mFactory2")
-        field2.isAccessible = true
-        field2.set(activity.layoutInflater, activity.delegate)
-        setSkinName(SKIN_NAME_DEFAULT)
-        setSkinMode(SKIN_MODE_DEFAULT)
     }
 }

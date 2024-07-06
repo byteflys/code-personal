@@ -8,18 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SkinnerInflaterFactory(private val activity: AppCompatActivity) : LayoutInflater.Factory2 {
 
-    internal val providers = mutableListOf<SkinnerProvider>()
-
-    fun registerViewProvider(provider: SkinnerProvider) = apply {
-        if (!providers.contains(provider))
-            providers.add(provider)
-    }
-
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
         val delegateView = activity.delegate.createView(parent, name, context, attrs)
         val inflateView = delegateView ?: activity.layoutInflater.onCreateView(context, parent, name, attrs)
         inflateView ?: return null
-        providers.forEach {
+        SkinnerProvidersFactory.providers().forEach {
             if (it.isProviderSupported(inflateView, attrs))
                 it.hookView(inflateView, attrs)
         }
