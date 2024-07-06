@@ -34,7 +34,7 @@ android {
 
 dependencies {
 
-    api(project(":android-skinner"))
+    api("io.github.hellogoogle2000:android-skinner:1.0.0")
 
     // Kotlin
     api("androidx.core:core-ktx:1.13.1")
