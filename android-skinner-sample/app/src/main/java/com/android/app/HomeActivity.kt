@@ -37,7 +37,7 @@ class HomeActivity : SkinnerCompatActivity() {
     }
 
     private fun loadSkinnerSkin() {
-        SkinnerKit.loadSkin("skinner22")
+        SkinnerKit.loadSkin("skinner")
         reloadContentView()
     }
 
