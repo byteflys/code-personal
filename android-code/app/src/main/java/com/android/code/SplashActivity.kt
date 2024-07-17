@@ -8,6 +8,7 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.android.code.ui.StartActivity
 import com.tencent.mmkv.MMKV
 
 class SplashActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         } else {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, StartActivity::class.java))
             finish()
         }
     }

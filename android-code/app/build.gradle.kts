@@ -23,7 +23,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
-        compose = true
+        compose = false
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -35,16 +35,16 @@ dependencies {
     // AndroidX
     api("androidx.appcompat:appcompat:+")
     api("androidx.fragment:fragment-ktx:+")
-    api("androidx.activity:activity-compose:+")
     api("androidx.constraintlayout:constraintlayout:+")
     api("com.google.android.material:material:+")
 
     // Compose
-    api("androidx.compose.ui:ui:+")
-    api("androidx.compose.ui:ui-graphics:+")
-    api("androidx.compose.ui:ui-tooling-preview:+")
-    api("androidx.compose.material3:material3:+")
-    api(platform("androidx.compose:compose-bom:+"))
+//    api("androidx.compose.ui:ui:+")
+//    api("androidx.compose.ui:ui-graphics:+")
+//    api("androidx.compose.ui:ui-tooling-preview:+")
+//    api("androidx.compose.material3:material3:+")
+//    api("androidx.activity:activity-compose:+")
+//    api(platform("androidx.compose:compose-bom:+"))
 
     // Kotlin
     implementation("androidx.core:core-ktx:1.13.1")
