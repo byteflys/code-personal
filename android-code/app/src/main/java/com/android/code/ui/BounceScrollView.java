@@ -102,6 +102,8 @@ public class BounceScrollView extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
+        if (!isAnimationFinished)
+            return super.onTouchEvent(e);
         int action = e.getAction();
         if (action == MotionEvent.ACTION_DOWN)
             y = e.getY();
@@ -115,11 +117,6 @@ public class BounceScrollView extends ScrollView {
             int dy = (int) (nowY - preY);
             //保存新的坐标位置
             y = nowY;
-            //动画未结束，则不进行重新定位
-            if (!isAnimationFinished) {
-                dy = 0;
-                isAnimationFinished = true;
-            }
             //当滚动到顶端或低端时，不再滑动，而是重新定位ContentView
             if (needRelayout()) {
                 //保存正常状态下的布局位置
@@ -139,17 +136,18 @@ public class BounceScrollView extends ScrollView {
         //开启动画，将控件还原至最近的正常状态
         contentView.animate()
                 .yBy(recentNormalBound.top - contentView.getTop())
-                .setDuration(200)
+                .setDuration(2000)
                 .setUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(@NonNull ValueAnimator animation) {
                         if (animation.getAnimatedFraction() == 1f) {
-//                    isAnimationFinished = true;
+                            recentNormalBound.setEmpty();
+                            isAnimationFinished = true;
                         }
                     }
                 }).start();
         //重置正常边界
-        recentNormalBound.setEmpty();
+
         //重装动画状态
         isAnimationFinished = false;
     }
@@ -157,6 +155,8 @@ public class BounceScrollView extends ScrollView {
     //判断是否需要对ContentView进行重新定位
     //当控件滑倒最顶端或最底端时，对ContentView进行重新定位，从而产生弹簧效果，这时ScrollY是不变的
     protected boolean needRelayout() {
+        if (!recentNormalBound.isEmpty())
+            return true;
         int invisibleHeight = contentView.getMeasuredHeight() - getHeight();
         int scrollY = getScrollY();
         if (scrollY <= 0 || scrollY >= invisibleHeight)
