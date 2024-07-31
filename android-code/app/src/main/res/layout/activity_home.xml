@@ -5,21 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="30dp">
+    android:orientation="vertical">
 
     <com.android.code.ui.BounceScrollView
         android:id="@+id/moduleScrollView"
-        android:layout_width="500dp"
+        android:layout_width="300dp"
         android:layout_height="500dp"
-        android:scrollbars="vertical">
+        android:background="#2200FF00"
+        android:padding="30dp"
+        android:scrollbars="none">
 
-        <ImageView
-            android:id="@+id/moduleLayout"
-            android:layout_width="3000dp"
-            android:layout_height="3000dp"
-            android:orientation="vertical"
-            android:scaleType="fitXY"
-            android:src="@drawable/image1" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="3000dp"
+                android:layout_height="3000dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/image1" />
+        </LinearLayout>
     </com.android.code.ui.BounceScrollView>
 </LinearLayout>

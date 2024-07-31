@@ -1,13 +1,19 @@
 package com.android.code.ui;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ScrollView;
+
+import androidx.annotation.NonNull;
 
 import com.android.code.R;
 
@@ -27,16 +33,11 @@ public class BounceScrollView extends ScrollView {
     float y;
 
     //动画是否在进行中
-    TranslateAnimation animation;
     boolean isAnimationFinished = true;
 
     //最大宽高
     int maxWidth = Integer.MAX_VALUE;
     int maxHeight = Integer.MAX_VALUE;
-
-    //让控件宽高，保持是某个值的整数倍
-    int widthRadix = 0;
-    int heightRadix = 0;
 
     //宽高占屏幕的最大比例
     float maxScreenRatioX = 0F;
@@ -58,8 +59,6 @@ public class BounceScrollView extends ScrollView {
         TypedArray attrs = context.obtainStyledAttributes(attributeSet, R.styleable.BounceScrollView);
         maxWidth = (int) attrs.getDimension(R.styleable.BounceScrollView_maxWidth, Integer.MAX_VALUE);
         maxHeight = (int) attrs.getDimension(R.styleable.BounceScrollView_maxHeight, Integer.MAX_VALUE);
-        widthRadix = (int) attrs.getDimension(R.styleable.BounceScrollView_widthDivision, 0);
-        heightRadix = (int) attrs.getDimension(R.styleable.BounceScrollView_heightDivision, 0);
         maxScreenRatioX = attrs.getFloat(R.styleable.BounceScrollView_maxScreenRatioX, 0);
         maxScreenRatioY = attrs.getFloat(R.styleable.BounceScrollView_maxScreenRatioY, 0);
         if (maxScreenRatioX > 0)
@@ -84,32 +83,12 @@ public class BounceScrollView extends ScrollView {
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        if (widthMode == MeasureSpec.EXACTLY)
-            widthSize = widthSize < maxWidth ? widthSize : maxWidth;
-        if (widthMode == MeasureSpec.UNSPECIFIED)
-            widthSize = widthSize < maxWidth ? widthSize : maxWidth;
-        if (widthMode == MeasureSpec.AT_MOST)
-            widthSize = widthSize < maxWidth ? widthSize : maxWidth;
-        if (widthRadix > 0) {
-            widthSize = widthSize - widthSize % widthRadix;
-            if (widthSize < widthRadix)
-                widthSize = widthRadix;
-        }
+        widthSize = Math.min(widthSize, maxWidth);
         int maxWidthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, widthMode);
 
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        if (heightMode == MeasureSpec.EXACTLY)
-            heightSize = heightSize < maxHeight ? heightSize : maxHeight;
-        if (heightMode == MeasureSpec.UNSPECIFIED)
-            heightSize = heightSize < maxHeight ? heightSize : maxHeight;
-        if (heightMode == MeasureSpec.AT_MOST)
-            heightSize = heightSize < maxHeight ? heightSize : maxHeight;
-        if (heightRadix > 0) {
-            heightSize = heightSize - heightSize % heightRadix;
-            if (heightSize < heightRadix)
-                heightSize = heightRadix;
-        }
+        heightSize = Math.min(heightSize, maxHeight);
         int maxHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, heightMode);
 
         super.onMeasure(maxWidthMeasureSpec, maxHeightMeasureSpec);
@@ -122,15 +101,10 @@ public class BounceScrollView extends ScrollView {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent e) {
-        if (e.getAction() == MotionEvent.ACTION_DOWN)
-            y = e.getY();
-        return super.dispatchTouchEvent(e);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent e) {
         int action = e.getAction();
+        if (action == MotionEvent.ACTION_DOWN)
+            y = e.getY();
         //手指松开时，执行状态还原动画
         if (action == MotionEvent.ACTION_UP)
             startRecoverAnimation();
@@ -138,7 +112,7 @@ public class BounceScrollView extends ScrollView {
         if (action == MotionEvent.ACTION_MOVE) {
             float preY = y;
             float nowY = e.getY();
-            int dy = (int) (preY - nowY);
+            int dy = (int) (nowY - preY);
             //保存新的坐标位置
             y = nowY;
             //动画未结束，则不进行重新定位
@@ -147,13 +121,12 @@ public class BounceScrollView extends ScrollView {
                 isAnimationFinished = true;
             }
             //当滚动到顶端或低端时，不再滑动，而是重新定位ContentView
-            boolean ifNeedRelayout = ifNeedRelayout();
-            if (ifNeedRelayout) {
+            if (needRelayout()) {
                 //保存正常状态下的布局位置
                 if (recentNormalBound.isEmpty())
                     recentNormalBound.set(contentView.getLeft(), contentView.getTop(), contentView.getRight(), contentView.getBottom());
                 //重新定位ContentView
-                contentView.layout(contentView.getLeft(), contentView.getTop() - dy / 2, contentView.getRight(), contentView.getBottom() - dy / 2);
+                contentView.layout(contentView.getLeft(), contentView.getTop() + dy / 2, contentView.getRight(), contentView.getBottom() + dy / 2);
             }
         }
         return super.onTouchEvent(e);
@@ -164,12 +137,17 @@ public class BounceScrollView extends ScrollView {
         if (recentNormalBound.isEmpty())
             return;
         //开启动画，将控件还原至最近的正常状态
-        animation = new TranslateAnimation(0, 0, contentView.getTop(), recentNormalBound.top);
-        animation.setDuration(200);
-        contentView.startAnimation(animation);
-        //将控件还原至最近的正常状态
-        //layout方法会立刻改变控件位置坐标，但会等到Animation执行完毕才呈现效果
-        contentView.layout(recentNormalBound.left, recentNormalBound.top, recentNormalBound.right, recentNormalBound.bottom);
+        contentView.animate()
+                .yBy(recentNormalBound.top - contentView.getTop())
+                .setDuration(200)
+                .setUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(@NonNull ValueAnimator animation) {
+                        if (animation.getAnimatedFraction() == 1f) {
+//                    isAnimationFinished = true;
+                        }
+                    }
+                }).start();
         //重置正常边界
         recentNormalBound.setEmpty();
         //重装动画状态
@@ -178,7 +156,7 @@ public class BounceScrollView extends ScrollView {
 
     //判断是否需要对ContentView进行重新定位
     //当控件滑倒最顶端或最底端时，对ContentView进行重新定位，从而产生弹簧效果，这时ScrollY是不变的
-    protected boolean ifNeedRelayout() {
+    protected boolean needRelayout() {
         int invisibleHeight = contentView.getMeasuredHeight() - getHeight();
         int scrollY = getScrollY();
         if (scrollY <= 0 || scrollY >= invisibleHeight)
