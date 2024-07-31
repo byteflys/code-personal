@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
         //SrcIn实现圆角图片
         onClick(R.id.menu1, (v) -> {
             container.removeAllViews();
-            RoundImageView_SrcIn view = new RoundImageView_SrcIn(this);
+            DrawableView view = new DrawableView(this);
             container.addView(view, new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
         });
         //DstIn实现圆角图片

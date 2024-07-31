@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         } else {
-            startActivity(Intent(this, StartActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
     }

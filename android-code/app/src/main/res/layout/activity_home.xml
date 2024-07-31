@@ -8,9 +8,18 @@
     android:orientation="vertical"
     android:padding="30dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    <com.android.code.ui.BounceScrollView
+        android:id="@+id/moduleScrollView"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:scrollbars="vertical">
+
+        <ImageView
+            android:id="@+id/moduleLayout"
+            android:layout_width="3000dp"
+            android:layout_height="3000dp"
+            android:orientation="vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/image1" />
+    </com.android.code.ui.BounceScrollView>
 </LinearLayout>

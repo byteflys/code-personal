@@ -2,9 +2,6 @@ package com.android.code
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.code.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -19,7 +16,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val x :Fragment
-        val viewModel = ViewModelProvider(this)[ContextViewModel::class.java]
+
     }
 }
