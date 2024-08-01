@@ -9,11 +9,13 @@
 
     <com.android.code.ui.BounceScrollView
         android:id="@+id/moduleScrollView"
-        android:layout_width="300dp"
-        android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#2200FF00"
         android:padding="30dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:maxScreenRatioX="0.5"
+        app:maxScreenRatioY="0.5">
 
         <LinearLayout
             android:layout_width="wrap_content"
