@@ -104,8 +104,9 @@ public class BounceScrollView extends ScrollView {
             int dy = (int) (nowY - preY);
             previousY = nowY;
             if (needRelayout()) {
-                if (recentNormalBound.isEmpty())
+                if (recentNormalBound.isEmpty()) {
                     recentNormalBound.set(contentView.getLeft(), contentView.getTop(), contentView.getRight(), contentView.getBottom());
+                }
                 contentView.layout(contentView.getLeft(), contentView.getTop() + dy / 2, contentView.getRight(), contentView.getBottom() + dy / 2);
             }
         }
@@ -122,6 +123,7 @@ public class BounceScrollView extends ScrollView {
         topPropertyAnimator = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), recentNormalBound.top);
         topPropertyAnimator.setDuration(1000);
         topPropertyAnimator.addUpdateListener(animation -> {
+            System.out.println("Bounce " + recentNormalBound.top + " " + contentView.getTop() + " " + getScrollY());
             if (animation.getAnimatedFraction() == 1f)
                 isAnimationFinished = true;
         });
