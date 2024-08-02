@@ -148,9 +148,7 @@ public class BounceScrollView extends ScrollView {
     }
 
     private boolean outOfBound() {
-        boolean outOfTop = getScrollY() == 0 && contentView.getTop() > 0;
-        boolean outOfBottom = getScrollY() == getMaxScrollY() && contentView.getBottom() - getScrollY() < getMeasuredHeight();
-        return outOfTop || outOfBottom;
+        return contentView.getTop() != 0;
     }
 
     @Override
