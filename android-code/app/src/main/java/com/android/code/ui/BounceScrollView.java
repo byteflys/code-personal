@@ -1,20 +1,22 @@
 package com.android.code.ui;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.android.code.R;
 
-// scroll view that supports drag out of bound limit
-// and auto bounce back on hand up
+// a scroll view that supports
+// drag out of bound limit, and auto bounce back on hand up
 @SuppressWarnings("all")
 public class BounceScrollView extends ScrollView {
 
@@ -113,14 +115,12 @@ public class BounceScrollView extends ScrollView {
     private void startRecoverAnimation() {
         if (!outOfBound())
             return;
-        ObjectAnimator anim1 = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), -getScrollY());
+        Toast.makeText(getContext(), "animate", Toast.LENGTH_SHORT).show();
+        ObjectAnimator anim1 = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), 0);
         ObjectAnimator anim2 = ObjectAnimator.ofInt(contentView, "bottom", contentView.getBottom(), contentView.getMeasuredHeight());
         anim1.addUpdateListener(animation -> {
-            System.out.println("Bounce " + contentView.getTop());
-            if (animation.getAnimatedFraction() == 1f) {
-                Toast.makeText(getContext(), "finish", Toast.LENGTH_LONG).show();
+            if (animation.getAnimatedFraction() == 1f)
                 isAnimationFinished = true;
-            }
         });
         animation = new AnimatorSet();
         animation.playTogether(anim1, anim2);
@@ -140,9 +140,14 @@ public class BounceScrollView extends ScrollView {
     }
 
     private boolean outOfBound() {
-        System.out.println("Bounce " + contentView.getTop() + "  " + contentView.getMeasuredHeight());
         boolean outOfTop = getScrollY() == 0 && contentView.getTop() > 0;
-        boolean outOfBottom = getScrollY() == getMaxScrollY() && contentView.getBottom() < getMeasuredHeight();
+        boolean outOfBottom = getScrollY() == getMaxScrollY() && contentView.getBottom() - getScrollY() < getMeasuredHeight();
         return outOfTop || outOfBottom;
+    }
+
+    @Override
+    protected void onDraw(@NonNull Canvas canvas) {
+        super.onDraw(canvas);
+        System.out.println("Bounce " + contentView.getTop() + "  " + contentView.getBottom() + "  " + getScrollY());
     }
 }
