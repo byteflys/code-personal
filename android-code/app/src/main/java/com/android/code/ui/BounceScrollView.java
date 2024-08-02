@@ -1,13 +1,15 @@
 package com.android.code.ui;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.android.code.R;
 
@@ -18,11 +20,9 @@ public class BounceScrollView extends ScrollView {
 
     View contentView;
 
-    Rect recentNormalBound = new Rect();
-
     float previousY;
 
-    ObjectAnimator topPropertyAnimator;
+    AnimatorSet animation;
     boolean isAnimationFinished = true;
 
     int maxWidth = Integer.MAX_VALUE;
@@ -80,16 +80,11 @@ public class BounceScrollView extends ScrollView {
     }
 
     @Override
-    public boolean canScrollVertically(int direction) {
-        return true;
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent e) {
         // stop previous animation
         if (!isAnimationFinished) {
             previousY = e.getY();
-            topPropertyAnimator.cancel();
+            animation.cancel();
             isAnimationFinished = true;
             return super.onTouchEvent(e);
         }
@@ -103,12 +98,10 @@ public class BounceScrollView extends ScrollView {
             float nowY = e.getY();
             int dy = (int) (nowY - preY);
             previousY = nowY;
-            if (needRelayout()) {
-                if (recentNormalBound.isEmpty()) {
-                    recentNormalBound.set(contentView.getLeft(), contentView.getTop(), contentView.getRight(), contentView.getBottom());
-                }
+            // when content reach top or bottom, it can not scroll any more
+            // but we can update layout attribute to break bound limits at this time
+            if (reachBound(dy))
                 contentView.layout(contentView.getLeft(), contentView.getTop() + dy / 2, contentView.getRight(), contentView.getBottom() + dy / 2);
-            }
         }
         // start recover animation if needed
         if (action == MotionEvent.ACTION_UP)
@@ -117,30 +110,39 @@ public class BounceScrollView extends ScrollView {
     }
 
     // recover to normal bound
-    protected void startRecoverAnimation() {
-        if (recentNormalBound.isEmpty())
+    private void startRecoverAnimation() {
+        if (!outOfBound())
             return;
-        topPropertyAnimator = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), recentNormalBound.top);
-        topPropertyAnimator.setDuration(1000);
-        topPropertyAnimator.addUpdateListener(animation -> {
-            System.out.println("Bounce " + recentNormalBound.top + " " + contentView.getTop() + " " + getScrollY());
-            if (animation.getAnimatedFraction() == 1f)
+        ObjectAnimator anim1 = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), -getScrollY());
+        ObjectAnimator anim2 = ObjectAnimator.ofInt(contentView, "bottom", contentView.getBottom(), contentView.getMeasuredHeight());
+        anim1.addUpdateListener(animation -> {
+            System.out.println("Bounce " + contentView.getTop());
+            if (animation.getAnimatedFraction() == 1f) {
+                Toast.makeText(getContext(), "finish", Toast.LENGTH_LONG).show();
                 isAnimationFinished = true;
+            }
         });
-        topPropertyAnimator.start();
+        animation = new AnimatorSet();
+        animation.playTogether(anim1, anim2);
+        animation.setDuration(1000);
+        animation.start();
         isAnimationFinished = false;
     }
 
-    // when content reach top or bottom
-    // can not scroll any more
-    // we can only update layout attribute to break bound limits
-    protected boolean needRelayout() {
-        if (!recentNormalBound.isEmpty())
-            return true;
-        int invisibleHeight = contentView.getMeasuredHeight() - getHeight();
-        int scrollY = getScrollY();
-        if (scrollY <= 0 || scrollY >= invisibleHeight)
-            return true;
-        return false;
+    private int getMaxScrollY() {
+        return contentView.getMeasuredHeight() - getMeasuredHeight();
+    }
+
+    private boolean reachBound(int dy) {
+        boolean outOfTop = getScrollY() == 0 && dy > 0;
+        boolean outOfBottom = getScrollY() == getMaxScrollY() && dy < 0;
+        return outOfTop || outOfBottom;
+    }
+
+    private boolean outOfBound() {
+        System.out.println("Bounce " + contentView.getTop() + "  " + contentView.getMeasuredHeight());
+        boolean outOfTop = getScrollY() == 0 && contentView.getTop() > 0;
+        boolean outOfBottom = getScrollY() == getMaxScrollY() && contentView.getBottom() < getMeasuredHeight();
+        return outOfTop || outOfBottom;
     }
 }
