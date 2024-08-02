@@ -118,15 +118,23 @@ public class BounceScrollView extends ScrollView {
         Toast.makeText(getContext(), "animate", Toast.LENGTH_SHORT).show();
         ObjectAnimator anim1 = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), 0);
         ObjectAnimator anim2 = ObjectAnimator.ofInt(contentView, "bottom", contentView.getBottom(), contentView.getMeasuredHeight());
+        ObjectAnimator anim3 = ObjectAnimator.ofInt(this, "scrollY", getScrollY(), getDstScrollY());
         anim1.addUpdateListener(animation -> {
             if (animation.getAnimatedFraction() == 1f)
                 isAnimationFinished = true;
         });
         animation = new AnimatorSet();
-        animation.playTogether(anim1, anim2);
+        animation.playTogether(anim1, anim2, anim3);
         animation.setDuration(1000);
         animation.start();
         isAnimationFinished = false;
+    }
+
+    private int getDstScrollY() {
+        boolean outOfTop = getScrollY() == 0 && contentView.getTop() > 0;
+        if (outOfTop)
+            return 0;
+        return getMaxScrollY();
     }
 
     private int getMaxScrollY() {
