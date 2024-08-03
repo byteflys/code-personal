@@ -142,6 +142,13 @@ public class ElasticListView extends RecyclerView {
     protected boolean onTouchEventInternal(MotionEvent e) {
         int action = MotionEventCompat.getActionMasked(e);
         switch (action) {
+            // 最近一个按下的手指为滑动手指
+            case MotionEventCompat.ACTION_POINTER_DOWN: {
+                int index = MotionEventCompat.getActionIndex(e);
+                preY = e.getY(index);
+                activePointerId = e.getPointerId(index);
+                break;
+            }
 
             case MotionEvent.ACTION_MOVE: {
                 int pointerIndex = e.findPointerIndex(activePointerId);
@@ -153,18 +160,18 @@ public class ElasticListView extends RecyclerView {
                     //判断控件能不能滑动，有没有到达边界
                     boolean canScrollUp = false;
                     boolean canScrollDown = false;
-                    //computeVerticalScrollRange返回控件全部内容的高度
-                    //computeVerticalScrollExtent返回控件在屏幕上可展示区域的高度
-                    //computeVerticalScrollOffset返回控件已滑过的距离
-                    int range = computeVerticalScrollRange() - computeVerticalScrollExtent();
-                    if (range == 0) {
+                    //computeVerticalScrollRange返回控件全部内容的高度，相当于fullHeight
+                    //computeVerticalScrollExtent返回控件在屏幕上可展示区域的高度，相当于visibleHeight
+                    //computeVerticalScrollOffset返回控件已滑过的距离，相当于scrollY
+                    int unvisibleHeight = computeVerticalScrollRange() - computeVerticalScrollExtent();
+                    if (unvisibleHeight == 0) {
                         //内容较少，已经全部展示，不需要滑动
                         canScrollUp = false;
                         canScrollDown = false;
                     } else {
                         int offset = computeVerticalScrollOffset();
                         canScrollUp = offset > 0;
-                        canScrollDown = offset < range;
+                        canScrollDown = offset < unvisibleHeight;
                     }
                     //未到达边界，上下都可以滑动
                     if (canScrollUp && canScrollDown)
@@ -187,20 +194,6 @@ public class ElasticListView extends RecyclerView {
                 break;
             }
 
-            case MotionEventCompat.ACTION_POINTER_DOWN: {
-                int index = MotionEventCompat.getActionIndex(e);
-                preY = e.getY(index);
-                activePointerId = e.getPointerId(index);
-                break;
-            }
-
-            case MotionEventCompat.ACTION_POINTER_UP: {
-                onPointerUp(e);
-                int pointerIndex = e.findPointerIndex(activePointerId);
-                preY = e.getY(pointerIndex);
-                break;
-            }
-
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL: {
                 if (nowOffset != 0) {
@@ -208,6 +201,13 @@ public class ElasticListView extends RecyclerView {
                     startAnimation(bounceBackAnimation);
                     state = STATE_BOUNCING_BACK;
                 }
+            }
+
+            case MotionEventCompat.ACTION_POINTER_UP: {
+                onPointerUp(e);
+                int pointerIndex = e.findPointerIndex(activePointerId);
+                preY = e.getY(pointerIndex);
+                break;
             }
         }
         //如果处于拉伸状态，则自己处理该事件，不分发给子节点
