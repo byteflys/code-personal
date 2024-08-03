@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="widthDivision" format="dimension" />
-    <attr name="heightDivision" format="dimension" />
     <attr name="maxWidth" format="dimension" />
     <attr name="maxHeight" format="dimension" />
     <attr name="maxScreenRatioX" format="float" />
     <attr name="maxScreenRatioY" format="float" />
 
     <declare-styleable name="BounceScrollView">
-        <attr name="widthDivision" />
-        <attr name="heightDivision" />
         <attr name="maxWidth" />
         <attr name="maxHeight" />
         <attr name="maxScreenRatioX" />
