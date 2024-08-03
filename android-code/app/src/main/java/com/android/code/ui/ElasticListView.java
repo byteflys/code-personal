@@ -60,9 +60,8 @@ public class ElasticListView extends RecyclerView {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         setLayoutManager(layoutManager);
-        //启用默认的越界滚动效果，即滚动到边界时，继续滚动会产生一个水纹效果
-        //手动滚动到边界时，使用橡皮筋拉伸效果，通过惯性自动滚动到边界时，仍然使用默认的水纹效果
-        setOverScrollMode(View.OVER_SCROLL_ALWAYS);
+        //禁用内置橡皮筋效果，我们的拉伸效果更明显
+        setOverScrollMode(View.OVER_SCROLL_NEVER);
         //创建回弹动画
         bounceBackAnimation = new Animation() {
             @Override
@@ -97,7 +96,7 @@ public class ElasticListView extends RecyclerView {
         //拉伸或回弹状态下，拉伸画布
         int saveCount = canvas.save();
         int height = getHeight();
-        float scale = 1 + Math.abs(nowOffset) / height * 0.3F;
+        float scale = 1 + Math.abs(nowOffset) / height * 0.6F;
         canvas.scale(1, scale, 0, nowOffset >= 0 ? 0 : height);
         super.draw(canvas);
         canvas.restoreToCount(saveCount);
