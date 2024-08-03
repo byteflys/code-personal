@@ -118,12 +118,6 @@ public class ElasticListView extends RecyclerView {
                 activePointerId = e.getPointerId(0);
                 //暂停回弹状态，或恢复到正常状态
                 if (state == STATE_BOUNCING_BACK) {
-                    //回弹动画已结束，则恢复到正常状态
-                    if (nowOffset == 0) {
-                        state = STATE_NORMAL;
-                        invalidate();
-                        break;
-                    }
                     //回弹动画尚未结束，切换到拉伸状态
                     //如果此时立刻将手松开，会开始一个新的回弹动画，从上次位置继续回弹
                     clearAnimation();
