@@ -16,6 +16,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
+        binding.listView.adapter = SimpleAdapter()
     }
 }
