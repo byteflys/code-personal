@@ -9,5 +9,6 @@
     <com.android.code.ui.ElasticListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#2200FF00" />
 </LinearLayout>
