@@ -4,14 +4,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.android.code.R;
 
@@ -115,7 +111,6 @@ public class BounceScrollView extends ScrollView {
     private void startRecoverAnimation() {
         if (!outOfBound())
             return;
-        Toast.makeText(getContext(), "animate", Toast.LENGTH_SHORT).show();
         ObjectAnimator anim1 = ObjectAnimator.ofInt(contentView, "top", contentView.getTop(), 0);
         ObjectAnimator anim2 = ObjectAnimator.ofInt(contentView, "bottom", contentView.getBottom(), contentView.getMeasuredHeight());
         ObjectAnimator anim3 = ObjectAnimator.ofInt(this, "scrollY", getScrollY(), getDstScrollY());
@@ -125,9 +120,17 @@ public class BounceScrollView extends ScrollView {
         });
         animation = new AnimatorSet();
         animation.playTogether(anim1, anim2, anim3);
-        animation.setDuration(1000);
+        animation.setDuration(200);
         animation.start();
         isAnimationFinished = false;
+    }
+
+    @Override
+    public void fling(int velocityY) {
+        if (!isAnimationFinished)
+            super.fling(0);
+        else
+            super.fling(velocityY);
     }
 
     private int getDstScrollY() {
@@ -149,11 +152,5 @@ public class BounceScrollView extends ScrollView {
 
     private boolean outOfBound() {
         return contentView.getTop() != 0;
-    }
-
-    @Override
-    protected void onDraw(@NonNull Canvas canvas) {
-        super.onDraw(canvas);
-        System.out.println("Bounce " + contentView.getTop() + "  " + contentView.getBottom() + "  " + getScrollY());
     }
 }
