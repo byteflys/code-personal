@@ -76,7 +76,6 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View view) {
                 Console.debug("ItemView.onClick");
                 Console.debug("=>", "ItemView.onClick", "void");
-                Toast.makeText(mContext, "Item Click", Toast.LENGTH_SHORT).show();
             }
         });
         if (holder instanceof ItemViewHolderWithRecyclerWidth) {
@@ -93,8 +92,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(mContext, "Refresh Click" + holder.getAdapterPosition()
-                                    , Toast.LENGTH_SHORT).show();
+
                         }
                     }
 
