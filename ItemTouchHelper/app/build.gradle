@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    namespace "com.android.ItemTouchHelper"
+    compileSdkVersion 34
+
+    defaultConfig {
+        minSdkVersion 30
+        targetSdkVersion 34
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    api 'com.android.support:appcompat-v7:27.1.1'
+    api 'com.android.support:recyclerview-v7:27.1.1'
+    api 'com.android.support.constraint:constraint-layout:1.1.2'
+}
