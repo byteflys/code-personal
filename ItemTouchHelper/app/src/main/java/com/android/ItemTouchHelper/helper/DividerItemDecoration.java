@@ -45,7 +45,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     protected Paint mDividerPaint;
 
     public DividerItemDecoration(Context context) {
-        this(context, VERTICAL_LIST, 0, 20);
+        this(context, VERTICAL_LIST, 0, 1);
     }
 
     public DividerItemDecoration(Context context, int orientation) {
