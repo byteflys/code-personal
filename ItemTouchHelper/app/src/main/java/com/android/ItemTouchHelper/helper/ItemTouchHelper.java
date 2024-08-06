@@ -455,6 +455,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
      *                     {@code null} if you want to remove ItemTouchHelper from the current
      *                     RecyclerView.
      */
+    // TODO
     public void attachToRecyclerView(@Nullable RecyclerView recyclerView) {
         if (mRecyclerView == recyclerView) {
             return; // nothing to do
