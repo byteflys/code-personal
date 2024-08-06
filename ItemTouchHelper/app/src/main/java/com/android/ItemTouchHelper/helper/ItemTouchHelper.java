@@ -34,8 +34,6 @@ import com.android.ItemTouchHelper.util.Console;
 import java.util.ArrayList;
 import java.util.List;
 
-//这个控件的拖拽还有BUG，有时交换元素时，元素会消失
-//主要通过Demo来读源码流程，细节上不要太较真
 @SuppressWarnings("all")
 public class ItemTouchHelper extends RecyclerView.ItemDecoration implements RecyclerView.OnChildAttachStateChangeListener {
 
