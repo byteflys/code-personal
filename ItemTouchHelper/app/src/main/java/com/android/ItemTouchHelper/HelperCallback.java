@@ -34,7 +34,7 @@ public class HelperCallback extends ItemTouchHelper.Callback {
         //ItemView的根布局是一个FrameLayout，Menu和Content实际上是FrameLayout下的两个子View
         //Content显示在Menu的上方，当Content通过滑动动画向左侧平移，Menu就逐渐露出来，形成侧滑菜单效果
         Adapter.ItemBaseViewHolder holder = (Adapter.ItemBaseViewHolder) viewHolder;
-        if (viewHolder instanceof Adapter.ItemSwipeWithActionWidthNoSpringViewHolder) {
+        if (viewHolder instanceof Adapter.ActionWidthVH) {
             if (dX < -holder.mActionContainer.getWidth()) {
                 dX =- holder.mActionContainer.getWidth();
             }

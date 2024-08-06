@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.ItemTouchHelper.helper.ItemTouchHelper;
 import com.android.ItemTouchHelper.util.Console;
@@ -61,10 +60,10 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         if (viewType == ITEM_TYPE_RECYCLER_WIDTH) {
             View view = getLayoutInflater().inflate(R.layout.list_item_with_single_delete, parent, false);
-            return new ItemViewHolderWithRecyclerWidth(view);
+            return new RecyclerWidthVH(view);
         }
         View view = getLayoutInflater().inflate(R.layout.list_item_main, parent, false);
-        return new ItemSwipeWithActionWidthNoSpringViewHolder(view);
+        return new ActionWidthVH(view);
     }
 
     @Override
@@ -78,8 +77,8 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 Console.debug("=>", "ItemView.onClick", "void");
             }
         });
-        if (holder instanceof ItemViewHolderWithRecyclerWidth) {
-            ItemViewHolderWithRecyclerWidth viewHolder = (ItemViewHolderWithRecyclerWidth) holder;
+        if (holder instanceof RecyclerWidthVH) {
+            RecyclerWidthVH viewHolder = (RecyclerWidthVH) holder;
             viewHolder.mActionViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -123,10 +122,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (mDatas.get(position).position == 1) {
+        int type = position % 3;
+        if (type == 1) {
             return ITEM_TYPE_ACTION_WIDTH_NO_SPRING;
         }
-        if (mDatas.get(position).position == 2) {
+        if (type == 2) {
             return ITEM_TYPE_RECYCLER_WIDTH;
         }
         return ITEM_TYPE_ACTION_WIDTH;
@@ -168,11 +168,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-    class ItemViewHolderWithRecyclerWidth extends ItemBaseViewHolder {
+    class RecyclerWidthVH extends ItemBaseViewHolder {
 
         View mActionViewDelete;
 
-        public ItemViewHolderWithRecyclerWidth(View itemView) {
+        public RecyclerWidthVH(View itemView) {
             super(itemView);
             mActionViewDelete = itemView.findViewById(R.id.view_list_repo_action_delete);
         }
@@ -192,12 +192,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    class ItemSwipeWithActionWidthNoSpringViewHolder extends ItemSwipeWithActionWidthViewHolder {
+    class ActionWidthVH extends ItemSwipeWithActionWidthViewHolder {
 
-        public ItemSwipeWithActionWidthNoSpringViewHolder(View itemView) {
+        public ActionWidthVH(View itemView) {
             super(itemView);
         }
-
     }
 
 }

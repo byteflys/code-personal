@@ -36,13 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Model> createTestDatas() {
         List<Model> result = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
-            Model testModel = new Model(i, ":Item Swipe Action Button Container Width");
-            if (i == 1) {
-                testModel = new Model(i, "Item Swipe with Action container width and no spring");
-            }
-            if (i == 2) {
-                testModel = new Model(i, "Item Swipe with RecyclerView Width");
-            }
+            int id = 100 + i;
+            Model testModel = new Model(id, String.valueOf(id));
             result.add(testModel);
         }
         return result;
