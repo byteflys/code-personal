@@ -273,6 +273,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         //一个是在Item进入滑动状态前，判断用户要进行何种操作，这个主要是通过checkSelectForSwipe方法完成的
         //二是当Item已经被选中时，单击可以取消选中状态，这个主要是通过endRecoverAnimation方法来完成的
         @Override
+        // TODO : 06
         public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent e) {
             Console.debug("OnItemTouchListener.onInterceptTouchEvent");
             mGestureDetector.onTouchEvent(e);
@@ -333,6 +334,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         }
 
         @Override
+        // TODO : 07
         public void onTouchEvent(RecyclerView recyclerView, MotionEvent e) {
             Console.debug("OnItemTouchListener.onTouchEvent");
             mGestureDetector.onTouchEvent(e);
@@ -455,7 +457,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
      *                     {@code null} if you want to remove ItemTouchHelper from the current
      *                     RecyclerView.
      */
-    // TODO
+    // TODO : 01
     public void attachToRecyclerView(@Nullable RecyclerView recyclerView) {
         if (mRecyclerView == recyclerView) {
             return; // nothing to do
@@ -475,6 +477,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
+                    // TODO : 02
                     if (newState == RecyclerView.SCROLL_STATE_DRAGGING && mPreOpened != null) {
                         closeOpenedPreItem();
                     }
@@ -483,6 +486,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         }
     }
 
+    // TODO : 03
     private void setupCallbacks() {
         ViewConfiguration vc = ViewConfiguration.get(mRecyclerView.getContext());
         mSlop = vc.getScaledTouchSlop();
@@ -509,6 +513,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         stopGestureDetection();
     }
 
+    // TODO : 09
     private void startGestureDetection() {
         mItemTouchHelperGestureListener = new ItemTouchHelperGestureListener();
         mGestureDetector = new GestureDetectorCompat(mRecyclerView.getContext(),
@@ -550,6 +555,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
                 mRecoverAnimations, mActionState, dx, dy);
     }
 
+    // TODO : 04
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         // we don't know if RV changed something so we should invalidate this index.
@@ -595,6 +601,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
     //1. 滑动过程中，根据滑动位移，来动态调整控件位置，并进行重绘
     //2. 手指按下后，旧的选中元素，通过动画自动还原至普通状态
     //3. 手指松开后，新的选中元素，通过动画自动完成滑动、拖拽、取消等动作
+    // TODO : 11 *
     void select(ViewHolder selected, int actionState) {
         Console.debug("ItemTouchHelper.select", name(selected), name(actionState));
         //REMARK => 如果目标元素和目标状态，都和当前一致，则什么都不做，继续执行旧动画
@@ -863,6 +870,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
      * Checks if we should swap w/ another view holder.
      */
     //REMARK => 拖拽元素
+    // TODO : 08
     void moveIfNecessary(ViewHolder viewHolder) {
         if (mRecyclerView.isLayoutRequested())
             return;
@@ -1418,6 +1426,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
 
         private int mCachedMaxScrollSpeed = -1;
 
+        // TODO : 12
         static {
             sUICallback = new ItemTouchUIUtilImpl();
         }
@@ -1962,6 +1971,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
             }
         }
 
+        // TODO : 05
         void onDraw(Canvas c, RecyclerView parent, ViewHolder selected,
                     List<RecoverAnimation> recoverAnimationList,
                     int actionState, float dX, float dY) {
@@ -2316,6 +2326,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
             return true;
         }
 
+        // TODO : 10
         @Override
         public void onLongPress(MotionEvent e) {
             if (!mShouldReactToLongPress) {

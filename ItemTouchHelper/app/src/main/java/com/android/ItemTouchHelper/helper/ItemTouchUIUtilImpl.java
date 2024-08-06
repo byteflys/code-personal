@@ -7,6 +7,7 @@ import android.view.View;
 
 public class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
 
+    // TODO : 13
     @Override
     public void clearView(View view) {
         view.setTranslationX(0f);
@@ -18,6 +19,7 @@ public class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
 
     }
 
+    // TODO : 14
     @Override
     public void onDraw(Canvas c, RecyclerView recyclerView, View view, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         view.setTranslationX(dX);

@@ -137,11 +137,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mDatas.size();
     }
 
-    class ItemBaseViewHolder extends RecyclerView.ViewHolder {
-        TextView mTextTitle;
-        TextView mTextIndex;
-        View mViewContent;
-        View mActionContainer;
+    public class ItemBaseViewHolder extends RecyclerView.ViewHolder {
+        public TextView mTextTitle;
+        public TextView mTextIndex;
+        public  View mViewContent;
+        public  View mActionContainer;
 
         public ItemBaseViewHolder(View itemView) {
             super(itemView);
@@ -168,7 +168,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-    class RecyclerWidthVH extends ItemBaseViewHolder {
+    public class RecyclerWidthVH extends ItemBaseViewHolder {
 
         View mActionViewDelete;
 
@@ -179,7 +179,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    class ItemSwipeWithActionWidthViewHolder extends ItemBaseViewHolder {
+    public  class ItemSwipeWithActionWidthViewHolder extends ItemBaseViewHolder {
 
         View mActionViewDelete;
         View mActionViewRefresh;
@@ -192,7 +192,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    class ActionWidthVH extends ItemSwipeWithActionWidthViewHolder {
+   public class ActionWidthVH extends ItemSwipeWithActionWidthViewHolder {
 
         public ActionWidthVH(View itemView) {
             super(itemView);

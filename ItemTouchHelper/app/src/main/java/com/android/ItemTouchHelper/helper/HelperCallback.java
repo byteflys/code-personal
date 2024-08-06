@@ -1,9 +1,9 @@
-package com.android.ItemTouchHelper;
+package com.android.ItemTouchHelper.helper;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 
-import com.android.ItemTouchHelper.helper.ItemTouchHelper;
+import com.android.ItemTouchHelper.Adapter;
 
 
 public class HelperCallback extends ItemTouchHelper.Callback {

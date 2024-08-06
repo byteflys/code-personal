@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.android.ItemTouchHelper.helper.DividerItemDecoration;
+import com.android.ItemTouchHelper.helper.HelperCallback;
 import com.android.ItemTouchHelper.helper.ItemTouchHelper;
 import com.android.ItemTouchHelper.view.MRecyclerView;
 

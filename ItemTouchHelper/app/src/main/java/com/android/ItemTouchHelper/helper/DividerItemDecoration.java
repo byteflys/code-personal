@@ -100,6 +100,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         mOrientation = orientation;
     }
 
+    // TODO : 12
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
