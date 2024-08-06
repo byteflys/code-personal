@@ -2524,6 +2524,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         return false;
     }
 
+    // TODO : 02
     private void closeOpenedPreItem() {
         final View view = getItemFrontView(mPreOpened);
         if (mPreOpened == null || view == null) return;
