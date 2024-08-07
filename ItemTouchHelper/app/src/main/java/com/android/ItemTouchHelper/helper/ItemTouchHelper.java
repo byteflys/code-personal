@@ -273,7 +273,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         //一个是在Item进入滑动状态前，判断用户要进行何种操作，这个主要是通过checkSelectForSwipe方法完成的
         //二是当Item已经被选中时，单击可以取消选中状态，这个主要是通过endRecoverAnimation方法来完成的
         @Override
-        // TODO : 06
+        // TODO : 06 ！！！
         public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent e) {
             Console.debug("OnItemTouchListener.onInterceptTouchEvent");
             mGestureDetector.onTouchEvent(e);
