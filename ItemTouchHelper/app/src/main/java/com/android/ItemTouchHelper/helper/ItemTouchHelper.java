@@ -923,6 +923,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
     /**
      * Returns the animation type or 0 if cannot be found.
      */
+    // TODO : 02
     int endRecoverAnimation(ViewHolder viewHolder, boolean override) {
         final int recoverAnimSize = mRecoverAnimations.size();
         for (int i = recoverAnimSize - 1; i >= 0; i--) {
@@ -2361,6 +2362,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         }
     }
 
+    // TODO : 02
     private static class RecoverAnimation implements Animator.AnimatorListener {
 
         final float mStartDx;
