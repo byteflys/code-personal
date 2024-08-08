@@ -273,7 +273,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         //一个是在Item进入滑动状态前，判断用户要进行何种操作，这个主要是通过checkSelectForSwipe方法完成的
         //二是当Item已经被选中时，单击可以取消选中状态，这个主要是通过endRecoverAnimation方法来完成的
         @Override
-        // TODO : 06 ！！！
+        // TODO : 06
         public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent e) {
             Console.debug("OnItemTouchListener.onInterceptTouchEvent");
             mGestureDetector.onTouchEvent(e);
@@ -292,14 +292,15 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
                     final RecoverAnimation animation = findAnimation(e);
                     if (animation != null) { //找出还在进行的动画
                         //REMARK => 点击时取消自身已有的选中状态
-                        mInitialTouchX -= animation.mX;
-                        mInitialTouchY -= animation.mY;
+                        mInitialTouchX -= animation.mCurrentDx;
+                        mInitialTouchY -= animation.mCurrentDy;
                         //REMARK => 如果要执行新的元素动画，则需要先还原旧的元素状态
                         //有可能存在多个还原动画同时执行的情况，我们不等旧的还原动画执行完毕，直接取消旧的还原动画，然后执行新的还原动画
                         endRecoverAnimation(animation.mViewHolder, true);
                         if (mPendingCleanup.remove(animation.mViewHolder.itemView)) {
                             mCallback.clearView(mRecyclerView, animation.mViewHolder);
                         }
+                        // TODO : !!!
                         select(animation.mViewHolder, animation.mActionState);
                         updateDxDy(e, mSelectedFlags, 0);
                     }
@@ -571,7 +572,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
 
     protected String name(ViewHolder viewHolder) {
         if (viewHolder == null)
-            return "ViewHolder@NULL";
+            return "ViewHolder@ ";
         return "ViewHolder@" + viewHolder.getAdapterPosition();
     }
 
@@ -603,7 +604,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
     //3. 手指松开后，新的选中元素，通过动画自动完成滑动、拖拽、取消等动作
     // TODO : 11 *
     void select(ViewHolder selected, int actionState) {
-        Console.debug("ItemTouchHelper.select", name(selected), name(actionState));
+        Console.debug("ItemTouchHelper.select", name(selected), name(mActionState), name(actionState));
         //REMARK => 如果目标元素和目标状态，都和当前一致，则什么都不做，继续执行旧动画
         if (selected == mSelected && actionState == mActionState)
             return;
@@ -1063,7 +1064,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
         for (int i = mRecoverAnimations.size() - 1; i >= 0; i--) {
             final RecoverAnimation anim = mRecoverAnimations.get(i);
             final View view = anim.mViewHolder.itemView;
-            if (hitTest(view, x, y, anim.mX, anim.mY)) {
+            if (hitTest(view, x, y, anim.mCurrentDx, anim.mCurrentDy)) {
                 return view;
             }
         }
@@ -1981,7 +1982,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
                 final RecoverAnimation anim = recoverAnimationList.get(i);
                 anim.update();
                 final int count = c.save();
-                onChildDraw(c, parent, anim.mViewHolder, anim.mX, anim.mY, anim.mActionState, false);
+                onChildDraw(c, parent, anim.mViewHolder, anim.mCurrentDx, anim.mCurrentDy, anim.mActionState, false);
                 c.restoreToCount(count);
             }
             if (selected != null) {
@@ -1998,7 +1999,7 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
             for (int i = 0; i < recoverAnimSize; i++) {
                 final RecoverAnimation anim = recoverAnimationList.get(i);
                 final int count = c.save();
-                onChildDrawOver(c, parent, anim.mViewHolder, anim.mX, anim.mY, anim.mActionState,
+                onChildDrawOver(c, parent, anim.mViewHolder, anim.mCurrentDx, anim.mCurrentDy, anim.mActionState,
                         false);
                 c.restoreToCount(count);
             }
@@ -2369,9 +2370,9 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
 
         final float mStartDy;
 
-        final float mTargetX;
+        final float mTargetDx;
 
-        final float mTargetY;
+        final float mTargetDy;
 
         final ViewHolder mViewHolder;
 
@@ -2383,9 +2384,8 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
 
         public boolean mIsPendingCleanup;
 
-        float mX;
-
-        float mY;
+        float mCurrentDx;
+        float mCurrentDy;
 
         // if user starts touching a recovering view, we put it into interaction mode again,
         // instantly.
@@ -2402,8 +2402,8 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
             mViewHolder = viewHolder;
             mStartDx = startDx;
             mStartDy = startDy;
-            mTargetX = targetX;
-            mTargetY = targetY;
+            mTargetDx = targetX;
+            mTargetDy = targetY;
             mValueAnimator = ValueAnimator.ofFloat(0f, 1f);
             mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
@@ -2438,17 +2438,17 @@ public class ItemTouchHelper extends RecyclerView.ItemDecoration implements Recy
          * This way, we can sync translate x/y values w/ the animators to avoid one-off frames.
          */
         public void update() {
-            if (mStartDx == mTargetX) {
-                mX = mViewHolder.itemView.getTranslationX();
+            if (mStartDx == mTargetDx) {
+                mCurrentDx = mViewHolder.itemView.getTranslationX();
             } else {
-                mX = mStartDx + mFraction * (mTargetX - mStartDx);
+                mCurrentDx = mStartDx + mFraction * (mTargetDx - mStartDx);
             }
-            if (mStartDy == mTargetY) {
-                mY = mViewHolder.itemView.getTranslationY();
+            if (mStartDy == mTargetDy) {
+                mCurrentDy = mViewHolder.itemView.getTranslationY();
             } else {
-                mY = mStartDy + mFraction * (mTargetY - mStartDy);
+                mCurrentDy = mStartDy + mFraction * (mTargetDy - mStartDy);
             }
-            Console.debug("getTranslationX", mFraction, mX, mY);
+            Console.debug("getTranslation", mFraction, mCurrentDx, mCurrentDy);
         }
 
         @Override

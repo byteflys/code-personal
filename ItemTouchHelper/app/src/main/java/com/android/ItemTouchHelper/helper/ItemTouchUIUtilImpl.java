@@ -20,6 +20,7 @@ public class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
     }
 
     // TODO : 14
+    // mainly executed on drag
     @Override
     public void onDraw(Canvas c, RecyclerView recyclerView, View view, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         view.setTranslationX(dX);
