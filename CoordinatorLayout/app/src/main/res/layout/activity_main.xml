@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.CoordinatorLayout.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/main"
+        app:behavior="com.android.CoordinatorLayout.ImageBehavior"
+        app:max_height="200dp"
+        app:min_height="60dp" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:background="#3F51B5"
+        app:behavior="com.android.CoordinatorLayout.ToolbarBehavior"
+        app:threshold="150dp" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/image">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/large_text" />
+    </android.support.v4.widget.NestedScrollView>
+</com.android.CoordinatorLayout.CoordinatorLayout>
+

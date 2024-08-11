@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <declare-styleable name="MyCoordinatorLayout">
+        <attr name="behavior" format="string" />
+        <attr name="threshold" format="dimension" />
+        <attr name="min_height" format="dimension" />
+        <attr name="max_height" format="dimension" />
+    </declare-styleable>
+</resources>
+
