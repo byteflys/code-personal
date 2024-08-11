@@ -13,9 +13,6 @@ import java.lang.reflect.Constructor;
 @SuppressWarnings("all")
 public class CoordinatorLayout extends RelativeLayout implements NestedScrollingParent, ViewTreeObserver.OnGlobalLayoutListener {
 
-    float lastX;
-    float lastY;
-
     public CoordinatorLayout(Context context) {
         super(context);
     }
@@ -24,8 +21,8 @@ public class CoordinatorLayout extends RelativeLayout implements NestedScrolling
         super(context, attrs);
     }
 
-    public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new LayoutParams(getContext(), attrs);
+    public CoordinatorLayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new CoordinatorLayoutParams(getContext(), attrs);
     }
 
     @Override
@@ -39,7 +36,7 @@ public class CoordinatorLayout extends RelativeLayout implements NestedScrolling
         super.onSizeChanged(w, h, oldw, oldh);
         for (int i = 0; i < getChildCount(); i++) {
             View v = getChildAt(i);
-            LayoutParams lp = (LayoutParams) v.getLayoutParams();
+            CoordinatorLayoutParams lp = (CoordinatorLayoutParams) v.getLayoutParams();
             if (lp.behavior != null)
                 lp.behavior.onSizeChanged(this, v, w, h, oldw, oldh);
         }
@@ -60,7 +57,7 @@ public class CoordinatorLayout extends RelativeLayout implements NestedScrolling
     public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         for (int i = 0; i < getChildCount(); i++) {
             View v = getChildAt(i);
-            LayoutParams lp = (LayoutParams) v.getLayoutParams();
+            CoordinatorLayoutParams lp = (CoordinatorLayoutParams) v.getLayoutParams();
             //关键代码，转发滑动事件
             if (lp.behavior != null)
                 lp.behavior.onNestedScroll(target, v, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
@@ -71,17 +68,17 @@ public class CoordinatorLayout extends RelativeLayout implements NestedScrolling
     public void onGlobalLayout() {
         for (int i = 0; i < getChildCount(); i++) {
             View v = getChildAt(i);
-            LayoutParams lp = (LayoutParams) v.getLayoutParams();
+            CoordinatorLayoutParams lp = (CoordinatorLayoutParams) v.getLayoutParams();
             if (lp.behavior != null)
                 lp.behavior.onLayoutFinish(this, v);
         }
     }
 
-    public class LayoutParams extends RelativeLayout.LayoutParams {
+    public class CoordinatorLayoutParams extends RelativeLayout.LayoutParams {
 
         protected Behavior behavior;
 
-        public LayoutParams(Context context, AttributeSet attributeSet) {
+        public CoordinatorLayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.MyCoordinatorLayout);
             String clazzName = a.getString(R.styleable.MyCoordinatorLayout_behavior);
