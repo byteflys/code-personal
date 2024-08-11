@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 //自定义流式布局管理器
-//这个Demo主要是为了演示自定义LayoutManager
-//很多代码都做了简化处理，在性能上并不够好
 public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
     //保存所有item偏移量信息，所有数据高度和
@@ -65,28 +63,27 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         }
         totalHeight = offsetY + itemHeight;
 
-        //回收不可见的元素
-        recyclerViewFillView(recycler, state);
+        //填充可见元素，回收不可见元素
+        recycleOrFillItemView(recycler, state);
     }
 
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
         detachAndScrapAttachedViews(recycler);
-        //实际滑动距离
-        int trval = dy;
+        //限制滑动边界
+        int offsetY = dy;
         if (verticalScrollOffset + dy < 0) {
-            trval = -verticalScrollOffset;
+            offsetY = -verticalScrollOffset;
         } else if (verticalScrollOffset + dy > totalHeight - getHeight()) {
-            trval = totalHeight - getHeight() - verticalScrollOffset;
+            offsetY = totalHeight - getHeight() - verticalScrollOffset;
         }
-
         //边界值判断
-        verticalScrollOffset += trval;
-
+        verticalScrollOffset += offsetY;
         //平移容器内的item
-        offsetChildrenVertical(trval);
-        recyclerViewFillView(recycler, state);
-        return trval;
+        offsetChildrenVertical(offsetY);
+        //填充可见元素，回收不可见元素
+        recycleOrFillItemView(recycler, state);
+        return offsetY;
     }
 
     @Override
@@ -94,19 +91,15 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         return true;
     }
 
-    protected void recyclerViewFillView(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        //清空RecyclerView的子View
-        detachAndScrapAttachedViews(recycler);
-        Rect phoneFrame = new Rect(0, verticalScrollOffset, getWidth(), verticalScrollOffset + getHeight());
+    protected void recycleOrFillItemView(RecyclerView.Recycler recycler, RecyclerView.State state) {
         //将滑出屏幕的view进行回收
-        Rect childRect = new Rect();
+        Rect phoneFrame = new Rect(0, verticalScrollOffset, getWidth(), verticalScrollOffset + getHeight());
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
             Rect child = itemBounds.get(i);
             if (!Rect.intersects(phoneFrame, child))
                 removeAndRecycleView(childView, recycler);
         }
-
         //可见区域出现在屏幕上的子view
         for (int j = 0; j < getItemCount(); j++)
             if (Rect.intersects(phoneFrame, itemBounds.get(j))) {
@@ -119,4 +112,3 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             }
     }
 }
-
