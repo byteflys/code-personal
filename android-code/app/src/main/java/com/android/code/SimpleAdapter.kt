@@ -13,7 +13,8 @@ class SimpleAdapter : RecyclerView.Adapter<ViewHolder>() {
         val textView = TextView(parent.context)
         textView.text = "Hello"
         textView.gravity = Gravity.CENTER
-        textView.layoutParams = MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        textView.layoutParams = MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        textView.setPadding(50, 10, 10, 50)
         return object : ViewHolder(textView) {}
     }
 

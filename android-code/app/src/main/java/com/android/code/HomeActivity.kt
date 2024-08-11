@@ -1,9 +1,9 @@
 package com.android.code
 
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.android.code.databinding.ActivityHome2Binding
+import com.android.code.ui.FlowLayoutManager
 
 class HomeActivity : AppCompatActivity() {
 
@@ -17,10 +17,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.button.setOnClickListener {
-            binding.editText.requestFocus()
-            val imm = getSystemService(InputMethodManager::class.java)
-            imm.showSoftInput(binding.editText, InputMethodManager.SHOW_IMPLICIT)
-        }
+        binding.recyclerView.layoutManager = FlowLayoutManager()
+        binding.recyclerView.adapter = SimpleAdapter()
     }
 }
