@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.support.v4.view.NestedScrollingParent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
@@ -88,22 +87,6 @@ public class CoordinatorLayout extends RelativeLayout implements NestedScrolling
             String clazzName = a.getString(R.styleable.MyCoordinatorLayout_behavior);
             behavior = parseBehaivor(context, attributeSet, clazzName);
             a.recycle();
-        }
-
-        public LayoutParams(int w, int h) {
-            super(w, h);
-        }
-
-        public LayoutParams(ViewGroup.LayoutParams source) {
-            super(source);
-        }
-
-        public LayoutParams(MarginLayoutParams source) {
-            super(source);
-        }
-
-        public LayoutParams(RelativeLayout.LayoutParams source) {
-            super(source);
         }
 
         protected Behavior parseBehaivor(Context context, AttributeSet attrs, String name) {
