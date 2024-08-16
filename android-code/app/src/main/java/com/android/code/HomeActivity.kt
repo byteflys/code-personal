@@ -3,7 +3,6 @@ package com.android.code
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.android.code.databinding.ActivityHome2Binding
-import com.android.code.ui.FlowLayoutManager
 
 class HomeActivity : AppCompatActivity() {
 
@@ -17,7 +16,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.recyclerView.layoutManager = FlowLayoutManager()
-        binding.recyclerView.adapter = SimpleAdapter()
+
     }
 }
