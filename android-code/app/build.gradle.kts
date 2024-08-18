@@ -36,9 +36,9 @@ dependencies {
 
     // AndroidX
     api("androidx.appcompat:appcompat:1.7.0")
-//    api("androidx.fragment:fragment-ktx:+")
-//    api("androidx.constraintlayout:constraintlayout:+")
-//    api("com.google.android.material:material:+")
+    api("androidx.fragment:fragment-ktx:+")
+    api("androidx.constraintlayout:constraintlayout:+")
+    api("com.google.android.material:material:+")
 
     // Compose
 //    api("androidx.compose.ui:ui:+")
