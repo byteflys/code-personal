@@ -15,8 +15,8 @@ class AndroidContentViewInterceptor : BasePointCut<AndroidContentViewPointcut> {
         val pointcut = annotation.args[0]
         val contentView = joinPoint.args!![0] as View
         contentView.setBackgroundColor(Color.YELLOW)
-        println("AOP AndroidContentViewInterceptor: $target $pointcut")
         println("AOP AndroidContentViewInterceptor: before target executed")
+        println("AOP AndroidContentViewInterceptor: $target $pointcut setContentView")
         val result = joinPoint.proceed()
         println("AOP AndroidContentViewInterceptor: after target executed")
         return result
