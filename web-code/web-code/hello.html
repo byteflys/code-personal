@@ -8,9 +8,9 @@
 
 </body>
 <script>
-    window.debugger.alert("xxxxxxxxx")
-    function setAccountButtonState(args) {
-        window.debugger.alert(args.title)
+    window.onBackPressed = function (args) {
+        window.debugger.alert("xxxxxxxxx")
+        return "hello"
     }
 </script>
 </html>

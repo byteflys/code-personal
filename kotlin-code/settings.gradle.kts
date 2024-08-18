@@ -1,6 +1,7 @@
 pluginManagement {
     plugins {
         id("org.jetbrains.kotlin.jvm") version "1.9.23"
+        id("io.freefair.aspectj.post-compile-weaving") version "8.7.1"
     }
 }
 
@@ -9,15 +10,5 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
-    }
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-
     }
 }
