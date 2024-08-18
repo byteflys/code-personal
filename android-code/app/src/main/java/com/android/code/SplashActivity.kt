@@ -9,14 +9,12 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.code.ui.StartActivity
-import com.tencent.mmkv.MMKV
 
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Global.application = application
-        MMKV.initialize(application)
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

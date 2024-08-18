@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id("io.github.FlyJingFish.AndroidAop.android-aop")
 }
 
 android {
@@ -33,10 +35,10 @@ android {
 dependencies {
 
     // AndroidX
-    api("androidx.appcompat:appcompat:+")
-    api("androidx.fragment:fragment-ktx:+")
-    api("androidx.constraintlayout:constraintlayout:+")
-    api("com.google.android.material:material:+")
+    api("androidx.appcompat:appcompat:1.7.0")
+//    api("androidx.fragment:fragment-ktx:+")
+//    api("androidx.constraintlayout:constraintlayout:+")
+//    api("com.google.android.material:material:+")
 
     // Compose
 //    api("androidx.compose.ui:ui:+")
@@ -47,33 +49,38 @@ dependencies {
 //    api(platform("androidx.compose:compose-bom:+"))
 
     // Kotlin
-    implementation("androidx.core:core-ktx:1.13.1")
+    api("androidx.core:core-ktx:1.13.1")
 
     // Coroutine
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:+")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:+")
+//    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:+")
+//    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:+")
 
     // Lifecycle
-    api("androidx.lifecycle:lifecycle-runtime-ktx:+")
-    api("androidx.lifecycle:lifecycle-viewmodel-ktx:+")
+//    api("androidx.lifecycle:lifecycle-runtime-ktx:+")
+//    api("androidx.lifecycle:lifecycle-viewmodel-ktx:+")
 
     // GSON
-    api("com.google.code.gson:gson:+")
+//    api("com.google.code.gson:gson:+")
 
     // OkHttp3
-    api("com.squareup.okhttp3:okhttp:+")
-    api("com.squareup.okhttp3:logging-interceptor:+")
+//    api("com.squareup.okhttp3:okhttp:+")
+//    api("com.squareup.okhttp3:logging-interceptor:+")
 
     // RxJava3
-    api("io.reactivex.rxjava3:rxjava:+")
-    api("io.reactivex.rxjava3:rxandroid:+")
-    api("com.github.akarnokd:rxjava3-retrofit-adapter:+")
+//    api("io.reactivex.rxjava3:rxjava:+")
+//    api("io.reactivex.rxjava3:rxandroid:+")
+//    api("com.github.akarnokd:rxjava3-retrofit-adapter:+")
 
     // Retrofit2
-    api("com.squareup.retrofit2:retrofit:+")
-    api("com.squareup.retrofit2:converter-gson:+")
-    api("com.squareup.retrofit2:adapter-rxjava2:+")
+//    api("com.squareup.retrofit2:retrofit:+")
+//    api("com.squareup.retrofit2:converter-gson:+")
+//    api("com.squareup.retrofit2:adapter-rxjava2:+")
 
     // MMKV
-    api("com.tencent:mmkv-static:+")
+//    api("com.tencent:mmkv-static:+")
+
+    // AndroidAOP
+    api("io.github.FlyJingFish.AndroidAop:android-aop-core:2.0.9")
+    api("io.github.FlyJingFish.AndroidAop:android-aop-annotation:2.0.9")
+    ksp("io.github.FlyJingFish.AndroidAop:android-aop-ksp:2.0.9")
 }
