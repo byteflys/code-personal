@@ -1,8 +1,19 @@
-package com.android.code.ui;
+package com.android.code.component;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import com.android.code.R;
+import com.android.code.ui.DrawableView;
+import com.android.code.ui.EraserView;
+import com.android.code.ui.HeartDiagramView;
+import com.android.code.ui.InvertImageView_DstIn;
+import com.android.code.ui.InvertImageView_SrcATop;
+import com.android.code.ui.InvertImageView_SrcIn;
+import com.android.code.ui.RoundImageView_DstIn;
+import com.android.code.ui.RoundImageView_SrcATop;
+import com.android.code.ui.ScratchCard;
+import com.android.code.ui.TwitterView;
+import com.android.code.ui.WaveView;
 
 import android.os.Bundle;
 import android.view.View;
