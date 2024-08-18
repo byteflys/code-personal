@@ -5,5 +5,7 @@ fun main() {
 }
 
 class Good {
-    fun doSomething() {}
+    fun doSomething() {
+        println("doSomething")
+    }
 }
