@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
+    id("org.jetbrains.kotlin.jvm")
+    id("io.freefair.aspectj.post-compile-weaving")
 }
 
 java {
@@ -41,4 +42,8 @@ dependencies {
 
     // websocket
     api("org.java-websocket:Java-WebSocket:1.5.1")
+
+    // AspectJ
+    api("org.aspectj:aspectjrt:1.9.6")
+    api("org.aspectj:aspectjweaver:1.9.6")
 }
