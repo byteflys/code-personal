@@ -8,7 +8,7 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.android.code.ui.StartActivity
+import com.android.code.commons.Global
 
 class SplashActivity : AppCompatActivity() {
 

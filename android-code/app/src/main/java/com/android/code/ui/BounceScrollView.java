@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import com.android.code.R;
+import com.android.code.commons.Device;
 
 // a scroll view that supports
 // drag out of bound limit, and auto bounce back on hand up

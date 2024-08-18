@@ -1,4 +1,4 @@
-package com.android.code
+package com.android.code.component
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

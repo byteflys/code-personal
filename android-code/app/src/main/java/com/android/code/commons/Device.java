@@ -1,11 +1,9 @@
-package com.android.code.ui;
+package com.android.code.commons;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Size;
 import android.view.WindowManager;
-
-import com.android.code.Global;
 
 @SuppressWarnings("all")
 public class Device {
