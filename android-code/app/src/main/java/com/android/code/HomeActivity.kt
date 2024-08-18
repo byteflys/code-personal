@@ -1,6 +1,7 @@
 package com.android.code
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.android.code.databinding.ActivityHome2Binding
 
@@ -16,6 +17,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
+        Log.e("xxx", "yyy")
     }
 }
