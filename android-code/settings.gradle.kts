@@ -43,7 +43,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-//        classpath("com.archinamon:android-gradle-aspectj:4.3.0")
+        classpath("com.google.code.gson:gson:+")
     }
 }
 
