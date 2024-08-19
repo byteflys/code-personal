@@ -13,4 +13,3 @@ object AndroidLogInterceptor {
         return 0
     }
 }
-
