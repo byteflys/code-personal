@@ -56,3 +56,5 @@ plugins {
 }
 
 include(":app")
+
+val t = "main"
