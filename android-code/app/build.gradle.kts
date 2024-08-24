@@ -11,7 +11,7 @@ android {
         namespace = "com.android.code"
         applicationId = "com.android.code.app"
         testApplicationId = "com.android.code.test"
-        minSdk = 30
+        minSdk = 28
         targetSdk = 34
     }
 
@@ -60,16 +60,16 @@ dependencies {
 //    api("androidx.lifecycle:lifecycle-viewmodel-ktx:+")
 
     // GSON
-//    api("com.google.code.gson:gson:+")
+    api("com.google.code.gson:gson:+")
 
     // OkHttp3
 //    api("com.squareup.okhttp3:okhttp:+")
 //    api("com.squareup.okhttp3:logging-interceptor:+")
 
     // RxJava3
-//    api("io.reactivex.rxjava3:rxjava:+")
-//    api("io.reactivex.rxjava3:rxandroid:+")
-//    api("com.github.akarnokd:rxjava3-retrofit-adapter:+")
+    api("io.reactivex.rxjava3:rxjava:+")
+    api("io.reactivex.rxjava3:rxandroid:+")
+    api("com.github.akarnokd:rxjava3-retrofit-adapter:+")
 
     // Retrofit2
 //    api("com.squareup.retrofit2:retrofit:+")

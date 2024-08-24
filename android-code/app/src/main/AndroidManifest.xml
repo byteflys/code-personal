@@ -12,13 +12,13 @@
 
     <application
         android:icon="@drawable/ic"
-        android:label="Code"
+        android:label="Demo"
         android:requestLegacyExternalStorage="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/Theme.ByteFly"
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.android.code.SplashActivity"
+            android:name="com.android.code.webview.ByteFlyWebViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
