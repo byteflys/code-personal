@@ -20,6 +20,7 @@ import android.webkit.WebViewClient
 import com.android.code.commons.ContextEx.open
 import com.android.code.commons.JSONEx.fromJson
 import com.android.code.commons.JSONEx.toJson
+import com.android.code.commons.ToastEx
 import com.android.code.commons.UriEx.isWebsiteOrFile
 
 @SuppressLint("JavascriptInterface")
@@ -63,12 +64,14 @@ open class ByteFlyWebView : WebView {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest, error: WebResourceError?) {
                 super.onReceivedError(view, request, error)
                 val url = request.url.toString()
+                val message = "WebViewError ${error?.errorCode} ${error?.description}"
+                ToastEx.show(message)
                 when (error?.errorCode) {
                     ERROR_HOST_LOOKUP,
                     ERROR_CONNECT,
                     ERROR_TIMEOUT -> onWebViewTimeout(url)
                     else -> {
-                        Log.e(ByteFlyWebView::class.simpleName, "WebViewError ${error?.errorCode} ${error?.description}")
+                        Log.e(ByteFlyWebView::class.simpleName, message)
                     }
                 }
             }
