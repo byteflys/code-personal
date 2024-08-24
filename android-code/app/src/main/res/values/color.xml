@@ -13,5 +13,7 @@
     <color name="black_percent_70">#B2000000</color>
     <color name="black_percent_88">#E1000000</color>
     <color name="gray">#77787B</color>
+    <color name="red">#FF0000</color>
     <color name="red_warning">#F34545</color>
+    <color name="purple">#625AFF</color>
 </resources>

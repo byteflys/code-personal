@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.android.code.webview.ByteFlyWebViewActivity"
+            android:name="com.android.code.webview.VipActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
