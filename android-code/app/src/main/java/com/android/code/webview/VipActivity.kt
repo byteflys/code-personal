@@ -18,8 +18,8 @@ class VipActivity : ComponentActivity() {
     private lateinit var tokenEdit: EditText
     private lateinit var goButton: Button
 
-    private val defaultUrl = "https://galaxy.mystarnote.cn/user-center"
-    private val defaultToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTY4MTA5LCJ3eFVuaW9uaWQiOiJvSXViWXZpYl9sMkEzOXAyRFJHaDFiMFZtQks0IiwibG9naW5UeXBlIjoicGhvbmUiLCJpYXQiOjE3MjQ0NzA0NTUsImV4cCI6MTc0MDAyMjQ1NX0.swT0GFtt3RMvd1v8tYaFRS03OGpML6oqPK6SOqRkxoQ"
+    private val defaultUrl = "https://dev-galaxy.send2boox.com/user-center"
+    private val defaultToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mzk4MjcsImxvZ2luVHlwZSI6InBob25lIiwiaWF0IjoxNzI0NDgyNTE2LCJleHAiOjE3NDAwMzQ1MTZ9.WS0fs1kLska29EDPFU0IpVZwf1JuWU6TDcb2oLIbIxE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setFullScreenStyle()
