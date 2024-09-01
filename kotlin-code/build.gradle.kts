@@ -10,6 +10,10 @@ java {
 
 dependencies {
 
+    // kotlin & coroutine
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+
     // apache commons
     api("org.apache.commons:commons-lang3:3.9")
     api("commons-io:commons-io:2.7")
