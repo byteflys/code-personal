@@ -78,9 +78,4 @@ dependencies {
 
     // MMKV
 //    api("com.tencent:mmkv-static:+")
-
-    // AndroidAOP
-    api("io.github.FlyJingFish.AndroidAop:android-aop-core:2.0.9")
-    api("io.github.FlyJingFish.AndroidAop:android-aop-annotation:2.0.9")
-    ksp("io.github.FlyJingFish.AndroidAop:android-aop-ksp:2.0.9")
 }
