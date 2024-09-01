@@ -36,9 +36,9 @@ dependencies {
 
     // AndroidX
     api("androidx.appcompat:appcompat:1.7.0")
-    api("androidx.fragment:fragment-ktx:+")
-    api("androidx.constraintlayout:constraintlayout:+")
-    api("com.google.android.material:material:+")
+    api("androidx.fragment:fragment-ktx:1.8.2")
+    api("androidx.constraintlayout:constraintlayout:2.1.4")
+    api("com.google.android.material:material:1.12.0")
 
     // Compose
 //    api("androidx.compose.ui:ui:+")
@@ -52,24 +52,24 @@ dependencies {
     api("androidx.core:core-ktx:1.13.1")
 
     // Coroutine
-//    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:+")
-//    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:+")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     // Lifecycle
-//    api("androidx.lifecycle:lifecycle-runtime-ktx:+")
-//    api("androidx.lifecycle:lifecycle-viewmodel-ktx:+")
+    api("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
+    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
 
     // GSON
-    api("com.google.code.gson:gson:+")
+    api("com.google.code.gson:gson:2.11.0")
 
     // OkHttp3
 //    api("com.squareup.okhttp3:okhttp:+")
 //    api("com.squareup.okhttp3:logging-interceptor:+")
 
     // RxJava3
-    api("io.reactivex.rxjava3:rxjava:+")
-    api("io.reactivex.rxjava3:rxandroid:+")
-    api("com.github.akarnokd:rxjava3-retrofit-adapter:+")
+    api("io.reactivex.rxjava3:rxjava:3.1.9")
+    api("io.reactivex.rxjava3:rxandroid:3.0.2")
+    api("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
 
     // Retrofit2
 //    api("com.squareup.retrofit2:retrofit:+")

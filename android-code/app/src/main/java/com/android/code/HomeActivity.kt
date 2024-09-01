@@ -2,6 +2,7 @@ package com.android.code
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.android.code.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -16,6 +17,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
+lifecycleScope
     }
 }
