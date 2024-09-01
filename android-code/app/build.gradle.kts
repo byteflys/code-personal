@@ -52,8 +52,8 @@ dependencies {
     api("androidx.core:core-ktx:1.13.1")
 
     // Coroutine
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     // Lifecycle
     api("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
