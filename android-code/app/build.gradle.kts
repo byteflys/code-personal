@@ -1,3 +1,7 @@
+import com.android.build.api.dsl.ApplicationBuildType
+import com.android.build.gradle.api.ApplicationVariant
+import com.android.build.gradle.internal.dsl.SigningConfig
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -29,6 +33,72 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
+    }
+
+    flavorDimensions += listOf("channel", "version")
+
+    productFlavors {
+        create("HUAWEI") {
+            dimension = "channel"
+            applicationIdSuffix = ".huawei"
+        }
+        create("XIAOMI") {
+            dimension = "channel"
+            applicationIdSuffix = ".xiaomi"
+        }
+        create("101") {
+            dimension = "version"
+            applicationIdSuffix = ".v101"
+        }
+        create("102") {
+            dimension = "version"
+            applicationIdSuffix = ".v102"
+        }
+    }
+
+    signingConfigs {
+        create("common") {
+            storeFile = File(rootProject.projectDir, "sign.keystore")
+            storePassword = "123456"
+            keyAlias = "signKey"
+            keyPassword = "123456"
+            enableV2Signing = true
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("common")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("common")
+        }
+        names.forEach { name ->
+            named(name) {
+                configureBuildType(signingConfigs, applicationVariants)
+            }
+        }
+    }
+}
+
+fun ApplicationBuildType.configureBuildType(
+    signingConfigs: NamedDomainObjectContainer<SigningConfig>,
+    applicationVariants: DomainObjectSet<ApplicationVariant>
+) {
+    signingConfig = signingConfigs.getByName("common")
+    applicationVariants.all { variant ->
+        if (name == "debug") {
+            return@all false
+        }
+        val name = "${variant.flavorName}-${variant.versionName}.apk"
+        println("Configure Variant -> Package Name : " + name)
+        variant.productFlavors.forEach { flavor ->
+            println("Configure Variant -> Flavor Name : " + flavor.name)
+        }
+        variant.outputs.forEach { output ->
+            println("Configure Variant -> Output Name : " + output.name)
+        }
+        return@all true
     }
 }
 

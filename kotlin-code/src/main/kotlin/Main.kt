@@ -11,5 +11,7 @@ suspend fun main() {
         println("coroutine by launch")
     }
     launchJob.start()
-    delay(99000L)
+//    delay(99000L)
+    run { delay(99000L) }
+    println("xxx")
 }
