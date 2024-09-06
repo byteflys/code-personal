@@ -1,12 +1,11 @@
 import com.android.build.api.dsl.ApplicationBuildType
-import com.android.build.gradle.api.ApplicationVariant
+import com.android.build.api.variant.impl.VariantOutputImpl
 import com.android.build.gradle.internal.dsl.SigningConfig
 
 plugins {
-    id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.android.application")
     id("com.google.devtools.ksp")
-    id("io.github.FlyJingFish.AndroidAop.android-aop")
 }
 
 android {
@@ -39,6 +38,7 @@ android {
 
     productFlavors {
         create("HUAWEI") {
+            isDefault = true
             dimension = "channel"
             applicationIdSuffix = ".huawei"
         }
@@ -47,6 +47,7 @@ android {
             applicationIdSuffix = ".xiaomi"
         }
         create("101") {
+            isDefault = true
             dimension = "version"
             applicationIdSuffix = ".v101"
         }
@@ -67,38 +68,24 @@ android {
     }
 
     buildTypes {
-        release {
+        create("common") {
+            isDefault = true
+            isDebuggable = true
+            isJniDebuggable = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             signingConfig = signingConfigs.getByName("common")
-        }
-        debug {
-            signingConfig = signingConfigs.getByName("common")
-        }
-        names.forEach { name ->
-            named(name) {
-                configureBuildType(signingConfigs, applicationVariants)
-            }
         }
     }
-}
 
-fun ApplicationBuildType.configureBuildType(
-    signingConfigs: NamedDomainObjectContainer<SigningConfig>,
-    applicationVariants: DomainObjectSet<ApplicationVariant>
-) {
-    signingConfig = signingConfigs.getByName("common")
-    applicationVariants.all { variant ->
-        if (name == "debug") {
-            return@all false
+    androidComponents {
+        onVariants { variant ->
+            variant.outputs.forEach { output ->
+                val output = output as VariantOutputImpl
+                val name = "${variant.flavorName}-${output.versionName.getOrElse("")}-${variant.buildType}.apk"
+                output.outputFileName = name
+            }
         }
-        val name = "${variant.flavorName}-${variant.versionName}.apk"
-        println("Configure Variant -> Package Name : " + name)
-        variant.productFlavors.forEach { flavor ->
-            println("Configure Variant -> Flavor Name : " + flavor.name)
-        }
-        variant.outputs.forEach { output ->
-            println("Configure Variant -> Output Name : " + output.name)
-        }
-        return@all true
     }
 }
 
