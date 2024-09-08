@@ -55,5 +55,3 @@ plugins {
 }
 
 include(":app")
-
-val t = "a9"

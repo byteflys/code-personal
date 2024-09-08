@@ -1,4 +1,5 @@
 import com.android.build.api.variant.impl.VariantOutputImpl
+import java.util.Properties
 
 plugins {
     id("org.jetbrains.kotlin.android")
@@ -6,9 +7,21 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+apply {
+    from("config.gradle")
+}
+
+inline fun <reified T> config(name: String): T {
+    val properties = rootProject.extensions["config"] as Properties
+    return properties[name] as T
+}
+
 android {
+
     compileSdk = 34
     defaultConfig {
+        versionCode = config("versionCode")
+        versionName = config("versionName")
         namespace = "com.android.code"
         applicationId = "com.android.code.app"
         testApplicationId = "com.android.code.test"
@@ -24,31 +37,13 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         dataBinding = true
         viewBinding = true
         compose = false
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
-    }
-
-    flavorDimensions += listOf("market", "platform")
-
-    productFlavors {
-        create("Huawei") {
-            isDefault = true
-            dimension = "market"
-        }
-        create("Xiaomi") {
-            dimension = "market"
-        }
-        create("Phone") {
-            isDefault = true
-            dimension = "platform"
-        }
-        create("Tablet") {
-            dimension = "platform"
-        }
     }
 
     signingConfigs {
@@ -69,20 +64,17 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
             signingConfig = signingConfigs.getByName("common")
+            manifestPlaceholders["market"] = "Huawei"
+            buildConfigField("Boolean", "debuggable", "true")
         }
     }
 
     androidComponents {
-        beforeVariants(selector().withBuildType("debug")) { it.enable = false }
-        beforeVariants(selector().withBuildType("release")) { it.enable = false }
         onVariants { variant ->
-            val buildType = variant.buildType
-            val market = variant.productFlavors.first { it.first == "market" }.second
-            val platform = variant.productFlavors.first { it.first == "platform" }.second
-            val apkName = "$market-$platform-$buildType.apk"
             variant.outputs.forEach { output ->
                 val output = output as VariantOutputImpl
-                output.outputFileName = apkName
+                output.outputFileName = "app.apk"
+                output.versionName = "2.222"
             }
         }
     }

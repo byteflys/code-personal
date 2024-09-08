@@ -17,6 +17,10 @@
         android:theme="@style/Theme.ByteFly"
         android:usesCleartextTraffic="true">
 
+        <meta-data
+            android:name="market"
+            android:value="${market}" />
+
         <activity
             android:name="com.android.code.SplashActivity"
             android:exported="true">

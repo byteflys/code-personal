@@ -1,0 +1,5 @@
+def config = new Properties()
+rootProject.extensions["config"] = config
+
+config["versionCode"] = 100
+config["versionName"] = "2.0.100"
