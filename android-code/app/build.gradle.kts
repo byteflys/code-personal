@@ -1,6 +1,4 @@
-import com.android.build.api.dsl.ApplicationBuildType
 import com.android.build.api.variant.impl.VariantOutputImpl
-import com.android.build.gradle.internal.dsl.SigningConfig
 
 plugins {
     id("org.jetbrains.kotlin.android")
@@ -34,26 +32,22 @@ android {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
 
-    flavorDimensions += listOf("channel", "version")
+    flavorDimensions += listOf("market", "platform")
 
     productFlavors {
-        create("HUAWEI") {
+        create("Huawei") {
             isDefault = true
-            dimension = "channel"
-            applicationIdSuffix = ".huawei"
+            dimension = "market"
         }
-        create("XIAOMI") {
-            dimension = "channel"
-            applicationIdSuffix = ".xiaomi"
+        create("Xiaomi") {
+            dimension = "market"
         }
-        create("101") {
+        create("Phone") {
             isDefault = true
-            dimension = "version"
-            applicationIdSuffix = ".v101"
+            dimension = "platform"
         }
-        create("102") {
-            dimension = "version"
-            applicationIdSuffix = ".v102"
+        create("Tablet") {
+            dimension = "platform"
         }
     }
 
@@ -68,7 +62,7 @@ android {
     }
 
     buildTypes {
-        create("common") {
+        create("Base") {
             isDefault = true
             isDebuggable = true
             isJniDebuggable = true
@@ -79,11 +73,16 @@ android {
     }
 
     androidComponents {
+        beforeVariants(selector().withBuildType("debug")) { it.enable = false }
+        beforeVariants(selector().withBuildType("release")) { it.enable = false }
         onVariants { variant ->
+            val buildType = variant.buildType
+            val market = variant.productFlavors.first { it.first == "market" }.second
+            val platform = variant.productFlavors.first { it.first == "platform" }.second
+            val apkName = "$market-$platform-$buildType.apk"
             variant.outputs.forEach { output ->
                 val output = output as VariantOutputImpl
-                val name = "${variant.flavorName}-${output.versionName.getOrElse("")}-${variant.buildType}.apk"
-                output.outputFileName = name
+                output.outputFileName = apkName
             }
         }
     }
