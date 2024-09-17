@@ -1,6 +1,5 @@
 plugins {
     id("org.jetbrains.kotlin.jvm")
-    id("io.freefair.aspectj.post-compile-weaving")
 }
 
 java {
@@ -10,6 +9,10 @@ java {
 }
 
 dependencies {
+
+    // kotlin & coroutine
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     // apache commons
     api("org.apache.commons:commons-lang3:3.9")
@@ -42,8 +45,4 @@ dependencies {
 
     // websocket
     api("org.java-websocket:Java-WebSocket:1.5.1")
-
-    // AspectJ
-    api("org.aspectj:aspectjrt:1.9.6")
-    api("org.aspectj:aspectjweaver:1.9.6")
 }

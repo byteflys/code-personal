@@ -1,11 +1,17 @@
 package com.code.kotlin
 
-fun main() {
-    Good().doSomething()
-}
+import kotlinx.coroutines.*
 
-class Good {
-    fun doSomething() {
-        println("doSomething")
+suspend fun main() {
+    val job = Job()
+    val scope = CoroutineScope(job)
+    val dispatcher = Dispatchers.Default
+    val option = CoroutineStart.LAZY
+    val launchJob = scope.launch(dispatcher, option) {
+        println("coroutine by launch")
     }
+    launchJob.start()
+//    delay(99000L)
+    run { delay(99000L) }
+    println("xxx")
 }

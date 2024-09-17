@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.android.code">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -11,11 +10,16 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".commons.CommonApplication"
         android:icon="@drawable/ic"
-        android:label="Code"
+        android:label="Demo"
         android:requestLegacyExternalStorage="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/Theme.ByteFly"
         android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="market"
+            android:value="${market}" />
 
         <activity
             android:name="com.android.code.SplashActivity"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_percent_88">#E1FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_percent_08">#14000000</color>
+    <color name="black_percent_15">#26000000</color>
+    <color name="black_percent_30">#4C000000</color>
+    <color name="black_percent_40">#66000000</color>
+    <color name="black_percent_50">#80000000</color>
+    <color name="black_percent_60">#99000000</color>
+    <color name="black_percent_70">#B2000000</color>
+    <color name="black_percent_88">#E1000000</color>
+    <color name="gray">#77787B</color>
+    <color name="red">#FF0000</color>
+    <color name="red_warning">#F34545</color>
+    <color name="purple">#625AFF</color>
+</resources>
