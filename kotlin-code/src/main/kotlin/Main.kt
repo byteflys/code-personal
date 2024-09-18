@@ -1,17 +1,16 @@
 package com.code.kotlin
 
-import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
-suspend fun main() {
-    val job = Job()
-    val scope = CoroutineScope(job)
-    val dispatcher = Dispatchers.Default
-    val option = CoroutineStart.LAZY
-    val launchJob = scope.launch(dispatcher, option) {
-        println("coroutine by launch")
+fun main() {
+    val completeContinuation = object : Continuation<Int> {
+        override val context = EmptyCoroutineContext
+        override fun resumeWith(result: Result<Int>) {
+            println(result.getOrNull())
+        }
     }
-    launchJob.start()
-//    delay(99000L)
-    run { delay(99000L) }
-    println("xxx")
+    val safeContinuation = suspend {
+        100
+    }.createCoroutine(completeContinuation)
+    safeContinuation.resume(Unit)
 }
