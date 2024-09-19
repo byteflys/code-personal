@@ -2,20 +2,22 @@ package com.code.kotlin
 
 import kotlin.coroutines.*
 
-suspend fun main() {
-//    val completeContinuation = object : Continuation<Int> {
-//        override val context = EmptyCoroutineContext
-//        override fun resumeWith(result: Result<Int>) {
-//            println(result.getOrNull())
-//        }
-//    }
-//    val safeContinuation = suspend {
-//        100
-//    }.createCoroutine(completeContinuation)
-//    safeContinuation.resume(Unit)
-    val suspendCoroutine = suspendCoroutine<Int> { continuation ->
-        continuation.resume(100)
+fun main() {
+    val completeContinuation = object : Continuation<Int> {
+        override val context = EmptyCoroutineContext
+        override fun resumeWith(result: Result<Int>) {
+            println(result.getOrThrow()) // ③
+        }
     }
-        println(suspendCoroutine)
-    Thread.sleep(2000L)
+    val safeContinuation = suspend {
+        100 // ②
+    }.createCoroutine(completeContinuation)
+    safeContinuation.resume(Unit) // ①
 }
+
+//suspend fun main() {
+//    val result = suspendCoroutine { continuation ->
+//        continuation.resume(100) // ①
+//    }
+//    println(result) // ②
+//}
