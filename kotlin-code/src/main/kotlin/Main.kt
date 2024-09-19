@@ -13,9 +13,9 @@ suspend fun main() {
 //        100
 //    }.createCoroutine(completeContinuation)
 //    safeContinuation.resume(Unit)
-suspendCoroutine<Int> { continuation ->
-    continuation.resume(100)
-}
-
-Thread.sleep(2000L)
+    val suspendCoroutine = suspendCoroutine<Int> { continuation ->
+        continuation.resume(100)
+    }
+        println(suspendCoroutine)
+    Thread.sleep(2000L)
 }
