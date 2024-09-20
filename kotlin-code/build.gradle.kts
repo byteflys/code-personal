@@ -11,23 +11,17 @@ java {
 dependencies {
 
     // kotlin & coroutine
-//    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 
     // apache commons
-    api("org.apache.commons:commons-lang3:3.9")
     api("commons-io:commons-io:2.7")
-
-    // commons codec
-    api("commons-codec:commons-codec:1.17.0")
-
-    // bouncy castle provider
-    api("org.bouncycastle:bcprov-jdk18on:1.71")
-
-    // xml
-    api("org.dom4j:dom4j:2.1.3")
+    api("org.apache.commons:commons-lang3:3.9")
 
     // gson
     api("com.google.code.gson:gson:2.8.9")
+
+    // rxjava
+    api("io.reactivex.rxjava3:rxjava:+")
 
     // okhttp
     api("com.squareup.okhttp3:okhttp:+")
@@ -37,9 +31,6 @@ dependencies {
     api("com.squareup.retrofit2:retrofit:+")
     api("com.squareup.retrofit2:adapter-rxjava3:+")
     api("com.squareup.retrofit2:converter-gson:+")
-
-    // rxjava
-    api("io.reactivex.rxjava3:rxjava:+")
 
     // websocket
     api("org.java-websocket:Java-WebSocket:1.5.1")
