@@ -6,13 +6,13 @@ fun main() {
     val completeContinuation = object : Continuation<Int> {
         override val context = EmptyCoroutineContext
         override fun resumeWith(result: Result<Int>) {
-            println(result.getOrThrow()) // ③
+            println(result.getOrThrow()) // ④
         }
     }
     val safeContinuation = suspend {
-        100 // ②
-    }.createCoroutine(completeContinuation)
-    safeContinuation.resume(Unit) // ①
+        100 // ③
+    }.createCoroutine(completeContinuation) // ①
+    safeContinuation.resume(Unit) // ②
 }
 
 //suspend fun main() {
