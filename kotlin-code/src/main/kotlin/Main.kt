@@ -23,10 +23,9 @@ import kotlin.coroutines.*
 //}
 
 suspend fun main() {
-    val result = suspendCoroutine { continuation ->
-        continuation.resume(100) // ①
+    val result = suspendCoroutine<Int> { continuation ->
+//        continuation.resume(100)
     }
-    delay(2000L)
-    println(result) // ②
-    Thread.sleep(3000L)
+    println(result)
+    Thread.sleep(99999L)
 }
