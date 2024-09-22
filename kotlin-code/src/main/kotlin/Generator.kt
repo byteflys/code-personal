@@ -2,6 +2,7 @@ package com.code.kotlin
 
 import kotlin.coroutines.*
 
+@RestrictsSuspension
 interface GeneratorScope<T> {
 
     suspend fun yield(value: T)
@@ -23,7 +24,7 @@ internal class GeneratorImpl<T> : Generator<T> {
 
     override suspend fun yield(value: T) {
         suspendCoroutine { continuation ->
-            when (state) {
+            when (val _state = state) {
                 is GeneratorState.WAITING -> {
                     state = GeneratorState.READY(continuation, value)
                 }
@@ -35,23 +36,29 @@ internal class GeneratorImpl<T> : Generator<T> {
 
     override fun resumeWith(result: Result<Any>) {
         state = GeneratorState.COMPLETED()
-        result.getOrThrow()
+    }
+
+    private fun resume() {
+        when (val _state = state) {
+            is GeneratorState.WAITING -> {
+                _state.continuation.resume(Unit)
+            }
+            else -> {}
+        }
     }
 
     override fun hasNext(): Boolean {
+        resume()
         return state !is GeneratorState.COMPLETED
     }
 
     override fun next(): T {
         when (val _state = state) {
-            is GeneratorState.WAITING -> {
-                _state.continuation.resume(Unit)
-                return next()
-            }
             is GeneratorState.READY -> {
                 state = GeneratorState.WAITING(_state.continuation)
                 return _state.value
             }
+            is GeneratorState.WAITING,
             is GeneratorState.COMPLETED -> throw IllegalStateException()
         }
     }
