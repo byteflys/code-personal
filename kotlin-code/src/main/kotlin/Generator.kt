@@ -8,7 +8,12 @@ interface GeneratorScope<T> {
     suspend fun yield(value: T)
 }
 
-internal interface Generator<T> : GeneratorScope<T>, Iterator<T>, Continuation<Any>
+interface GeneratorIterator<T> : Iterator<T> {
+
+    fun await(): T
+}
+
+internal interface Generator<T> : GeneratorScope<T>, GeneratorIterator<T>, Continuation<Any>
 
 internal sealed class GeneratorState<T> {
     class WAITING<T>(val continuation: Continuation<Unit>) : GeneratorState<T>()
@@ -62,11 +67,13 @@ internal class GeneratorImpl<T> : Generator<T> {
             is GeneratorState.COMPLETED -> throw IllegalStateException()
         }
     }
+
+    override fun await() = next()
 }
 
 fun <T> generator(
     block: suspend GeneratorScope<T>.() -> Unit
-): Iterator<T> {
+): GeneratorIterator<T> {
     val generator = GeneratorImpl<T>()
     val continuation = block.createCoroutine(generator, generator)
     generator.state = GeneratorState.WAITING(continuation)

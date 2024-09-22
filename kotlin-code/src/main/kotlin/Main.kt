@@ -6,7 +6,8 @@ fun main() {
         yield(200)
         yield(300)
     }
-    for (value in generator) {
+    while (generator.hasNext()) {
+        val value = generator.await()
         println(value)
     }
 }
