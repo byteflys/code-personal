@@ -7,7 +7,7 @@ fun main() {
     }
 }
 
-fun AsyncScope<String>.loadUserName() {
+fun Promise<String>.loadUserName() {
     try {
         resume("hello")
     } catch (e: Throwable) {

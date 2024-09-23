@@ -2,24 +2,16 @@ package com.code.kotlin
 
 import kotlin.coroutines.*
 
-interface AsyncScope<T> {
-    fun getContinuation(): Continuation<T>
-    fun setContinuation(continuation: Continuation<T>)
+interface Promise<T> {
     fun resume(value: T)
     fun error(e: Throwable)
 }
 
-class AsyncScopeImpl<T> : AsyncScope<T>, Continuation<Unit> {
+internal class PromiseImpl<T> : Promise<T>, Continuation<Unit> {
 
     override val context = EmptyCoroutineContext
 
-    private lateinit var continuation: Continuation<T>
-
-    override fun getContinuation() = continuation
-
-    override fun setContinuation(continuation: Continuation<T>) {
-        this.continuation = continuation
-    }
+    internal lateinit var continuation: Continuation<T>
 
     override fun resumeWith(result: Result<Unit>) {
         result.getOrThrow()
@@ -35,15 +27,17 @@ class AsyncScopeImpl<T> : AsyncScope<T>, Continuation<Unit> {
 }
 
 fun <T> async(
-    block: suspend AsyncScope<T>.() -> Unit
-) {
-    val asyncScope = AsyncScopeImpl<T>()
-    block.startCoroutine(asyncScope, asyncScope)
+    block: suspend Promise<T>.() -> Unit
+): Promise<T> {
+    val promise = PromiseImpl<T>()
+    block.startCoroutine(promise, promise)
+    return promise
 }
 
-suspend fun <T> AsyncScope<T>.await(
-    block: AsyncScope<T>.() -> Unit
+suspend fun <T> Promise<T>.await(
+    block: Promise<T>.() -> Unit
 ) = suspendCoroutine { continuation ->
-    setContinuation(continuation)
-    block()
+    val impl = this as PromiseImpl<T>
+    impl.continuation = continuation
+    impl.block()
 }
