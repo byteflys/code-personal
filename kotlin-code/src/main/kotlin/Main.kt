@@ -1,23 +1,16 @@
 package com.code.kotlin
 
 import kotlin.concurrent.thread
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
-fun main() {
-    async {
-        val user = await<String> { loadUserInfo() }
-        println(user)
-        println("async returned")
-    }
-    println("async not return")
-}
-
-fun Promise<String>.loadUserInfo() {
-    thread {
-        Thread.sleep(3000L)
-        try {
-            resume("Darius")
-        } catch (e: Throwable) {
-            error(e)
+suspend fun main() {
+    val result = suspendCoroutine<Int> { continuation ->
+        thread {
+            continuation.resume(100)
+            Thread.sleep(5000L)
+            println(2)
         }
     }
+    println(1)
 }
