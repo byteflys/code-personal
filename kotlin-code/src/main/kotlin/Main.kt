@@ -1,13 +1,16 @@
 package com.code.kotlin
 
 fun main() {
-    val generator = generator {
-        yield(100)
-        yield(200)
-        yield(300)
+    async {
+        val userName = await<String> { loadUserName() }
+        println(userName)
     }
-    while (generator.hasNext()) {
-        val value = generator.await()
-        println(value)
+}
+
+fun AsyncScope<String>.loadUserName() {
+    try {
+        resume("hello")
+    } catch (e: Throwable) {
+        error(e)
     }
 }

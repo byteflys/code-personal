@@ -33,6 +33,7 @@ internal class GeneratorImpl<T> : Generator<T> {
                 is GeneratorState.WAITING -> {
                     state = GeneratorState.READY(continuation, value)
                 }
+
                 is GeneratorState.READY,
                 is GeneratorState.COMPLETED -> throw IllegalStateException()
             }
@@ -48,6 +49,7 @@ internal class GeneratorImpl<T> : Generator<T> {
             is GeneratorState.WAITING -> {
                 _state.continuation.resume(Unit)
             }
+
             else -> {}
         }
     }
@@ -63,6 +65,7 @@ internal class GeneratorImpl<T> : Generator<T> {
                 state = GeneratorState.WAITING(_state.continuation)
                 return _state.value
             }
+
             is GeneratorState.WAITING,
             is GeneratorState.COMPLETED -> throw IllegalStateException()
         }
