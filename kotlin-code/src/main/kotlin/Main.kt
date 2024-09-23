@@ -4,18 +4,18 @@ import kotlin.concurrent.thread
 
 fun main() {
     async {
-        val userName = await<String> { loadUserName() }
-        println(userName)
+        val user = await<String> { loadUserInfo() }
+        println(user)
         println("async returned")
     }
     println("async not return")
 }
 
-fun Promise<String>.loadUserName() {
+fun Promise<String>.loadUserInfo() {
     thread {
         Thread.sleep(3000L)
         try {
-            resume("hello")
+            resume("Darius")
         } catch (e: Throwable) {
             error(e)
         }
