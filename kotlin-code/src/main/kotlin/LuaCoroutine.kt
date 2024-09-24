@@ -2,38 +2,46 @@ package com.code.kotlin
 
 import kotlin.coroutines.*
 
-fun <IN, OUT> create(
-    block: suspend LuaCoroutineScope<IN>.() -> OUT
-): LuaCoroutine<IN> {
-    val generator = GeneratorImpl<T>()
-    val continuation = block.createCoroutine(generator, generator)
-    generator.state = GeneratorState.WAITING(continuation)
-    return generator
+fun <PARAM, RESULT> create(
+    block: suspend LuaCoroutineScope<PARAM, RESULT>.() -> Unit
+): LuaCoroutine<PARAM, RESULT> {
+    val coroutine = LuaCoroutineImpl<PARAM, RESULT>()
+    val continuation = block.createCoroutine(coroutine, coroutine)
+    coroutine.state = CoroutineState.WAITING(continuation)
+    return coroutine
 }
 
-interface LuaCoroutine<IN> {
-    fun resume(value: IN)
+interface LuaCoroutine<PARAM, RESULT> {
+    fun resume(value: PARAM): RESULT
 }
 
 @RestrictsSuspension
-interface LuaCoroutineScope<OUT> {
-    suspend fun yield(value: OUT)
+interface LuaCoroutineScope<PARAM, RESULT> {
+    suspend fun yield(value: RESULT): PARAM
 }
 
-internal class LuaCoroutineImpl<IN, OUT> :
-    LuaCoroutine<IN>, LuaCoroutineScope<OUT>, Continuation<OUT> {
+internal sealed class CoroutineState<RESULT> {
+    class WAITING<RESULT>(val continuation: Continuation<Unit>) : CoroutineState<RESULT>()
+    class READY<RESULT>(val continuation: Continuation<Unit>, val value: RESULT) : CoroutineState<RESULT>()
+    class COMPLETED<RESULT> : CoroutineState<RESULT>()
+}
+
+internal class LuaCoroutineImpl<PARAM, RESULT> :
+    LuaCoroutine<PARAM, RESULT>, LuaCoroutineScope<PARAM, RESULT>, Continuation<Unit> {
 
     override val context = EmptyCoroutineContext
 
-    override fun resume(value: IN) {
+    internal lateinit var state: CoroutineState<RESULT>
+
+    override suspend fun yield(value: RESULT): PARAM {
         TODO("Not yet implemented")
     }
 
-    override suspend fun yield(value: OUT) {
+    override fun resume(value: PARAM): RESULT {
         TODO("Not yet implemented")
     }
 
-    override fun resumeWith(result: Result<OUT>) {
+    override fun resumeWith(result: Result<Unit>) {
         result.getOrThrow()
     }
 }
