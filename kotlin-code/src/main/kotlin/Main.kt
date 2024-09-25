@@ -2,7 +2,7 @@ package com.code.kotlin
 
 fun main() {
 
-    val producer = create<Unit, String> {
+    val producer = create<String, Unit> {
         yield("a")
         println("produce a")
         yield("b")
@@ -11,7 +11,7 @@ fun main() {
         println("produce c")
     }
 
-    val consumer = create<String, Unit> {
+    val consumer = create<Unit, String> {
         val param1 = yield(Unit)
         println("consume $param1")
         val param2 = yield(Unit)

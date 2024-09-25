@@ -2,59 +2,59 @@ package com.code.kotlin
 
 import kotlin.coroutines.*
 
-fun <R, P> create(
-    block: suspend LuaCoroutineScope<R, P>.() -> Unit
-): LuaCoroutine<R, P> {
-    val coroutine = LuaCoroutineImpl<R, P>()
+fun <P, R> create(
+    block: suspend LuaCoroutineScope<P, R>.() -> Unit
+): LuaCoroutine<P, R> {
+    val coroutine = LuaCoroutineImpl<P, R>()
     coroutine.state = LuaCoroutineState.CREATED()
     block.startCoroutine(coroutine, coroutine)
     return coroutine
 }
 
-interface LuaCoroutine<R, P> {
+interface LuaCoroutine<P, R> {
     fun resume(value: R): P
 }
 
 @RestrictsSuspension
-interface LuaCoroutineScope<R, P> {
+interface LuaCoroutineScope<P, R> {
     suspend fun yield(value: P): R
 }
 
-internal sealed class LuaCoroutineState<R, P> {
-    class CREATED<R, P> : LuaCoroutineState<R, P>()
-    class SUSPENDED<R, P>(val continuation: Continuation<R>, val value: P) : LuaCoroutineState<R, P>()
-    class RESUMED<R, P>(val value: R) : LuaCoroutineState<R, P>()
-    class COMPLETED<R, P> : LuaCoroutineState<R, P>()
+internal sealed class LuaCoroutineState<P, R> {
+    class CREATED<P, R> : LuaCoroutineState<P, R>()
+    class SUSPENDED<P, R>(val continuation: Continuation<R>, val value: P) : LuaCoroutineState<P, R>()
+    class RESUMED<P, R>(val value: R) : LuaCoroutineState<P, R>()
+    class COMPLETED<P, R> : LuaCoroutineState<P, R>()
 }
 
-internal class LuaCoroutineImpl<R, P> :
-    LuaCoroutine<R, P>, LuaCoroutineScope<R, P>, Continuation<Unit> {
+internal class LuaCoroutineImpl<P, R> :
+    LuaCoroutine<P, R>, LuaCoroutineScope<P, R>, Continuation<Unit> {
 
     override val context = EmptyCoroutineContext
 
-    internal lateinit var state: LuaCoroutineState<R, P>
+    internal lateinit var state: LuaCoroutineState<P, R>
 
     override suspend fun yield(value: P): R = suspendCoroutine { continuation ->
         when (val old = state) {
-            is LuaCoroutineState.CREATED<*, *>,
-            is LuaCoroutineState.RESUMED<*, *> -> {
+            is LuaCoroutineState.CREATED<P, R>,
+            is LuaCoroutineState.RESUMED<P, R> -> {
                 state = LuaCoroutineState.SUSPENDED(continuation, value)
             }
-            is LuaCoroutineState.SUSPENDED<*, *>,
-            is LuaCoroutineState.COMPLETED<*, *> -> throw IllegalStateException()
+            is LuaCoroutineState.SUSPENDED<P, R>,
+            is LuaCoroutineState.COMPLETED<P, R> -> throw IllegalStateException()
         }
     }
 
     override fun resume(value: R): P {
         when (val old = state) {
-            is LuaCoroutineState.SUSPENDED<R, P> -> {
+            is LuaCoroutineState.SUSPENDED<P, R> -> {
                 state = LuaCoroutineState.RESUMED(value)
                 old.continuation.resume(value)
                 return old.value
             }
-            is LuaCoroutineState.CREATED<R, P>,
-            is LuaCoroutineState.RESUMED<R, P>,
-            is LuaCoroutineState.COMPLETED<R, P> -> throw IllegalStateException()
+            is LuaCoroutineState.CREATED<P, R>,
+            is LuaCoroutineState.RESUMED<P, R>,
+            is LuaCoroutineState.COMPLETED<P, R> -> throw IllegalStateException()
         }
     }
 
