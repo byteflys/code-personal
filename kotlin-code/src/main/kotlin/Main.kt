@@ -4,26 +4,26 @@ fun main() {
 
     val producer = create<String, Unit> {
         yield("a")
-        println("produce a")
         yield("b")
-        println("produce b")
         yield("c")
-        println("produce c")
     }
 
     val consumer = create<Unit, String> {
-        val param1 = yield(Unit)
-        println("consume $param1")
-        val param2 = yield(Unit)
-        println("consume $param2")
-        val param3 = yield(Unit)
-        println("consume $param3")
+        val result1 = yield(Unit)
+        println("consume $result1")
+        val result2 = yield(Unit)
+        println("consume $result2")
+        val result3 = yield(Unit)
+        println("consume $result3")
     }
 
-    val out1 = producer.resume(Unit)
-    consumer.resume(out1)
-    val out2 = producer.resume(Unit)
-    consumer.resume(out2)
-    val out3 = producer.resume(Unit)
-    consumer.resume(out3)
+    val param1 = producer.resume(Unit)
+    println("produce $param1")
+    consumer.resume(param1)
+    val param2 = producer.resume(Unit)
+    println("produce $param2")
+    consumer.resume(param2)
+    val param3 = producer.resume(Unit)
+    println("produce $param3")
+    consumer.resume(param3)
 }
