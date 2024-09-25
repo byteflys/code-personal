@@ -2,40 +2,39 @@ package com.code.kotlin
 
 import kotlin.coroutines.*
 
-fun <PARAM, RESULT> create(
-    block: suspend LuaCoroutineScope<PARAM, RESULT>.() -> Unit
-): LuaCoroutine<PARAM, RESULT> {
-    val coroutine = LuaCoroutineImpl<PARAM, RESULT>()
-    val continuation = block.createCoroutine(coroutine, coroutine)
-    coroutine.state = LuaCoroutineState.CREATED(continuation)
-    continuation.resume(Unit)
+fun <R, P> create(
+    block: suspend LuaCoroutineScope<R, P>.() -> Unit
+): LuaCoroutine<R, P> {
+    val coroutine = LuaCoroutineImpl<R, P>()
+    coroutine.state = LuaCoroutineState.CREATED()
+    block.startCoroutine(coroutine, coroutine)
     return coroutine
 }
 
-interface LuaCoroutine<PARAM, RESULT> {
-    fun resume(value: PARAM): RESULT
+interface LuaCoroutine<R, P> {
+    fun resume(value: R): P
 }
 
 @RestrictsSuspension
-interface LuaCoroutineScope<PARAM, RESULT> {
-    suspend fun yield(value: RESULT): PARAM
+interface LuaCoroutineScope<R, P> {
+    suspend fun yield(value: P): R
 }
 
-internal sealed class LuaCoroutineState<PARAM, RESULT> {
-    class CREATED<PARAM, RESULT>(val continuation: Continuation<Unit>) : LuaCoroutineState<PARAM, RESULT>()
-    class SUSPENDED<PARAM, RESULT>(val continuation: Continuation<PARAM>, val value: RESULT) : LuaCoroutineState<PARAM, RESULT>()
-    class RESUMED<PARAM, RESULT>(val value: PARAM) : LuaCoroutineState<PARAM, RESULT>()
-    class COMPLETED<PARAM, RESULT> : LuaCoroutineState<PARAM, RESULT>()
+internal sealed class LuaCoroutineState<R, P> {
+    class CREATED<R, P> : LuaCoroutineState<R, P>()
+    class SUSPENDED<R, P>(val continuation: Continuation<R>, val value: P) : LuaCoroutineState<R, P>()
+    class RESUMED<R, P>(val value: R) : LuaCoroutineState<R, P>()
+    class COMPLETED<R, P> : LuaCoroutineState<R, P>()
 }
 
-internal class LuaCoroutineImpl<PARAM, RESULT> :
-    LuaCoroutine<PARAM, RESULT>, LuaCoroutineScope<PARAM, RESULT>, Continuation<Unit> {
+internal class LuaCoroutineImpl<R, P> :
+    LuaCoroutine<R, P>, LuaCoroutineScope<R, P>, Continuation<Unit> {
 
     override val context = EmptyCoroutineContext
 
-    internal lateinit var state: LuaCoroutineState<PARAM, RESULT>
+    internal lateinit var state: LuaCoroutineState<R, P>
 
-    override suspend fun yield(value: RESULT): PARAM = suspendCoroutine { continuation ->
+    override suspend fun yield(value: P): R = suspendCoroutine { continuation ->
         when (val old = state) {
             is LuaCoroutineState.CREATED<*, *>,
             is LuaCoroutineState.RESUMED<*, *> -> {
@@ -46,16 +45,16 @@ internal class LuaCoroutineImpl<PARAM, RESULT> :
         }
     }
 
-    override fun resume(value: PARAM): RESULT {
+    override fun resume(value: R): P {
         when (val old = state) {
-            is LuaCoroutineState.SUSPENDED<PARAM, RESULT> -> {
+            is LuaCoroutineState.SUSPENDED<R, P> -> {
                 state = LuaCoroutineState.RESUMED(value)
                 old.continuation.resume(value)
                 return old.value
             }
-            is LuaCoroutineState.CREATED<PARAM, RESULT>,
-            is LuaCoroutineState.RESUMED<PARAM, RESULT>,
-            is LuaCoroutineState.COMPLETED<PARAM, RESULT> -> throw IllegalStateException()
+            is LuaCoroutineState.CREATED<R, P>,
+            is LuaCoroutineState.RESUMED<R, P>,
+            is LuaCoroutineState.COMPLETED<R, P> -> throw IllegalStateException()
         }
     }
 
