@@ -50,6 +50,7 @@ internal class LuaCoroutineImpl<PARAM, RESULT> :
         when (val old = state) {
             is LuaCoroutineState.SUSPENDED<PARAM, RESULT> -> {
                 state = LuaCoroutineState.RESUMED(value)
+                old.continuation.resume(value)
                 return old.value
             }
             is LuaCoroutineState.CREATED<PARAM, RESULT>,
