@@ -3,12 +3,12 @@ package com.code.kotlin
 fun main() {
 
     val producer = create<String, Unit> {
-        println("consume a")
         yield("a")
-        println("consume b")
+        println("produce a")
         yield("b")
-        println("consume c")
+        println("produce b")
         yield("c")
+        println("produce c")
     }
 
     val consumer = create<Unit, String> {
@@ -20,10 +20,8 @@ fun main() {
         println("consume $result3")
     }
 
-    val param1 = producer.resume(Unit)
-    consumer.resume(param1)
-    val param2 = producer.resume(Unit)
-    consumer.resume(param2)
-    val param3 = producer.resume(Unit)
-    consumer.resume(param3)
+    while (!producer.completed() && !consumer.completed()) {
+        val param = producer.resume(Unit)
+        consumer.resume(param)
+    }
 }

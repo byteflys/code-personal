@@ -13,6 +13,7 @@ fun <P, R> create(
 
 interface LuaCoroutine<P, R> {
     fun resume(value: R): P
+    fun completed(): Boolean
 }
 
 @RestrictsSuspension
@@ -59,6 +60,9 @@ internal class LuaCoroutineImpl<P, R> :
     }
 
     override fun resumeWith(result: Result<Unit>) {
+        state = LuaCoroutineState.COMPLETED()
         result.getOrThrow()
     }
+
+    override fun completed() = state is LuaCoroutineState.COMPLETED
 }
