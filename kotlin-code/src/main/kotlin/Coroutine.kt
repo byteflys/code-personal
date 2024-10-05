@@ -1,15 +1,13 @@
-package com.bennyhuo.kotlin.coroutine.ch04.lua
+package x.coroutine
 
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.coroutines.*
 
 sealed class Status {
-    class Created(val continuation: Continuation<Unit>) : Status()
-    class Yielded<P>(val continuation: Continuation<P>) : Status()
-    class Resumed<R>(val continuation: Continuation<R>) : Status()
-    object Dead : Status()
+    internal class Created(val continuation: Continuation<Unit>) : Status()
+    internal class Suspended<P>(val continuation: Continuation<P>) : Status()
+    internal class Resumed<R>(val continuation: Continuation<R>) : Status()
+    internal data object Completed : Status()
 }
 
 interface CoroutineScope<P, R> {
@@ -39,9 +37,9 @@ class Coroutine<P, R>(
             val previousStatus = status.getAndUpdate {
                 when (it) {
                     is Status.Created -> throw IllegalStateException("Never started!")
-                    is Status.Yielded<*> -> throw IllegalStateException("Already yielded!")
-                    is Status.Resumed<*> -> Status.Yielded(continuation)
-                    Status.Dead -> throw IllegalStateException("Already dead!")
+                    is Status.Suspended<*> -> throw IllegalStateException("Already yielded!")
+                    is Status.Resumed<*> -> Status.Suspended(continuation)
+                    is Status.Completed -> throw IllegalStateException("Already dead!")
                 }
             }
 
@@ -51,8 +49,9 @@ class Coroutine<P, R>(
 
     private val status: AtomicReference<Status>
 
-    val isActive: Boolean
-        get() = status.get() != Status.Dead
+    fun active(): Boolean {
+        return status.get() !is Status.Completed
+    }
 
     init {
         val coroutineBlock: suspend CoroutineScope<P, R>.() -> R = { block(parameter!!) }
@@ -64,11 +63,11 @@ class Coroutine<P, R>(
         val previousStatus = status.getAndUpdate {
             when (it) {
                 is Status.Created -> throw IllegalStateException("Never started!")
-                is Status.Yielded<*> -> throw IllegalStateException("Already yielded!")
+                is Status.Suspended<*> -> throw IllegalStateException("Already yielded!")
                 is Status.Resumed<*> -> {
-                    Status.Dead
+                    Status.Completed
                 }
-                Status.Dead -> throw IllegalStateException("Already dead!")
+                is Status.Completed -> throw IllegalStateException("Already dead!")
             }
         }
         (previousStatus as? Status.Resumed<R>)?.continuation?.resumeWith(result)
@@ -81,64 +80,22 @@ class Coroutine<P, R>(
                     scope.parameter = value
                     Status.Resumed(continuation)
                 }
-                is Status.Yielded<*> -> {
+                is Status.Suspended<*> -> {
                     Status.Resumed(continuation)
                 }
                 is Status.Resumed<*> -> throw IllegalStateException("Already resumed!")
-                Status.Dead -> throw IllegalStateException("Already dead!")
+                is Status.Completed -> throw IllegalStateException("Already dead!")
             }
         }
 
         when (previousStatus) {
             is Status.Created -> previousStatus.continuation.resume(Unit)
-            is Status.Yielded<*> -> (previousStatus as Status.Yielded<P>).continuation.resume(value)
+            is Status.Suspended<*> -> (previousStatus as Status.Suspended<P>).continuation.resume(value)
             else -> {}
         }
     }
 
     suspend fun <SymT> SymCoroutine<SymT>.yield(value: R): P {
         return scope.yield(value)
-    }
-}
-
-class Dispatcher : ContinuationInterceptor {
-    override val key = ContinuationInterceptor
-
-    private val executor = Executors.newSingleThreadExecutor()
-
-    override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> {
-        return DispatcherContinuation(continuation, executor)
-    }
-}
-
-class DispatcherContinuation<T>(val continuation: Continuation<T>, val executor: Executor) : Continuation<T> by continuation {
-
-    override fun resumeWith(result: Result<T>) {
-        executor.execute {
-            continuation.resumeWith(result)
-        }
-    }
-}
-
-suspend fun main() {
-    val producer = Coroutine.create<Unit, Int>(Dispatcher()) {
-        for (i in 0..3) {
-            println("send $i")
-            yield(i)
-        }
-        return@create 0
-    }
-
-    val consumer = Coroutine.create<Int, Unit>(Dispatcher()) { param: Int ->
-        println("start $param")
-        for (i in 0..3) {
-            val value = yield(Unit)
-            println("receive $value")
-        }
-    }
-
-    while (producer.isActive && consumer.isActive) {
-        val result = producer.resume(Unit)
-        consumer.resume(result)
     }
 }
