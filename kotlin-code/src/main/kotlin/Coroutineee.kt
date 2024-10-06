@@ -3,21 +3,14 @@ package x.coroutine
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.coroutines.*
 
-sealed class Status {
-    internal class Created(val continuation: Continuation<Unit>) : Status()
-    internal class Suspended<P>(val continuation: Continuation<P>) : Status()
-    internal class Resumed<R>(val continuation: Continuation<R>) : Status()
-    internal data object Completed : Status()
-}
-
 interface CoroutineScope<P, R> {
 
     var parameter: P?
 
-    suspend fun yield(value: R): P
+    suspend fun yield(result: R): P
 }
 
-class Coroutine<P, R>(
+class Coroutineee<P, R>(
     override val context: CoroutineContext = EmptyCoroutineContext,
     private val block: suspend CoroutineScope<P, R>.() -> R
 ) : Continuation<R> {
@@ -25,7 +18,7 @@ class Coroutine<P, R>(
     private val scope = object : CoroutineScope<P, R> {
         override var parameter: P? = null
 
-        override suspend fun yield(value: R): P = suspendCoroutine { continuation ->
+        override suspend fun yield(result: R): P = suspendCoroutine { continuation ->
             val previousStatus = status.getAndUpdate {
                 when (it) {
                     is Status.Created -> throw IllegalStateException("Never started!")
@@ -35,7 +28,7 @@ class Coroutine<P, R>(
                 }
             }
 
-            (previousStatus as? Status.Resumed<R>)?.continuation?.resume(value)
+            (previousStatus as? Status.Resumed<R>)?.continuation?.resume(result)
         }
     }
 

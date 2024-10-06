@@ -1,14 +1,18 @@
 package x.coroutine
 
+import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
-object Coroutines {
+sealed class Status {
+    internal class Created(val continuation: Continuation<Unit>) : Status()
+    internal class Suspended<P>(val continuation: Continuation<P>) : Status()
+    internal class Resumed<R>(val continuation: Continuation<R>) : Status()
+    internal data object Completed : Status()
+}
 
-    fun <P, R> launch(
-        context: CoroutineContext = EmptyCoroutineContext,
-        block: suspend CoroutineScope<P, R>.() -> R
-    ): Coroutine<P, R> {
-        return Coroutine(context, block)
-    }
+fun <P, R> launch(
+    context: CoroutineContext,
+    block: suspend CoroutineScope<P, R>.() -> R
+): Coroutineee<P, R> {
+    return Coroutineee(context, block)
 }

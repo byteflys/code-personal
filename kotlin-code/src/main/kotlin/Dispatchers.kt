@@ -12,6 +12,8 @@ object Dispatchers {
 
     private val newExecutor = Executors.newCachedThreadPool()
 
+    private val ioExecutor = Executors.newSingleThreadExecutor()
+
     private val dataExecutor = Executors.newSingleThreadExecutor()
 
     private val networkExecutor = Executors.newScheduledThreadPool(10)
@@ -19,6 +21,8 @@ object Dispatchers {
     fun current() = Dispatcher(currentExecutor)
 
     fun new() = Dispatcher(newExecutor)
+
+    fun io() = Dispatcher(ioExecutor)
 
     fun data() = Dispatcher(dataExecutor)
 
@@ -30,10 +34,10 @@ object Dispatchers {
 // delegate continuation work to another continuation
 // which supports thread schedule
 class Dispatcher(
-    val executor: Executor? = null
+    private val executor: Executor? = null
 ) : ContinuationInterceptor {
 
-    override val key = ContinuationInterceptor
+    override val key = ContinuationInterceptor.Key
 
     override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> {
         return DispatcherContinuation(continuation, executor)
@@ -42,8 +46,8 @@ class Dispatcher(
 
 // continuation that supports thread schedule
 class DispatcherContinuation<T>(
-    val continuation: Continuation<T>,
-    val executor: Executor? = null
+    private val continuation: Continuation<T>,
+    private val executor: Executor? = null
 ) : Continuation<T> by continuation {
 
     override fun resumeWith(result: Result<T>) {
