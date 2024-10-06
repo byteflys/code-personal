@@ -40,3 +40,7 @@ fun <P, R> GlobalScope.launch(
     val context = coroutineContext + context
     return CoroutineImpl(context, block)
 }
+
+fun <P, R> GlobalScope.launch(
+    block: suspend WriteableCoroutine<P, R>.() -> R
+) = GlobalScope.launch(EmptyCoroutineContext, block)
