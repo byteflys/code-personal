@@ -87,8 +87,4 @@ class Coroutine<P, R>(
             else -> {}
         }
     }
-
-    suspend fun <SymT> SymCoroutine<SymT>.yield(value: R): P {
-        return scope.yield(value)
-    }
 }
