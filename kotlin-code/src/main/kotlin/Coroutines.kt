@@ -4,18 +4,18 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-interface ReadableCoroutine<P, R> {
-
-    suspend fun resume(parameter: P): R
-
-    fun completed(): Boolean
-}
-
 interface WriteableCoroutine<P, R> {
 
     var parameter: P?
 
     suspend fun yield(result: R): P
+}
+
+interface ReadableCoroutine<P, R> {
+
+    suspend fun resume(parameter: P): R
+
+    fun completed(): Boolean
 }
 
 interface CoroutineScope {
