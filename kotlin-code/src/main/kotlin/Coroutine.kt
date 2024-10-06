@@ -12,7 +12,7 @@ sealed class Status {
 
 interface CoroutineScope<P, R> {
 
-    val parameter: P?
+    var parameter: P?
 
     suspend fun yield(value: R): P
 }
