@@ -10,17 +10,21 @@ object Dispatchers {
 
     private val currentExecutor = Executor { runnable -> runnable.run() }
 
+    private val newExecutor = Executors.newCachedThreadPool()
+
     private val dataExecutor = Executors.newSingleThreadExecutor()
 
     private val networkExecutor = Executors.newScheduledThreadPool(10)
 
-    fun currentThread() = Dispatcher(currentExecutor)
+    fun current() = Dispatcher(currentExecutor)
 
-    fun newThread() = Dispatcher(Executors.newSingleThreadExecutor())
+    fun new() = Dispatcher(newExecutor)
 
-    fun dataThread() = Dispatcher(dataExecutor)
+    fun data() = Dispatcher(dataExecutor)
 
-    fun networkThread() = Dispatcher(networkExecutor)
+    fun network() = Dispatcher(networkExecutor)
+
+    fun sequence() = Dispatcher(Executors.newSingleThreadExecutor())
 }
 
 // delegate continuation work to another continuation

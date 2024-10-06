@@ -11,6 +11,7 @@ sealed class Status {
 }
 
 interface CoroutineScope<P, R> {
+
     val parameter: P?
 
     suspend fun yield(value: R): P
@@ -18,13 +19,13 @@ interface CoroutineScope<P, R> {
 
 class Coroutine<P, R>(
     override val context: CoroutineContext = EmptyCoroutineContext,
-    private val block: suspend CoroutineScope<P, R>.(P) -> R
+    private val block: suspend CoroutineScope<P, R>.() -> R
 ) : Continuation<R> {
 
     companion object {
         fun <P, R> create(
             context: CoroutineContext = EmptyCoroutineContext,
-            block: suspend CoroutineScope<P, R>.(P) -> R
+            block: suspend CoroutineScope<P, R>.() -> R
         ): Coroutine<P, R> {
             return Coroutine(context, block)
         }
@@ -54,7 +55,7 @@ class Coroutine<P, R>(
     }
 
     init {
-        val coroutineBlock: suspend CoroutineScope<P, R>.() -> R = { block(parameter!!) }
+        val coroutineBlock: suspend CoroutineScope<P, R>.() -> R = { block() }
         val start = coroutineBlock.createCoroutine(scope, this)
         status = AtomicReference(Status.Created(start))
     }
@@ -81,6 +82,7 @@ class Coroutine<P, R>(
                     Status.Resumed(continuation)
                 }
                 is Status.Suspended<*> -> {
+                    scope.parameter = value
                     Status.Resumed(continuation)
                 }
                 is Status.Resumed<*> -> throw IllegalStateException("Already resumed!")

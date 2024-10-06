@@ -5,12 +5,13 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 interface SymCoroutineScope<T> {
+    var parameter: T?
     suspend fun <P> transfer(symCoroutine: SymCoroutine<P>, value: P): T
 }
 
 class SymCoroutine<T>(
     override val context: CoroutineContext = EmptyCoroutineContext,
-    private val block: suspend SymCoroutineScope<T>.(T) -> Unit
+    private val block: suspend SymCoroutineScope<T>.() -> Unit
 ) : Continuation<T> {
 
     companion object {
@@ -22,7 +23,7 @@ class SymCoroutine<T>(
 
         fun <T> create(
             context: CoroutineContext = EmptyCoroutineContext,
-            block: suspend SymCoroutineScope<T>.(T) -> Unit
+            block: suspend SymCoroutineScope<T>.() -> Unit
         ): SymCoroutine<T> {
             return SymCoroutine(context, block)
         }
@@ -34,6 +35,7 @@ class SymCoroutine<T>(
         get() = this == main
 
     private val body: SymCoroutineScope<T> = object : SymCoroutineScope<T> {
+        override var parameter: T? = null
         private tailrec suspend fun <P> transferInner(symCoroutine: SymCoroutine<P>, value: Any?): T {
             if (this@SymCoroutine.isMain) {
                 return if (symCoroutine.isMain) {
@@ -56,7 +58,7 @@ class SymCoroutine<T>(
 
     private val coroutine = Coroutine<T, Parameter<*>>(context) {
         Parameter(this@SymCoroutine, suspend {
-            block(body, it)
+            block(body)
             if (this@SymCoroutine.isMain) Unit else throw IllegalStateException("SymCoroutine cannot be dead.")
         }() as T)
     }
@@ -71,22 +73,22 @@ class SymCoroutine<T>(
 }
 
 object SymCoroutines {
-    val coroutine0: SymCoroutine<Int> = SymCoroutine.create<Int> { param: Int ->
-        println("coroutine-0 $param")
+    val coroutine0: SymCoroutine<Int> = SymCoroutine.create<Int> {
+        println("coroutine-0 $parameter")
         var result = transfer(coroutine2, 0)
         println("coroutine-0 1 $result")
         result = transfer(SymCoroutine.main, Unit)
         println("coroutine-0 1 $result")
     }
 
-    val coroutine1: SymCoroutine<Int> = SymCoroutine.create { param: Int ->
-        println("coroutine-1 $param")
+    val coroutine1: SymCoroutine<Int> = SymCoroutine.create {
+        println("coroutine-1 $parameter")
         val result = transfer(coroutine0, 1)
         println("coroutine-1 1 $result")
     }
 
-    val coroutine2: SymCoroutine<Int> = SymCoroutine.create { param: Int ->
-        println("coroutine-2 $param")
+    val coroutine2: SymCoroutine<Int> = SymCoroutine.create {
+        println("coroutine-2 $parameter")
         var result = transfer(coroutine1, 2)
         println("coroutine-2 1 $result")
         result = transfer(coroutine0, 2)

@@ -4,27 +4,26 @@ suspend fun main() {
 
     printThreadId("main.start")
 
-    val producer = Coroutine.create(Dispatchers.newThread()) { initParam: Unit ->
-        for (i in 0..3) {
-            printThreadId("producer.yield")
-            val param = yield(i)
-            printThreadId("produce $param->$i")
+    val producer = Coroutine.create<Unit, Int>(Dispatchers.new()) {
+        for (i in 1..3) {
+            printThreadId("producer.yieldWith $i")
+            yield(i)
         }
         return@create 0
     }
 
-    val consumer = Coroutine.create(Dispatchers.newThread()) { initParam: Int ->
-        for (i in 0..3) {
-            printThreadId("consumer.yield")
-            val param = yield(Unit)
-            printThreadId("consume $param->${Unit}")
+    val consumer = Coroutine.create<Int, Unit>(Dispatchers.new()) {
+        for (i in 1..3) {
+            println("$parameter consumed")
+            printThreadId("consumer.yieldWith Unit")
+            yield(Unit)
         }
     }
 
     while (producer.active() && consumer.active()) {
-        printThreadId("producer.resume")
+        printThreadId("producer.resumeWith Unit")
         val param1 = producer.resume(Unit)
-        printThreadId("consumer.resume")
+        printThreadId("consumer.resumeWith $param1")
         val param2 = consumer.resume(param1)
     }
 
@@ -33,5 +32,5 @@ suspend fun main() {
 
 fun printThreadId(tag: String) {
     val tid = Thread.currentThread().id
-    println("$tag $tid")
+    println("$tag <tid=$tid>")
 }
