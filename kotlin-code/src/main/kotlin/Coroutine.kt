@@ -22,15 +22,6 @@ class Coroutine<P, R>(
     private val block: suspend CoroutineScope<P, R>.() -> R
 ) : Continuation<R> {
 
-    companion object {
-        fun <P, R> create(
-            context: CoroutineContext = EmptyCoroutineContext,
-            block: suspend CoroutineScope<P, R>.() -> R
-        ): Coroutine<P, R> {
-            return Coroutine(context, block)
-        }
-    }
-
     private val scope = object : CoroutineScope<P, R> {
         override var parameter: P? = null
 

@@ -4,15 +4,15 @@ suspend fun main() {
 
     printThreadId("main.start")
 
-    val producer = Coroutine.create<Unit, Int>(Dispatchers.new()) {
+    val producer = Coroutines.launch<Unit, Int>(Dispatchers.new()) {
         for (i in 1..3) {
             printThreadId("producer.yieldWith $i")
             yield(i)
         }
-        return@create 0
+        return@launch 0
     }
 
-    val consumer = Coroutine.create<Int, Unit>(Dispatchers.new()) {
+    val consumer = Coroutines.launch<Int, Unit>(Dispatchers.new()) {
         for (i in 1..3) {
             println("$parameter consumed")
             printThreadId("consumer.yieldWith Unit")
