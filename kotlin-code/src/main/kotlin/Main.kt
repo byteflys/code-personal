@@ -4,7 +4,7 @@ suspend fun main() {
 
     printThreadId("main.start")
 
-    val producer = launch<Unit, Int>(Dispatchers.new()) {
+    val producer = GlobalScope.launch<Unit, Int>(Dispatchers.new()) {
         for (i in 1..3) {
             printThreadId("producer.yieldWith $i")
             yield(i)
@@ -12,7 +12,7 @@ suspend fun main() {
         return@launch 0
     }
 
-    val consumer = launch<Int, Unit>(Dispatchers.new()) {
+    val consumer = GlobalScope.launch<Int, Unit>(Dispatchers.new()) {
         for (i in 1..3) {
             println("$parameter consumed")
             printThreadId("consumer.yieldWith Unit")
@@ -21,7 +21,7 @@ suspend fun main() {
         return@launch Unit
     }
 
-    while (producer.active() && consumer.active()) {
+    while (!producer.completed() && !consumer.completed()) {
         printThreadId("producer.resumeWith Unit")
         val param1 = producer.resume(Unit)
         printThreadId("consumer.resumeWith $param1")

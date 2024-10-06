@@ -3,19 +3,10 @@ package x.coroutine
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.coroutines.*
 
-interface CoroutineScope<P, R> {
-
-    var context: CoroutineContext
-
-    var parameter: P?
-
-    suspend fun yield(result: R): P
-}
-
-class Coroutineee<P, R>(
+internal class CoroutineImpl<P, R>(
     override var context: CoroutineContext = EmptyCoroutineContext,
-    private val block: suspend CoroutineScope<P, R>.() -> R
-) : Continuation<R>, CoroutineScope<P, R> {
+    private val block: suspend WriteableCoroutine<P, R>.() -> R
+) : Continuation<R>, WriteableCoroutine<P, R>, ReadableCoroutine<P, R> {
 
     override var parameter: P? = null
 
@@ -34,12 +25,10 @@ class Coroutineee<P, R>(
 
     private val status: AtomicReference<Status>
 
-    fun active(): Boolean {
-        return status.get() !is Status.Completed
-    }
+    override fun completed() = status.get() is Status.Completed
 
     init {
-        val coroutineBlock: suspend CoroutineScope<P, R>.() -> R = { block() }
+        val coroutineBlock: suspend WriteableCoroutine<P, R>.() -> R = { block() }
         val start = coroutineBlock.createCoroutine(this, this)
         status = AtomicReference(Status.Created(start))
     }
@@ -58,7 +47,7 @@ class Coroutineee<P, R>(
         (previousStatus as? Status.Resumed<R>)?.continuation?.resumeWith(result)
     }
 
-    suspend fun resume(param: P): R = suspendCoroutine { continuation ->
+    override suspend fun resume(param: P): R = suspendCoroutine { continuation ->
         val previousStatus = status.getAndUpdate {
             when (it) {
                 is Status.Created -> {
