@@ -4,8 +4,8 @@ import kotlin.coroutines.CoroutineContext
 
 internal class SymmetricCoroutineImpl<T>(
     context: CoroutineContext,
-    block: suspend SymmetricCoroutine<T>.() -> Unit
-) : SymmetricCoroutine<T> {
+    block: suspend SymmetricCoroutineScope<T>.() -> Unit
+) : SymmetricCoroutine<T>, SymmetricCoroutineScope<T> {
 
     internal var isMain = false
 
@@ -34,6 +34,12 @@ internal class SymmetricCoroutineImpl<T>(
             transferContext?.let {
                 transferInner(it.coroutine, it.parameter)
             }
+        }
+    }
+
+    override suspend fun clean() {
+        while (!coroutine.completed()) {
+            coroutine.resume(getParameter())
         }
     }
 }
