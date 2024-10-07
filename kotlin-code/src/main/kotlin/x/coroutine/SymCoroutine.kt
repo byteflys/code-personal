@@ -9,9 +9,9 @@ interface SymCoroutineScope<T> {
 }
 
 class SymCoroutine<T>(
-    override val context: CoroutineContext = EmptyCoroutineContext,
+      val context: CoroutineContext = EmptyCoroutineContext,
     private val block: suspend SymCoroutineScope<T>.() -> Unit
-) : Continuation<T> {
+)  {
 
     companion object {
         lateinit var main: SymCoroutine<Any?>
@@ -59,10 +59,6 @@ class SymCoroutine<T>(
             block(body)
             if (this@SymCoroutine.isMain) Unit else throw IllegalStateException("SymCoroutine cannot be dead.")
         }() as T)
-    }
-
-    override fun resumeWith(result: Result<T>) {
-        throw IllegalStateException("SymCoroutine cannot be dead!")
     }
 
     suspend fun start(value: T) {
