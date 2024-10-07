@@ -34,13 +34,9 @@ object GlobalScope : CoroutineScope {
 }
 
 fun <P, R> GlobalScope.launch(
-    context: CoroutineContext,
+    context: CoroutineContext = EmptyCoroutineContext,
     block: suspend WriteableCoroutine<P, R>.() -> R
 ): ReadableCoroutine<P, R> {
     val context = coroutineContext + context
     return CoroutineImpl(context, block)
 }
-
-fun <P, R> GlobalScope.launch(
-    block: suspend WriteableCoroutine<P, R>.() -> R
-) = GlobalScope.launch(EmptyCoroutineContext, block)
