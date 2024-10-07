@@ -8,9 +8,9 @@ interface SymCoroutineScope<T> {
 }
 
 class SymCoroutine<T>(
-      val context: CoroutineContext = EmptyCoroutineContext,
+    val context: CoroutineContext = EmptyCoroutineContext,
     private val block: suspend SymCoroutineScope<T>.() -> Unit
-)  {
+) {
 
     companion object {
         lateinit var main: SymCoroutine<Any?>
@@ -33,18 +33,14 @@ class SymCoroutine<T>(
         get() = this == main
 
     private val body: SymCoroutineScope<T> = object : SymCoroutineScope<T> {
-        private tailrec suspend fun <P> transferInner(symCoroutine: SymCoroutine<P>, value: Any?): T {
-            if (this@SymCoroutine.isMain) {
-                return if (symCoroutine.isMain) {
-                    value as T
-                } else {
-                    val parameter = symCoroutine.coroutine.resume(value as P)
-                    transferInner(parameter.coroutine, parameter.value)
-                }
+        private tailrec suspend fun <P> transferInner(other: SymCoroutine<P>, value: Any?): T {
+            if (!this@SymCoroutine.isMain)
+                return coroutine.yield(Parameter(other, value as P))
+            return if (other.isMain) {
+                value as T
             } else {
-                coroutine.run {
-                    return yield(Parameter(symCoroutine, value as P))
-                }
+                val parameter = other.coroutine.resume(value as P)
+                transferInner(parameter.coroutine, parameter.value)
             }
         }
 
@@ -56,7 +52,6 @@ class SymCoroutine<T>(
     private val coroutine = CoroutineImpl<T, Parameter<*>>(context) {
         Parameter(this@SymCoroutine, suspend {
             block(body)
-            if (this@SymCoroutine.isMain) Unit else throw IllegalStateException("SymCoroutine cannot be dead.")
         }() as T)
     }
 
@@ -72,15 +67,20 @@ suspend fun main() {
     coroutine1 = SymCoroutine.create {
         transfer(coroutine3, "d")
         transfer(SymCoroutine.main, Unit)
+        println("coroutine1 finished")
     }
     coroutine2 = SymCoroutine.create {
         transfer(coroutine1, "c")
+        println("coroutine2 finished")
     }
     coroutine3 = SymCoroutine.create {
         transfer(coroutine2, "b")
-        transfer(coroutine1, "f")
+        transfer(coroutine1, "e")
+        println("coroutine3 finished")
     }
     SymCoroutine.main {
         transfer(coroutine3, "a")
+        println("coroutine main finished")
     }
+    println("main finished")
 }
