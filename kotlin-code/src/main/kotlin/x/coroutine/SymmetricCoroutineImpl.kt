@@ -9,10 +9,9 @@ internal class SymmetricCoroutineImpl<T>(
 
     internal var isMain = false
 
-    internal val coroutine: CoroutineImpl<T, Unit>
-
-    init {
-        coroutine = CoroutineImpl(context) { block() }
+    internal val coroutine: CoroutineImpl<T, TransferContext<*>?> = CoroutineImpl(context) {
+        block()
+        return@CoroutineImpl null
     }
 
     override fun isMain() = isMain
@@ -21,19 +20,20 @@ internal class SymmetricCoroutineImpl<T>(
         return coroutine.parameter!!
     }
 
-    override suspend fun startCoroutine(param: T) {
-        coroutine.resume(param)
-    }
+    override suspend fun <R> transfer(other: SymmetricCoroutine<R>, param: R) = transferInner(other, param)
 
-    override tailrec suspend fun <R> transfer(other: SymmetricCoroutine<R>, param: R) {
+    private tailrec suspend fun <R> transferInner(other: SymmetricCoroutine<R>, param: Any?) {
         if (!isMain) {
-            coroutine.yield(Unit)
+            val transferContext = TransferContext(other, param as R)
+            coroutine.yield(transferContext)
             return
         }
         if (!other.isMain()) {
             val impl = other as SymmetricCoroutineImpl<R>
-            val parameter = impl.coroutine.resume(param)
-            transfer(parameter.coroutine, parameter.value)
+            val transferContext = impl.coroutine.resume(param as R)
+            transferContext?.let {
+                transferInner(it.coroutine, it.parameter)
+            }
         }
     }
 }

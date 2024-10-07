@@ -1,37 +1,35 @@
 package x.coroutine
 
 suspend fun main() {
-
-    printThreadId("main.start")
-
-    val producer = GlobalScope.launch<Unit, Int>(Dispatchers.new()) {
-        for (i in 1..3) {
-            printThreadId("producer.yieldWith $i")
-            yield(i)
-        }
-        return@launch 0
+    val list = mutableListOf<SymmetricCoroutine<*>>()
+    lateinit var coroutine0: SymmetricCoroutine<Unit>
+    lateinit var coroutine1: SymmetricCoroutine<String>
+    lateinit var coroutine2: SymmetricCoroutine<String>
+    lateinit var coroutine3: SymmetricCoroutine<String>
+    coroutine1 = createSymmetric {
+        transfer(coroutine3, "d")
+        transfer(coroutine0, Unit)
+        list.remove(coroutine1)
     }
-
-    val consumer = GlobalScope.launch<Int, Unit>(Dispatchers.new()) {
-        for (i in 1..3) {
-            println("$parameter consumed")
-            printThreadId("consumer.yieldWith Unit")
-            yield(Unit)
-        }
-        return@launch Unit
+    coroutine2 = createSymmetric {
+        transfer(coroutine1, "c")
+        list.remove(coroutine2)
     }
-
-    while (!producer.completed() && !consumer.completed()) {
-        printThreadId("producer.resumeWith Unit")
-        val param1 = producer.resume(Unit)
-        printThreadId("consumer.resumeWith $param1")
-        val param2 = consumer.resume(param1)
+    coroutine3 = createSymmetric {
+        val parameter = getParameter()
+        println(parameter)
+        transfer(coroutine2, "b")
+        transfer(coroutine1, "e")
+        list.remove(coroutine3)
     }
-
-    printThreadId("main.end")
-}
-
-fun printThreadId(tag: String) {
-    val tid = Thread.currentThread().id
-    println("$tag <tid=$tid>")
+    coroutine0 = createSymmetric {
+        transfer(coroutine3, "a")
+        list.remove(coroutine0)
+    }
+    list.add(coroutine0)
+    list.add(coroutine1)
+    list.add(coroutine2)
+    list.add(coroutine3)
+    launchSymmetric(coroutine0, Unit)
+    println(list.size)
 }

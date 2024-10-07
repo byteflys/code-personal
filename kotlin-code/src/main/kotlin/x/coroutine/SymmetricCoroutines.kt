@@ -8,38 +8,24 @@ interface SymmetricCoroutine<T> {
 
     fun getParameter(): T
 
-    suspend fun startCoroutine(param: T)
-
     suspend fun <R> transfer(other: SymmetricCoroutine<R>, param: R)
 }
 
+data class TransferContext<T>(
+    val coroutine: SymmetricCoroutine<T>,
+    val parameter: T?
+)
+
 fun <T> createSymmetric(
-    isMain: Boolean = false,
     block: suspend SymmetricCoroutine<T>.() -> Unit
 ): SymmetricCoroutine<T> {
-    val symmetric = SymmetricCoroutineImpl(EmptyCoroutineContext, block)
-    symmetric.isMain = isMain
-    return symmetric
+    return SymmetricCoroutineImpl(EmptyCoroutineContext, block)
 }
 
-suspend fun main() {
-    lateinit var main: SymmetricCoroutine<Unit>
-    lateinit var coroutine1: SymmetricCoroutine<String>
-    lateinit var coroutine2: SymmetricCoroutine<String>
-    lateinit var coroutine3: SymmetricCoroutine<String>
-    coroutine1 = createSymmetric {
-        transfer(coroutine3, "d")
-        transfer(main, Unit)
+suspend fun <T> launchSymmetric(symmetric: SymmetricCoroutine<T>, param: T) {
+    val main = SymmetricCoroutineImpl<Unit>(EmptyCoroutineContext) {
+        transfer(symmetric, param)
     }
-    coroutine2 = createSymmetric {
-        transfer(coroutine1, "c")
-    }
-    coroutine3 = createSymmetric {
-        transfer(coroutine2, "b")
-        transfer(coroutine1, "f")
-    }
-    main = createSymmetric(true) {
-        transfer(coroutine3, "a")
-    }
-    main.startCoroutine(Unit)
+    main.isMain = true
+    main.coroutine.resume(Unit)
 }
