@@ -4,6 +4,8 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 interface SymmetricCoroutine<T> {
 
+    fun isMain(): Boolean
+
     fun getParameter(): T
 
     suspend fun startCoroutine(param: T)
@@ -12,8 +14,13 @@ interface SymmetricCoroutine<T> {
 }
 
 fun <T> createSymmetric(
+    isMain: Boolean = false,
     block: suspend SymmetricCoroutine<T>.() -> Unit
-): SymmetricCoroutine<T> = SymmetricCoroutineImpl(EmptyCoroutineContext, block)
+): SymmetricCoroutine<T> {
+    val symmetric = SymmetricCoroutineImpl(EmptyCoroutineContext, block)
+    symmetric.isMain = isMain
+    return symmetric
+}
 
 suspend fun main() {
     lateinit var main: SymmetricCoroutine<Unit>
@@ -31,7 +38,7 @@ suspend fun main() {
         transfer(coroutine2, "b")
         transfer(coroutine1, "f")
     }
-    main = createSymmetric {
+    main = createSymmetric(true) {
         transfer(coroutine3, "a")
     }
     main.startCoroutine(Unit)
