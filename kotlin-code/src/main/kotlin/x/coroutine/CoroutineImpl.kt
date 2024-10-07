@@ -3,14 +3,14 @@ package x.coroutine
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.coroutines.*
 
-internal class CoroutineImpl<P, R>(
+internal open class CoroutineImpl<P, R>(
     override var context: CoroutineContext,
     block: suspend WriteableCoroutine<P, R>.() -> R
 ) : Continuation<R>, WriteableCoroutine<P, R>, ReadableCoroutine<P, R> {
 
     override var parameter: P? = null
 
-    private val status: AtomicReference<Status>
+    internal val status: AtomicReference<Status>
 
     init {
         val continuation = block.createCoroutine(this, this)

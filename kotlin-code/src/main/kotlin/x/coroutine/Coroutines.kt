@@ -6,7 +6,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 interface WriteableCoroutine<P, R> {
 
-    var parameter: P?
+    val parameter: P?
 
     suspend fun yield(result: R): P
 }
@@ -19,7 +19,7 @@ interface ReadableCoroutine<P, R> {
 }
 
 interface CoroutineScope {
-    var coroutineContext: CoroutineContext
+    val coroutineContext: CoroutineContext
 }
 
 sealed class Status {
