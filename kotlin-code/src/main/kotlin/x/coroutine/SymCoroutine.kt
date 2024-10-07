@@ -71,20 +71,19 @@ class SymCoroutine<T>(
 }
 
 suspend fun main() {
-    lateinit var parameter: String
     lateinit var coroutine1: SymCoroutine<String>
     lateinit var coroutine2: SymCoroutine<String>
     lateinit var coroutine3: SymCoroutine<String>
     coroutine1 = SymCoroutine.create {
-        parameter = transfer(coroutine3, "d")
-        parameter = transfer(SymCoroutine.main, Unit)
+        transfer(coroutine3, "d")
+        transfer(SymCoroutine.main, Unit)
     }
     coroutine2 = SymCoroutine.create {
-        parameter = transfer(coroutine1, "c")
+        transfer(coroutine1, "c")
     }
     coroutine3 = SymCoroutine.create {
-        parameter = transfer(coroutine2, "b")
-        parameter = transfer(coroutine1, "f")
+        transfer(coroutine2, "b")
+        transfer(coroutine1, "f")
     }
     SymCoroutine.main {
         transfer(coroutine3, "a")
