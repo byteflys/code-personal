@@ -137,7 +137,7 @@ abstract class AbstractCoroutine<T>(context: CoroutineContext) : Job, Continuati
         parentCancelDisposable?.dispose()
     }
 
-    protected fun doOnCompleted(block: (Result<T>) -> Unit): Disposable {
+    fun doOnCompleted(block: (Result<T>) -> Unit): Disposable {
         val disposable = CompletionHandlerDisposable(this, block)
         val newState = state.updateAndGet { prev ->
             when (prev) {
