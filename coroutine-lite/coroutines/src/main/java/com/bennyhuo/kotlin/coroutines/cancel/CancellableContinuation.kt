@@ -49,7 +49,7 @@ class CancellableContinuation<T>(private val continuation: Continuation<T>) : Co
     fun getResult(): Any? {
         installCancelHandler()
 
-        if(decision.compareAndSet(CancelDecision.UNDECIDED, CancelDecision.SUSPENDED))
+        if (decision.compareAndSet(CancelDecision.UNDECIDED, CancelDecision.SUSPENDED))
             return COROUTINE_SUSPENDED
 
         return when (val currentState = state.get()) {
@@ -112,9 +112,8 @@ class CancellableContinuation<T>(private val continuation: Continuation<T>) : Co
     }
 }
 
-
 suspend inline fun <T> suspendCancellableCoroutine(
-        crossinline block: (CancellableContinuation<T>) -> Unit
+    crossinline block: (CancellableContinuation<T>) -> Unit
 ): T = suspendCoroutineUninterceptedOrReturn { continuation ->
     val cancellable = CancellableContinuation(continuation.intercepted())
     block(cancellable)
