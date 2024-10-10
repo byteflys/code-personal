@@ -9,16 +9,17 @@ import com.bennyhuo.kotlin.coroutines.dispatcher.DispatcherContext
 import com.bennyhuo.kotlin.coroutines.dispatcher.Dispatchers
 import com.bennyhuo.kotlin.coroutines.scope.CoroutineScope
 import java.util.concurrent.atomic.AtomicInteger
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
-import kotlin.coroutines.startCoroutine
+import kotlin.coroutines.*
+import kotlin.coroutines.intrinsics.createCoroutineUnintercepted
+import kotlin.coroutines.intrinsics.intercepted
 
 private var coroutineIndex = AtomicInteger(0)
 
 fun CoroutineScope.launch(context: CoroutineContext = EmptyCoroutineContext, block: suspend CoroutineScope.() -> Unit): Job {
     val completion = StandaloneCoroutine(newCoroutineContext(context))
-    block.startCoroutine(completion, completion)
+    val c1 = block.createCoroutineUnintercepted(completion, completion)
+    val c2 = c1.intercepted()
+    c2.resume(Unit)
     return completion
 }
 

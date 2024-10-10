@@ -49,7 +49,7 @@ abstract class AbstractCoroutine<T>(context: CoroutineContext) : Job, Continuati
                 is CoroutineState.InComplete -> prevState.tryComplete(result)
                 is CoroutineState.CompleteWaitForChildren<*>,
                 is CoroutineState.Complete<*> -> {
-                    throw IllegalStateException("Already completed!")
+                    prevState
                 }
             }
         }
