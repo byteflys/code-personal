@@ -1,21 +1,17 @@
-import com.bennyhuo.kotlin.coroutines.cancel.suspendCancellableCoroutine
-import com.bennyhuo.kotlin.coroutines.core.AbstractCoroutine
+import com.bennyhuo.kotlin.coroutines.delay
+import com.bennyhuo.kotlin.coroutines.dispatcher.Dispatchers
 import com.bennyhuo.kotlin.coroutines.launch
 import com.bennyhuo.kotlin.coroutines.runBlocking
-import kotlin.coroutines.resume
- 
+
 suspend fun main() {
     runBlocking {
-        val parent = launch {
+        val job = launch {
             println(1)
-        } as AbstractCoroutine<Unit>
-        // when suspend
-        suspendCancellableCoroutine<Unit> { continuation ->
-            val disposable = parent.doOnCompleted { result ->
-                println(2)
-                continuation.resume(Unit)
-            }
-            continuation.invokeOnCancellation { disposable.dispose() }
+            delay(1000)
+            println(2)
         }
+        println(3)
+        job.join()
+        println(4)
     }
 }
