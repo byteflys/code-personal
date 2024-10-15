@@ -1,27 +1,42 @@
 import com.bennyhuo.kotlin.coroutines.cancel.suspendCancellableCoroutine
-import com.bennyhuo.kotlin.coroutines.core.AbstractCoroutine
-import com.bennyhuo.kotlin.coroutines.delay
 import com.bennyhuo.kotlin.coroutines.launch
 import com.bennyhuo.kotlin.coroutines.runBlocking
+import x.kotlin.commons.coroutine.Coroutines
+import java.util.concurrent.CompletableFuture
+import kotlin.concurrent.thread
 import kotlin.coroutines.resume
 
-suspend fun main() {
-    runBlocking {
-        val parent = launch {
-            println(1)
-            delay(1000)
-        } as AbstractCoroutine<Unit>
-        println(2)
-        // when suspend
-        suspendCancellableCoroutine<Unit> { continuation ->
-            println(2.1)
-            val disposable = parent.doOnCompleted { result ->
-                println(3)
-                continuation.resume(Unit)
-            }
-            continuation.invokeOnCancellation { disposable.dispose() }
-            println(2.2)
+fun main() {
+    thread {
+        Coroutines.startCoroutine {
+            runCoroutine()
         }
-        println(4)
+    }
+    Thread.sleep(5000)
+}
+
+suspend fun runCoroutine() {
+    runBlocking {
+        launch {
+            val result = suspendCancellableCoroutine<Int> { continuation ->
+                val future = CompletableFuture.supplyAsync {
+                    Thread.sleep(3000L)
+                    return@supplyAsync 100
+                }
+                future.thenApply {
+                    println("4")
+                    continuation.resume(it)
+                }
+                continuation.invokeOnCancellation {
+                    println("3")
+                    future.cancel(true)
+                }
+                println("1")
+                Thread.sleep(1000L)
+                continuation.cancel()
+                println("2")
+            }
+            println(result)
+        }
     }
 }

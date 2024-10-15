@@ -82,6 +82,8 @@ android {
 
 dependencies {
 
+    api("com.blankj:utilcodex:+")
+
     // AndroidX
     api("androidx.appcompat:appcompat:1.7.0")
     api("androidx.fragment:fragment-ktx:1.8.2")

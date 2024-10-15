@@ -117,5 +117,6 @@ suspend inline fun <T> suspendCancellableCoroutine(
 ): T = suspendCoroutineUninterceptedOrReturn { continuation ->
     val cancellable = CancellableContinuation(continuation.intercepted())
     block(cancellable)
-    cancellable.getResult()
+    val result = cancellable.getResult()
+    return@suspendCoroutineUninterceptedOrReturn result
 }

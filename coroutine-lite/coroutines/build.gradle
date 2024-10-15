@@ -10,8 +10,7 @@ sourceCompatibility = 1.8
 
 dependencies {
 
-    api("io.github.hellogoogle2000:kotlin-commons:1.0.11")
-
+    implementation("io.github.hellogoogle2000:kotlin-commons:1.0.11")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     testImplementation "org.jetbrains.kotlin:kotlin-test"
     compileOnly 'com.google.android:android:4.1.1.4'
