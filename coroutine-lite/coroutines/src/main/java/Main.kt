@@ -1,10 +1,8 @@
 import com.bennyhuo.kotlin.coroutines.cancel.suspendCancellableCoroutine
-import com.bennyhuo.kotlin.coroutines.delay
 import com.bennyhuo.kotlin.coroutines.launch
 import com.bennyhuo.kotlin.coroutines.runBlocking
 import java.util.concurrent.CompletableFuture
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 suspend fun main() {
     runBlocking {
@@ -18,12 +16,13 @@ suspend fun main() {
                     continuation.resume(it)
                 }
                 continuation.invokeOnCancellation {
+                    println("3")
                     future.cancel(true)
-                    continuation.resume(-1)
                 }
                 println("1")
                 Thread.sleep(1000L)
                 continuation.cancel()
+                println("2")
             }
             println(result)
         }
