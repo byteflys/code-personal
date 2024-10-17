@@ -1,3 +1,4 @@
+import com.bennyhuo.kotlin.coroutines.async
 import com.bennyhuo.kotlin.coroutines.launch
 import com.bennyhuo.kotlin.coroutines.runBlocking
 import com.bennyhuo.kotlin.coroutines.scope.CoroutineScope
@@ -14,12 +15,13 @@ fun main() {
 }
 
 suspend fun CoroutineScope.runCoroutine() {
-    val job = launch {
+    val job = async {
         println(1)
         throw RuntimeException("ea")
         println(2)
+        return@async 100
     }
     println(3)
-    job.join()
-    println(4)
+    val ret = job.await()
+    println(ret)
 }
