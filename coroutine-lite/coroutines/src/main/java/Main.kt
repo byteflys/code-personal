@@ -22,6 +22,8 @@ suspend fun CoroutineScope.runCoroutine() {
         return@async 100
     }
     println(3)
+    job.join()
+    println(4)
     val ret = job.await()
     println(ret)
 }
