@@ -1,4 +1,5 @@
 import com.bennyhuo.kotlin.coroutines.async
+import com.bennyhuo.kotlin.coroutines.delay
 import com.bennyhuo.kotlin.coroutines.launch
 import com.bennyhuo.kotlin.coroutines.runBlocking
 import com.bennyhuo.kotlin.coroutines.scope.CoroutineScope
@@ -21,9 +22,6 @@ suspend fun CoroutineScope.runCoroutine() {
         println(2)
         return@async 100
     }
+    job.await()
     println(3)
-    job.join()
-    println(4)
-    val ret = job.await()
-    println(ret)
 }
