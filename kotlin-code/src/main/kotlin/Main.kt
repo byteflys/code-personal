@@ -1,23 +1,21 @@
 package x.coroutine
 
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.delay
 
 suspend fun main() {
-    val receiveChannel = GlobalScope.produce<Int> {
-        repeat(5) {
-            delay(300)
-            send(it)
-        }
-        close()
-        repeat(5) {
-            delay(300)
-            send(it)
+    val sendChannel = GlobalScope.actor<Int> {
+        while (!isClosedForReceive) {
+            val element = receive()
+            println(element)
         }
     }
-    for (element in receiveChannel) {
-        println(element)
+    repeat(5) {
+        sendChannel.send(it + 1)
     }
+    sendChannel.close()
+    println(sendChannel.isClosedForSend)
     println("Done!")
+    delay(9999)
 }
