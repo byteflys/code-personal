@@ -1,15 +1,19 @@
 package x.coroutine
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.broadcast
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
 
 suspend fun main() {
-   val broadcast = GlobalScope.broadcast<Int>(capacity = 5) {
-       List(3){
-
-       }
-    }
+    flow<Int> {
+        repeat(5) {
+            delay(300)
+            emit(it + 1)
+        }
+    }.onEach {
+        println(it)
+    }.collect()
     println("Done!")
     delay(9999)
 }
