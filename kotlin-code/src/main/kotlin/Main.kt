@@ -1,20 +1,14 @@
 package x.coroutine
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 suspend fun main() {
-    val parentJob = Job()
-    val scope = CoroutineScope(parentJob)
-    val dispatcher = Dispatchers.Default
-    val start = CoroutineStart.LAZY
-    val job = scope.launch(dispatcher, start) {
+    val job = GlobalScope.launch {
+        delay(1000)
         println("coroutine by launch")
     }
-    job.start()
+    println(job.isCancelled)
     delay(999 * 1000L)
 }
