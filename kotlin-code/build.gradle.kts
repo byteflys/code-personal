@@ -4,7 +4,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(8)
     }
 }
 
@@ -14,7 +14,6 @@ dependencies {
 
     // kotlin & coroutine
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:2.0.0")
 
     // apache commons
     api("commons-io:commons-io:2.7")
