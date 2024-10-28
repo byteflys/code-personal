@@ -20,11 +20,13 @@ suspend fun main() {
     val job1 = GlobalScope.launch(dispatcher1 + errorHandler + CoroutineName("1")) {
         val job2 = GlobalScope.launch(dispatcher2 + errorHandler + CoroutineName("2")) {
             delay(100)
-            printWithThreadInfo("3")
+            printWithThreadInfo("1")
             throw RuntimeException("crash")
         }
+        delay(200)
         printWithThreadInfo("2")
     }
-    printWithThreadInfo("1")
+    delay(300)
+    printWithThreadInfo("3")
     delay(999 * 1000L)
 }
