@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 suspend fun main() {
     Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
-        println(throwable.message + " " + "DefaultUncaughtExceptionHandler")
+        printWithThreadInfo(throwable.message + " " + "DefaultUncaughtExceptionHandler")
     }
     val errorHandler = CoroutineExceptionHandler { context, throwable ->
         println(throwable.message + " " + context[CoroutineName])

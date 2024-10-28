@@ -5,8 +5,9 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    repositoriesMode = RepositoriesMode.PREFER_SETTINGS
     repositories {
+        mavenLocal()
         google()
         mavenCentral()
         gradlePluginPortal()
