@@ -10,7 +10,7 @@ java {
 
 dependencies {
 
-    api("io.github.hellogoogle2000:kotlin-commons:1.0.15")
+    api("io.github.hellogoogle2000:kotlin-commons:1.0.16")
 
     // kotlin & coroutine
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
