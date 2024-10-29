@@ -10,23 +10,24 @@ import x.kotlin.commons.coroutine.CoroutineDispatchers
 import x.kotlin.commons.debug.Debug.printWithThreadInfo
 
 suspend fun main() {
-    val dispatcher1 = CoroutineDispatchers.io()
+    val dispatcher1 = CoroutineDispatchers.new()
     val dispatcher2 = CoroutineDispatchers.data()
     val errorHandler = CoroutineExceptionHandler { context, throwable ->
         printWithThreadInfo(context[CoroutineName]?.name + "-crashed")
     }
-    lateinit var job1: Job
-    job1 = GlobalScope.launch(dispatcher1 + errorHandler + CoroutineName("Job1")) {
-        val job2 = launch(dispatcher2 + errorHandler + CoroutineName("Job2")) {
-            delay(100)
-            printWithThreadInfo("1")
-            println("Job1.isCompleted = ${job1.isCompleted}")
+    lateinit var job2: Job
+    val job1 = GlobalScope.launch(dispatcher1 + errorHandler + CoroutineName("Job1")) {
+          job2 = launch(dispatcher2 + errorHandler + CoroutineName("Job2")) {
+            delay(200)
+            printWithThreadInfo("Job2")
             throw RuntimeException("crash")
         }
-        printWithThreadInfo("2")
+        delay(400)
+        printWithThreadInfo("Job1")
     }
-    delay(400)
-    printWithThreadInfo("3")
-    println("Job1.isCompleted = ${job1.isCompleted}")
-    delay(999 * 1000L)
+    delay(600)
+    job1.join()
+    job2.join()
+    printWithThreadInfo("Main")
+    delay(1 * 1000L)
 }
