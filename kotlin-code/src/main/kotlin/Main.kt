@@ -2,7 +2,10 @@ package x.coroutine
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -16,15 +19,18 @@ suspend fun main() {
         printWithThreadInfo(context[CoroutineName]?.name + "-crashed")
     }
     val job1 = GlobalScope.launch(dispatcher1 + errorHandler + CoroutineName("Job1")) {
-        val job2 = launch(dispatcher2 + errorHandler + CoroutineName("Job2")) {
-            delay(100)
-            printWithThreadInfo("Job2")
-            throw RuntimeException("crash")
+        val supervisorScope = CoroutineScope(SupervisorJob())
+        supervisorScope.launch {
+            val job2 = launch(dispatcher2 + errorHandler + CoroutineName("Job2")) {
+                delay(500)
+                printWithThreadInfo("Job2")
+                throw RuntimeException("crash")
+            }
         }
         delay(200)
         printWithThreadInfo("Job1")
     }
     delay(400)
     printWithThreadInfo("Main")
-    delay(1 * 1000L)
+    delay(10 * 1000L)
 }
