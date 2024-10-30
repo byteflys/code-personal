@@ -19,8 +19,9 @@ suspend fun main() {
         printWithThreadInfo(context[CoroutineName]?.name + "-crashed")
     }
     val job1 = GlobalScope.launch(dispatcher1 + errorHandler + CoroutineName("Job1")) {
-        val supervisorScope = CoroutineScope(SupervisorJob())
+        val supervisorScope = CoroutineScope(SupervisorJob() + dispatcher1 + errorHandler + CoroutineName("Supervisor"))
         supervisorScope.launch {
+            printWithThreadInfo("SupervisorScope")
             val job2 = launch(dispatcher2 + errorHandler + CoroutineName("Job2")) {
                 delay(500)
                 printWithThreadInfo("Job2")
