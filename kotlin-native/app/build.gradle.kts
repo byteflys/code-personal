@@ -8,16 +8,12 @@ kotlin {
     // gradle macMainBinaries
     // app/build/bin/mac/debugExecutable/app.kexe
     macosX64("mac") {
-        binaries {
-            executable()
-        }
+        binaries.executable()
     }
     // gradle linuxMainBinaries
     // app/build/bin/linux/debugExecutable/app.kexe
     linuxX64("linux") {
-        binaries {
-            executable()
-        }
+        binaries.executable()
     }
     // create index.html in resources
     // include app.js in html
@@ -29,7 +25,5 @@ kotlin {
 }
 
 tasks.withType<KotlinJsCompile>().configureEach {
-    compilerOptions {
-        target = "es2015"
-    }
+    compilerOptions.target = "es2015"
 }
