@@ -1,7 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
-
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
 }
@@ -22,16 +18,13 @@ kotlin {
     // gradle jsRun --continuous
     // gradle jsBrowserDevelopmentRun --continuous
     js {
-        browser()
+        browser {
+            commonWebpackConfig {
+                outputFileName = "app.js"
+                devServer?.static?.add(project.rootDir.path)
+            }
+        }
         binaries.executable()
+        compilerOptions.target = "es5"
     }
 }
-
-tasks.withType<KotlinJsCompile>().configureEach {
-    compilerOptions.target = "es2015"
-}
-
-//rootProject.plugins.withType<NodeJsRootPlugin> {
-//    rootProject.the<NodeJsRootExtension>().versions.webpack.version = "5.93.0"
-//    rootProject.the<NodeJsRootExtension>().versions.webpackCli.version = "5.1.4"
-//}
