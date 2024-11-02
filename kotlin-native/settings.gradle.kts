@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.lower.collectNativeImplementations
+
 pluginManagement {
     repositories {
         maven("https://maven.aliyun.com/repository/public/")
