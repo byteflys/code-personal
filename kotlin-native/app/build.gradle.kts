@@ -17,7 +17,7 @@ kotlin {
     }
     // create index.html in resources
     // include app.js in html
-    // gradle jsRun
+    // gradle jsRun --continuous
     js {
         browser()
         binaries.executable()
