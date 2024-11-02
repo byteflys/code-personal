@@ -5,20 +5,31 @@ plugins {
 }
 
 kotlin {
-    linuxX64("native") {
+    // gradle macMainBinaries
+    // app/build/bin/mac/debugExecutable/app.kexe
+    macosX64("mac") {
         binaries {
             executable()
         }
     }
-    js {
-        browser {
+    // gradle linuxMainBinaries
+    // app/build/bin/linux/debugExecutable/app.kexe
+    linuxX64("linux") {
+        binaries {
+            executable()
         }
+    }
+    // create index.html in resources
+    // include app.js in html
+    // gradle jsRun
+    js {
+        browser()
         binaries.executable()
     }
 }
 
 tasks.withType<KotlinJsCompile>().configureEach {
-    kotlinOptions {
+    compilerOptions {
         target = "es2015"
     }
 }
