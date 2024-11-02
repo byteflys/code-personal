@@ -31,7 +31,7 @@ tasks.withType<KotlinJsCompile>().configureEach {
     compilerOptions.target = "es2015"
 }
 
-rootProject.plugins.withType<NodeJsRootPlugin> {
-    rootProject.the<NodeJsRootExtension>().versions.webpack.version = "5.96.1"
-    rootProject.the<NodeJsRootExtension>().versions.webpackCli.version = "5.1.4"
-}
+//rootProject.plugins.withType<NodeJsRootPlugin> {
+//    rootProject.the<NodeJsRootExtension>().versions.webpack.version = "5.93.0"
+//    rootProject.the<NodeJsRootExtension>().versions.webpackCli.version = "5.1.4"
+//}
