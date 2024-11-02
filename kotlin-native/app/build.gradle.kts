@@ -1,8 +1,13 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
 }
 
 kotlin {
+    jvm {
+        compilerOptions.jvmTarget = JvmTarget.JVM_1_8
+    }
     // gradle macMainBinaries
     // app/build/bin/mac/debugExecutable/app.kexe
     macosX64("mac") {

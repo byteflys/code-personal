@@ -1,3 +1,3 @@
 fun main() {
-    println("kotlin-native-linux")
+    println("kotlin-linux")
 }
