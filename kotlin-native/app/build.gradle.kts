@@ -39,6 +39,12 @@ kotlin {
     androidTarget {
         compilerOptions.jvmTarget = JvmTarget.JVM_1_8
     }
+    iosArm64("ios") {
+        binaries.framework {
+            baseName = "app"
+            isStatic = true
+        }
+    }
 }
 
 kotlin {
@@ -64,6 +70,9 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation("androidx.activity:activity-compose:1.9.3")
+        }
+        iosMain.dependencies {
+            implementation("org.jetbrains.compose.ui:ui-uikitarm64:1.7.0")
         }
     }
 }
