@@ -51,7 +51,7 @@ kotlin {
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
         }
         jvmMain.dependencies {
-            implementation(compose.desktop.common)
+            implementation(compose.desktop.currentOs)
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.9.0")
         }
         jsMain.dependencies {
