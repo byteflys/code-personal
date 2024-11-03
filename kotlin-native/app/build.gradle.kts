@@ -71,9 +71,6 @@ kotlin {
             implementation(compose.preview)
             implementation("androidx.activity:activity-compose:1.9.3")
         }
-        iosMain.dependencies {
-            implementation("org.jetbrains.compose.ui:ui-uikitarm64:1.7.0")
-        }
     }
 }
 
