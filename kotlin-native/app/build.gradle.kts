@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("com.android.application")
 }
 
 kotlin {
@@ -35,6 +36,9 @@ kotlin {
         binaries.executable()
         compilerOptions.target = "es5"
     }
+    androidTarget {
+        compilerOptions.jvmTarget = JvmTarget.JVM_1_8
+    }
 }
 
 kotlin {
@@ -57,5 +61,27 @@ kotlin {
         jsMain.dependencies {
             implementation(compose.html.core)
         }
+        androidMain.dependencies {
+            implementation(compose.preview)
+            implementation("androidx.activity:activity-compose:1.9.3")
+        }
     }
+}
+
+android {
+    namespace = "x.kmp.hello"
+    compileSdk = 34
+    defaultConfig {
+        applicationId = "x.kmp.hello"
+        minSdk = 30
+        targetSdk = 34
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    debugImplementation(compose.uiTooling)
 }
