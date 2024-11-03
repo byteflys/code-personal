@@ -1,12 +1,14 @@
-import androidx.compose.material.Text
+package x.kmp.hello
+
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import platformName
 
 fun main() {
     println(platformName())
     application {
         Window(::exitApplication) {
-            Text("Kotlin/JVM")
+            SimpleComposeView()
         }
     }
 }

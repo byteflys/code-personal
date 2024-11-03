@@ -1,8 +1,11 @@
+package x.kmp.hello
+
 import kotlinx.browser.window
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Img
 import org.jetbrains.compose.web.renderComposableInBody
+import platformName
 
 suspend fun main() {
     console.log(platformName())
