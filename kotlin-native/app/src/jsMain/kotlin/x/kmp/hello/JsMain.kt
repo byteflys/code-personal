@@ -1,6 +1,7 @@
 import kotlinx.browser.window
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.web.dom.Text
+import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Img
 import org.jetbrains.compose.web.renderComposableInBody
 
 suspend fun main() {
@@ -9,7 +10,9 @@ suspend fun main() {
         delay(500)
         window.alert("alert $i")
         renderComposableInBody {
-            Text("Hello World")
+            Div()
+            Img("https://th.bing.com/th/id/OIP.IKtTTdtHQYe30BCCkZvv1AHaHa")
+            Div()
         }
     }
 }
