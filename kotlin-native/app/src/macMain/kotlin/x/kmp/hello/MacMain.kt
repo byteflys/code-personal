@@ -1,3 +1,3 @@
 fun main() {
-    println("kotlin-mac")
+    println(platformName())
 }
