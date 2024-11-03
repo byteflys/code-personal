@@ -57,8 +57,5 @@ kotlin {
         jsMain.dependencies {
             implementation(compose.html.core)
         }
-        macosMain.dependencies {
-            implementation(compose.desktop.macos_arm64)
-        }
     }
 }
