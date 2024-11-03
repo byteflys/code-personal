@@ -41,7 +41,7 @@ kotlin {
     }
     iosArm64("ios") {
         binaries.framework {
-            baseName = "app"
+            baseName = "KotlinCompose"
             isStatic = true
         }
     }
