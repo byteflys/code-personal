@@ -5,8 +5,12 @@ plugins {
 }
 
 kotlin {
+    // gradle jvmRun
     jvm {
         compilerOptions.jvmTarget = JvmTarget.JVM_1_8
+        mainRun {
+            mainClass.set("JvmMainKt")
+        }
     }
     // gradle macMainBinaries
     // app/build/bin/mac/debugExecutable/app.kexe
@@ -22,6 +26,7 @@ kotlin {
     // include app.js in html
     // gradle jsRun --continuous
     // gradle jsBrowserDevelopmentRun --continuous
+    // gradle jsNodeRun
     js {
         browser {
             commonWebpackConfig {
@@ -29,6 +34,7 @@ kotlin {
                 devServer?.static?.add(project.rootDir.path)
             }
         }
+        nodejs()
         binaries.executable()
         compilerOptions.target = "es5"
     }
