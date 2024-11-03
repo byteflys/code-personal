@@ -46,6 +46,7 @@ kotlin {
             implementation(compose.material)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel:2.8.3")
             implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
         }
@@ -55,7 +56,6 @@ kotlin {
         }
         jsMain.dependencies {
             implementation(compose.html.core)
-            implementation(compose.runtime)
         }
     }
 }
