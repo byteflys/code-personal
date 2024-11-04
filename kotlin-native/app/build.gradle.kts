@@ -17,7 +17,7 @@ kotlin {
     }
     // gradle macMainBinaries
     // app/build/bin/mac/debugExecutable/app.kexe
-    macosX64("mac") {
+    macosArm64("mac") {
         binaries.executable()
     }
     // create index.html in resources
