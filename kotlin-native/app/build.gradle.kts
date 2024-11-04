@@ -39,9 +39,9 @@ kotlin {
     androidTarget {
         compilerOptions.jvmTarget = JvmTarget.JVM_1_8
     }
-    iosArm64("ios") {
+    iosSimulatorArm64("ios") {
         binaries.framework {
-            baseName = "KotlinCompose"
+            baseName = "IOSCompose"
             isStatic = true
         }
     }
