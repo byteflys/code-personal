@@ -1,18 +1,25 @@
-package x.coroutine
+import kotlin.reflect.KProperty
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import x.kotlin.commons.coroutine.XDispatchers
-import x.kotlin.commons.debug.XConsole.printWithThreadInfo
+fun main() {
+    val hello = Hello()
+    hello.name = "tom"
+    println(hello.name)
+}
 
-suspend fun main() {
-    val dispatcher = XDispatchers.share()
-    GlobalScope.launch(dispatcher) {
-        for (i in 1..5) {
-            delay(100)
-            printWithThreadInfo("1")
-        }
+class Hello {
+
+    var name: String by Delegate()
+}
+
+class Delegate {
+
+    private var value = ""
+
+    operator fun getValue(thisRef: Any, property: KProperty<*>): String {
+        return "${thisRef.javaClass.simpleName}::${property.name}=${value}"
     }
-    delay(10 * 1000L)
+
+    operator fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
+        this.value = value
+    }
 }
