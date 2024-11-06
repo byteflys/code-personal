@@ -15,4 +15,5 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.21")
     implementation("org.springframework.boot:spring-boot-starter:3.3.5")
     implementation("org.springframework.boot:spring-boot-starter-web:3.3.5")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:3.3.5")
 }
