@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import x.spring.hello.repository.UserRepository
-import x.kotlin.commons.serialize.JSON.toJson
+import x.kotlin.commons.serialize.JSON.toJsonOrNull
 
 @RestController
 class JPAController {
@@ -14,7 +14,7 @@ class JPAController {
 
     @GetMapping("/jpa")
     fun jpa(): String {
-        val users = userRepository.findAll().toList()
-        return users.toJson()
+        val user = userRepository.findByName("b")
+        return user.toJsonOrNull("null").orEmpty()
     }
 }
