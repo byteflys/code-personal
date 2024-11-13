@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity(name = "user_info")
-class User {
+class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
