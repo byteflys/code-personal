@@ -29,6 +29,8 @@ dependencies {
     api("com.querydsl:querydsl-jpa:5.1.0:jakarta")
     api("com.querydsl:querydsl-kotlin:5.1.0")
     kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
+    // mongodb
+    api("org.springframework.boot:spring-boot-starter-data-mongodb:3.3.5")
     // redis
     api("org.springframework.boot:spring-boot-starter-data-redis:3.3.5")
 }
